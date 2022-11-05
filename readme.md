@@ -1,2 +1,2 @@
-# Boulder Dash SDL
+# Mine2d
 
