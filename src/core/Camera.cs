@@ -9,7 +9,6 @@ class Camera
 
     public void CenterOn(Vector2 target)
     {
-        Console.WriteLine("Centering camera on " + target);
         var ctx = Context.Get();
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var windowWidth = ctx.FrontendGameState.WindowWidth;

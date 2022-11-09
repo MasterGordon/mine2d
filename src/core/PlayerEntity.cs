@@ -53,16 +53,23 @@ class PlayerEntity
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).hasTileAt(pL)
                 || world.HasChunkAt(pR) && world.GetChunkAt(pR).hasTileAt(pR);
-            Console.WriteLine(World.ToChunkPos(p.Position));
-            if (world.HasChunkAt(p.Position))
-            {
-                var chunk = world.GetChunkAt(p.Position);
-                Console.WriteLine($"Chunk: {chunk.X}, {chunk.Y}");
-            }
             if (hasCollision)
             {
                 p.Movement = p.Movement with { Y = 0 };
                 p.Position += new Vector2(0, -0.1f);
+            }
+        } while (hasCollision);
+        do
+        {
+            var pL = p.Position + new Vector2(0, -32);
+            var pR = p.Position + new Vector2(16, -32);
+            hasCollision =
+                world.HasChunkAt(pL) && world.GetChunkAt(pL).hasTileAt(pL)
+                || world.HasChunkAt(pR) && world.GetChunkAt(pR).hasTileAt(pR);
+            if (hasCollision)
+            {
+                p.Movement = p.Movement with { Y = 0 };
+                p.Position += new Vector2(0, 0.1f);
             }
         } while (hasCollision);
     }

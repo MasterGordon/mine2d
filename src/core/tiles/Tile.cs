@@ -1,37 +1,68 @@
 class Tile
 {
     public string Name { get; set; }
-    public IntPtr Texture { get; set; }
+    public int Hardness { get; set; }
+    private readonly IntPtr texture;
+    private static IntPtr breakingTexture;
 
-    public Tile(string name, string textureName)
+    public Tile(string name, string textureName, int hardness)
     {
         this.Name = name;
+        this.Hardness = hardness;
 
         var rl = Context.Get().ResourceLoader;
         var (ptr, size) = rl.LoadToIntPtr("assets." + textureName + ".png");
         var sdlBuffer = SDL_RWFromMem(ptr, size);
         var surface = IMG_Load_RW(sdlBuffer, 1);
         var texture = Context.Get().Renderer.CreateTextureFromSurface(surface);
-        this.Texture = texture;
+        this.texture = texture;
+        if (breakingTexture == IntPtr.Zero)
+        {
+            loadBreakingTexture();
+        }
         SDL_FreeSurface(surface);
     }
 
     ~Tile()
     {
-        SDL_DestroyTexture(this.Texture);
+        SDL_DestroyTexture(this.texture);
     }
 
-    public void Render(int x, int y)
+    public void Render(int x, int y, STile tile)
     {
         var renderer = Context.Get().Renderer;
         var scale = Context.Get().FrontendGameState.Settings.GameScale;
         var camera = Context.Get().FrontendGameState.Camera;
         renderer.DrawTexture(
-            this.Texture,
+            this.texture,
             (x - (int)camera.position.X) * scale,
             (y - (int)camera.position.Y) * scale,
             Constants.TileSize * scale,
             Constants.TileSize * scale
         );
+        if (tile.Hits > 0)
+        {
+            var breakingOffset = (int)((double)tile.Hits / this.Hardness * 4);
+            renderer.DrawTexture(
+                breakingTexture,
+                (x - (int)camera.position.X) * scale,
+                (y - (int)camera.position.Y) * scale,
+                Constants.TileSize * scale,
+                Constants.TileSize * scale,
+                breakingOffset,
+                16,
+                16
+            );
+        }
+    }
+
+    private static void loadBreakingTexture()
+    {
+        var rl = Context.Get().ResourceLoader;
+        var (ptr, size) = rl.LoadToIntPtr("assets.breaking.png");
+        var sdlBuffer = SDL_RWFromMem(ptr, size);
+        var surface = IMG_Load_RW(sdlBuffer, 1);
+        breakingTexture = Context.Get().Renderer.CreateTextureFromSurface(surface);
+        SDL_FreeSurface(surface);
     }
 }

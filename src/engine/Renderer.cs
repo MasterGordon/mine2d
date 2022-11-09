@@ -128,6 +128,25 @@ class Renderer
             w = w,
             h = h
         };
-        SDL_RenderCopy(renderer, texture, IntPtr.Zero, ref rect);
+        _ = SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect);
+    }
+
+    public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int offsetIndex, int srcWidth, int srcHeight)
+    {
+        SDL_Rect rect = new()
+        {
+            x = x,
+            y = y,
+            w = w,
+            h = h
+        };
+        SDL_Rect srcRect = new()
+        {
+            x = srcWidth * offsetIndex,
+            y = 0,
+            w = srcWidth,
+            h = srcHeight,
+        };
+        _ = SDL_RenderCopy(this.renderer, texture, ref srcRect, ref rect);
     }
 }

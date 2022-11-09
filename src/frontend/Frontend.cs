@@ -42,6 +42,26 @@ class Frontend : IFrontend
                 Console.WriteLine($"Mouse moved to {mousePos}");
                 ctx.FrontendGameState.MousePosition = mousePos;
             }
+            if (e.type == SDL_EventType.SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+            {
+                var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.position;
+                if (ctx.GameState.World.HasChunkAt(amp))
+                {
+                    var chunk = ctx.GameState.World.GetChunkAt(amp);
+                    var tile = chunk.GetTileAt(amp);
+                    var tileId = tile.Id;
+                    if (tile.Id != 0)
+                    {
+                        var tileRegistry = ctx.TileRegistry;
+                        var hardness = tileRegistry.GetTile(tileId).Hardness;
+                        chunk.SetTileAt(amp, tile with { Hits = tile.Hits + 1 });
+                        if (tile.Hits >= hardness)
+                        {
+                            chunk.SetTileAt(amp, STile.From(0));
+                        }
+                    }
+                }
+            }
             if (e.type == SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {
                 var movementInput = ctx.FrontendGameState.MovementInput;

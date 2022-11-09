@@ -1,6 +1,6 @@
 class Chunk
 {
-    public int[,] Tiles { get; set; } = new int[Constants.ChunkSize, Constants.ChunkSize];
+    public STile[,] Tiles { get; set; } = new STile[Constants.ChunkSize, Constants.ChunkSize];
     public int X { get; set; }
     public int Y { get; set; }
 
@@ -10,12 +10,12 @@ class Chunk
         this.Y = y;
     }
 
-    public void SetTile(int x, int y, int tile)
+    public void SetTile(int x, int y, STile tile)
     {
         this.Tiles[x, y] = tile;
     }
 
-    public int GetTile(int x, int y)
+    public STile GetTile(int x, int y)
     {
         return this.Tiles[x, y];
     }
@@ -33,21 +33,35 @@ class Chunk
         return this.hasTile(tileX, tileY);
     }
 
-    public int GetTileAt(Vector2 pos)
+    public STile GetTileAt(Vector2 pos)
     {
         return this.GetTileAt((int)pos.X, (int)pos.Y);
     }
 
-    public int GetTileAt(int x, int y)
+    public STile GetTileAt(int x, int y)
     {
-        var tileX = (int)Math.Floor(x / (float)Constants.TileSize);
-        var tileY = (int)Math.Floor(y / (float)Constants.TileSize);
+        var posInChunk = this.GetPositionInChunk(new Vector2(x, y));
+        var tileX = (int)Math.Floor(posInChunk.X / Constants.TileSize);
+        var tileY = (int)Math.Floor(posInChunk.Y / Constants.TileSize);
         return this.GetTile(tileX, tileY);
+    }
+
+    public void SetTileAt(Vector2 pos, STile tile)
+    {
+        this.SetTileAt((int)pos.X, (int)pos.Y, tile);
+    }
+
+    public void SetTileAt(int x, int y, STile tile)
+    {
+        var posInChunk = this.GetPositionInChunk(new Vector2(x, y));
+        var tileX = (int)Math.Floor(posInChunk.X / Constants.TileSize);
+        var tileY = (int)Math.Floor(posInChunk.Y / Constants.TileSize);
+        this.SetTile(tileX, tileY, tile);
     }
 
     public bool hasTile(int x, int y)
     {
-        return x >= 0 && x < this.Tiles.Length && y >= 0 && y < this.Tiles.Length;
+        return x >= 0 && x < this.Tiles.Length && y >= 0 && y < this.Tiles.Length && this.Tiles[x, y].Id != 0;
     }
 
     public bool hasTile(Vector2 pos)
