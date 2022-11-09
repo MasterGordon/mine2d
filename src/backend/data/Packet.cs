@@ -1,49 +1,55 @@
-using System.Numerics;
+namespace mine2d.backend.data;
 
-readonly struct MovePacket
+public interface IPacket
 {
-    readonly public string type = "move";
-    readonly public string playerName;
-    readonly public Vector2 movement;
+    string Type { get; }
+}
+
+readonly struct MovePacket : IPacket
+{
+    public string Type => "move";
+
+    readonly public string PlayerName;
+    readonly public Vector2 Movement;
 
     public MovePacket(string playerName, Vector2 movement)
     {
-        this.playerName = playerName;
-        this.movement = movement;
+        this.PlayerName = playerName;
+        this.Movement = movement;
     }
 }
 
 readonly struct ConnectPacket
 {
-    public readonly string type = "connect";
-    public readonly string playerName;
-    public readonly Guid playerGuid;
+    public readonly string Type = "connect";
+    public readonly string PlayerName;
+    public readonly Guid PlayerGuid;
 
     public ConnectPacket(string playerName, Guid playerGuid)
     {
-        this.playerName = playerName;
-        this.playerGuid = playerGuid;
+        this.PlayerName = playerName;
+        this.PlayerGuid = playerGuid;
     }
 }
 
 readonly struct TickPacket
 {
-    public readonly string type = "tick";
-    public readonly uint tick;
+    public readonly string Type = "tick";
+    public readonly uint Tick;
 
     public TickPacket(uint tick)
     {
-        this.tick = tick;
+        this.Tick = tick;
     }
 }
 
 readonly struct SelfMovedPacket
 {
-    public readonly string type = "selfMoved";
-    public readonly Vector2 target;
+    public readonly string Type = "selfMoved";
+    public readonly Vector2 Target;
 
     public SelfMovedPacket(Vector2 target)
     {
-        this.target = target;
+        this.Target = target;
     }
 }

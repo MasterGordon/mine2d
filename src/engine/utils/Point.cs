@@ -1,3 +1,5 @@
+namespace mine2d.engine.utils;
+
 class Point
 {
     public static double Distance(double x1, double y1, double x2, double y2)

@@ -1,3 +1,7 @@
+using mine2d.core;
+
+namespace mine2d.frontend.renderer;
+
 class WorldRenderer : IRenderer
 {
     public void Render()

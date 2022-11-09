@@ -1,3 +1,10 @@
+using mine2d.backend.data;
+using mine2d.core;
+using mine2d.core.data;
+using mine2d.frontend.renderer;
+
+namespace mine2d.frontend;
+
 class Frontend : IFrontend
 {
     public void Init()
@@ -44,7 +51,7 @@ class Frontend : IFrontend
             }
             if (e.type == SDL_EventType.SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
-                var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.position;
+                var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
                 if (ctx.GameState.World.HasChunkAt(amp))
                 {
                     var chunk = ctx.GameState.World.GetChunkAt(amp);
@@ -122,9 +129,9 @@ class Frontend : IFrontend
             if (
                 e.key.keysym.scancode
                     is SDL_Scancode.SDL_SCANCODE_A
-                        or SDL_Scancode.SDL_SCANCODE_D
-                        or SDL_Scancode.SDL_SCANCODE_W
-                        or SDL_Scancode.SDL_SCANCODE_S
+                    or SDL_Scancode.SDL_SCANCODE_D
+                    or SDL_Scancode.SDL_SCANCODE_W
+                    or SDL_Scancode.SDL_SCANCODE_S
                 && e.key.repeat == 0
                 && e.type is SDL_EventType.SDL_KEYDOWN or SDL_EventType.SDL_KEYUP
             )
@@ -156,29 +163,29 @@ class Frontend : IFrontend
         {
             if (player.Name == ctx.FrontendGameState.PlayerName)
             {
-                ctx.Renderer.SetColor(0, 0, 255, 255);
+                ctx.Renderer.SetColor(0, 0, 255);
             }
             else
             {
-                ctx.Renderer.SetColor(255, 0, 0, 255);
+                ctx.Renderer.SetColor(255, 0, 0);
             }
 
             ctx.Renderer.DrawRect(
-                (player.Position.X - (int)camera.position.X) * scale,
-                (player.Position.Y - (int)camera.position.Y) * scale - 32 * scale,
+                (player.Position.X - (int)camera.Position.X) * scale,
+                (player.Position.Y - (int)camera.Position.Y) * scale - 32 * scale,
                 16 * scale,
                 32 * scale
             );
         });
-        var absoluteMousePos = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + camera.position;
+        var absoluteMousePos = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + camera.Position;
         if (ctx.GameState.World.HasTileAt((int)absoluteMousePos.X, (int)absoluteMousePos.Y))
         {
             var a = Constants.TileSize;
             var tilePos = new Vector2(absoluteMousePos.X - absoluteMousePos.X % a, absoluteMousePos.Y - absoluteMousePos.Y % a);
-            ctx.Renderer.SetColor(255, 255, 255, 255);
+            ctx.Renderer.SetColor(255, 255, 255);
             ctx.Renderer.DrawOutline(
-                (int)tilePos.X * scale - (int)camera.position.X * scale,
-                (int)tilePos.Y * scale - (int)camera.position.Y * scale,
+                (int)tilePos.X * scale - (int)camera.Position.X * scale,
+                (int)tilePos.Y * scale - (int)camera.Position.Y * scale,
                 16 * scale,
                 16 * scale
             );

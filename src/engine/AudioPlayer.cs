@@ -1,3 +1,5 @@
+namespace mine2d.engine;
+
 enum Sound { }
 
 class AudioPlayer
@@ -12,7 +14,7 @@ class AudioPlayer
 
     public void Register(Sound name, string path)
     {
-        var buffer = resourceLoader.LoadBytes(path);
+        var buffer = this.resourceLoader.LoadBytes(path);
         this.audioFiles.Add(name, buffer);
     }
 

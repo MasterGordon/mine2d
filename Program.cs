@@ -1,4 +1,6 @@
-﻿class Program
+﻿namespace mine2d;
+
+class Program
 {
     static void Main(string[] args)
     {

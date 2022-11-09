@@ -1,10 +1,12 @@
+namespace mine2d.core;
+
 class Camera
 {
-    public Vector2 position;
+    public Vector2 Position;
 
     public Camera()
     {
-        position = Vector2.Zero;
+        this.Position = Vector2.Zero;
     }
 
     public void CenterOn(Vector2 target)
@@ -13,6 +15,6 @@ class Camera
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var windowWidth = ctx.FrontendGameState.WindowWidth;
         var windowHeight = ctx.FrontendGameState.WindowHeight;
-        position = target - (new Vector2(windowWidth / 2, windowHeight / 2)) / scale;
+        this.Position = target - (new Vector2(windowWidth, windowHeight) / 2) / scale;
     }
 }

@@ -1,3 +1,5 @@
+namespace mine2d.core.data;
+
 class Chunk
 {
     public STile[,] Tiles { get; set; } = new STile[Constants.ChunkSize, Constants.ChunkSize];
@@ -20,17 +22,17 @@ class Chunk
         return this.Tiles[x, y];
     }
 
-    public bool hasTileAt(Vector2 pos)
+    public bool HasTileAt(Vector2 pos)
     {
-        return this.hasTileAt((int)pos.X, (int)pos.Y);
+        return this.HasTileAt((int)pos.X, (int)pos.Y);
     }
 
-    public bool hasTileAt(int x, int y)
+    public bool HasTileAt(int x, int y)
     {
         var posInChunk = this.GetPositionInChunk(new Vector2(x, y));
         var tileX = (int)Math.Floor(posInChunk.X / Constants.TileSize);
         var tileY = (int)Math.Floor(posInChunk.Y / Constants.TileSize);
-        return this.hasTile(tileX, tileY);
+        return this.HasTile(tileX, tileY);
     }
 
     public STile GetTileAt(Vector2 pos)
@@ -59,14 +61,14 @@ class Chunk
         this.SetTile(tileX, tileY, tile);
     }
 
-    public bool hasTile(int x, int y)
+    public bool HasTile(int x, int y)
     {
         return x >= 0 && x < this.Tiles.Length && y >= 0 && y < this.Tiles.Length && this.Tiles[x, y].Id != 0;
     }
 
-    public bool hasTile(Vector2 pos)
+    public bool HasTile(Vector2 pos)
     {
-        return this.hasTile((int)pos.X, (int)pos.Y);
+        return this.HasTile((int)pos.X, (int)pos.Y);
     }
 
     public Vector2 GetPositionInChunk(Vector2 pos)

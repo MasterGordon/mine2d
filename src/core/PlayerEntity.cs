@@ -1,6 +1,10 @@
+using mine2d.state;
+
+namespace mine2d.core;
+
 class PlayerEntity
 {
-    public static bool isSelf(Player p)
+    public static bool IsSelf(Player p)
     {
         return p.Guid == GetSelf().Guid;
     }
@@ -16,7 +20,7 @@ class PlayerEntity
 
     public static void Move(Player p)
     {
-        p.Movement += Constants.gravity;
+        p.Movement += Constants.Gravity;
         p.Position += p.Movement;
     }
 
@@ -28,7 +32,7 @@ class PlayerEntity
         {
             var pL = p.Position + new Vector2(0, -8);
             hasCollision =
-                world.HasChunkAt(pL) && world.GetChunkAt(pL).hasTileAt(pL);
+                world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { X = 0 };
@@ -39,7 +43,7 @@ class PlayerEntity
         {
             var pR = p.Position + new Vector2(16, -8);
             hasCollision =
-                world.HasChunkAt(pR) && world.GetChunkAt(pR).hasTileAt(pR);
+                world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { X = 0 };
@@ -51,8 +55,8 @@ class PlayerEntity
             var pL = p.Position;
             var pR = p.Position + new Vector2(16, 0);
             hasCollision =
-                world.HasChunkAt(pL) && world.GetChunkAt(pL).hasTileAt(pL)
-                || world.HasChunkAt(pR) && world.GetChunkAt(pR).hasTileAt(pR);
+                world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL)
+                || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { Y = 0 };
@@ -64,8 +68,8 @@ class PlayerEntity
             var pL = p.Position + new Vector2(0, -32);
             var pR = p.Position + new Vector2(16, -32);
             hasCollision =
-                world.HasChunkAt(pL) && world.GetChunkAt(pL).hasTileAt(pL)
-                || world.HasChunkAt(pR) && world.GetChunkAt(pR).hasTileAt(pR);
+                world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL)
+                || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { Y = 0 };

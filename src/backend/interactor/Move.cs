@@ -1,3 +1,9 @@
+using mine2d.backend.data;
+using mine2d.core;
+using mine2d.engine.system.annotations;
+
+namespace mine2d.backend.interactor;
+
 [Interactor]
 class Move
 {
@@ -5,10 +11,10 @@ class Move
     public static void MoveHybrid(MovePacket packet)
     {
         var ctx = Context.Get();
-        var player = ctx.GameState.Players.Find(p => p.Name == packet.playerName);
+        var player = ctx.GameState.Players.Find(p => p.Name == packet.PlayerName);
         if (player != null)
         {
-            player.Movement = packet.movement * 4;
+            player.Movement = packet.Movement * 4;
         }
     }
 

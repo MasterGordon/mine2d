@@ -1,3 +1,10 @@
+using System.Reflection;
+using mine2d.core.extensions;
+using mine2d.engine;
+using mine2d.engine.system.annotations;
+
+namespace mine2d.backend;
+
 class Publisher
 {
     private readonly Dictionary<string, HashSet<Delegate>> subscribers =
@@ -7,13 +14,14 @@ class Publisher
     public Publisher(InteractorKind kind)
     {
         this.kind = kind;
-        this.scan();
+        this.Scan();
     }
 
-    private void scan()
+    private void Scan()
     {
-        var assembly = this.GetType().Assembly;
-        var types = assembly.GetTypes();
+        var types = Assembly
+            .GetAssembly(this.GetType())!
+            .GetTypesSafe();
         foreach (var type in types)
         {
             var attrs = type.GetCustomAttributes(typeof(Interactor), false);
@@ -35,15 +43,15 @@ class Publisher
                     continue;
                 }
                 var del = Delegate.CreateDelegate(
-                    typeof(Action<>).MakeGenericType(method.GetParameters()[0].ParameterType),
+                    typeof(Action<>).MakeGenericTypeSafely(method.GetParameters()[0].ParameterType),
                     method
                 );
-                this.subscribe(attr.Type, del);
+                this.Subscribe(attr.Type, del);
             }
         }
     }
 
-    private void subscribe(string type, Delegate callback)
+    private void Subscribe(string type, Delegate callback)
     {
         if (!this.subscribers.ContainsKey(type))
         {

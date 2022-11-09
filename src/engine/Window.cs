@@ -1,10 +1,12 @@
+namespace mine2d.engine;
+
 class Window
 {
     IntPtr window;
 
     public Window(string title, int w, int h)
     {
-        window = SDL_CreateWindow(
+        this.window = SDL_CreateWindow(
             title,
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,

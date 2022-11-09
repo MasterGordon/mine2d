@@ -1,3 +1,7 @@
+using mine2d.core.data;
+
+namespace mine2d.core.tiles;
+
 class Tile
 {
     public string Name { get; set; }
@@ -14,11 +18,10 @@ class Tile
         var (ptr, size) = rl.LoadToIntPtr("assets." + textureName + ".png");
         var sdlBuffer = SDL_RWFromMem(ptr, size);
         var surface = IMG_Load_RW(sdlBuffer, 1);
-        var texture = Context.Get().Renderer.CreateTextureFromSurface(surface);
-        this.texture = texture;
+        this.texture = Context.Get().Renderer.CreateTextureFromSurface(surface);
         if (breakingTexture == IntPtr.Zero)
         {
-            loadBreakingTexture();
+            LoadBreakingTexture();
         }
         SDL_FreeSurface(surface);
     }
@@ -35,8 +38,8 @@ class Tile
         var camera = Context.Get().FrontendGameState.Camera;
         renderer.DrawTexture(
             this.texture,
-            (x - (int)camera.position.X) * scale,
-            (y - (int)camera.position.Y) * scale,
+            (x - (int)camera.Position.X) * scale,
+            (y - (int)camera.Position.Y) * scale,
             Constants.TileSize * scale,
             Constants.TileSize * scale
         );
@@ -45,8 +48,8 @@ class Tile
             var breakingOffset = (int)((double)tile.Hits / this.Hardness * 4);
             renderer.DrawTexture(
                 breakingTexture,
-                (x - (int)camera.position.X) * scale,
-                (y - (int)camera.position.Y) * scale,
+                (x - (int)camera.Position.X) * scale,
+                (y - (int)camera.Position.Y) * scale,
                 Constants.TileSize * scale,
                 Constants.TileSize * scale,
                 breakingOffset,
@@ -56,7 +59,7 @@ class Tile
         }
     }
 
-    private static void loadBreakingTexture()
+    private static void LoadBreakingTexture()
     {
         var rl = Context.Get().ResourceLoader;
         var (ptr, size) = rl.LoadToIntPtr("assets.breaking.png");

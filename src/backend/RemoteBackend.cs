@@ -1,21 +1,25 @@
-using WatsonTcp;
-using Newtonsoft.Json;
 using System.Text;
+using mine2d.backend.data;
+using mine2d.engine.system.annotations;
+using mine2d.state;
+using Newtonsoft.Json;
+using WatsonTcp;
+
+namespace mine2d.backend;
 
 class RemoteBackend : IBackend
 {
     private WatsonTcpClient client;
     private Publisher publisher;
-    private Queue<ValueType> pendingPackets = new Queue<ValueType>();
+    private readonly Queue<ValueType> pendingPackets = new();
     private uint tick = 0;
 
     public void Process(double dt)
     {
-        var ctx = Context.Get();
-        this.ProcessPacket(new TickPacket(tick++));
-        while (pendingPackets.Count > 0)
+        this.ProcessPacket(new TickPacket(this.tick++));
+        while (this.pendingPackets.Count > 0)
         {
-            var packet = pendingPackets.Dequeue();
+            var packet = this.pendingPackets.Dequeue();
             this.ProcessPacket(packet);
         }
     }
@@ -25,7 +29,7 @@ class RemoteBackend : IBackend
         this.publisher.Publish(packet);
         var json = JsonConvert.SerializeObject(packet);
         var bytes = Encoding.UTF8.GetBytes(json);
-        client.Send(bytes);
+        this.client.Send(bytes);
     }
 
     public void Init()
@@ -36,8 +40,8 @@ class RemoteBackend : IBackend
 
     public void Run()
     {
-        client = new WatsonTcpClient("127.0.0.1", 42069);
-        client.Events.MessageReceived += (sender, args) =>
+        this.client = new WatsonTcpClient("127.0.0.1", 42069);
+        this.client.Events.MessageReceived += (_, args) =>
         {
             var ctx = Context.Get();
             var message = Encoding.UTF8.GetString(args.Data);
@@ -47,6 +51,6 @@ class RemoteBackend : IBackend
                 ctx.GameState = packet;
             }
         };
-        client.Connect();
+        this.client.Connect();
     }
 }

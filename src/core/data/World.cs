@@ -1,3 +1,5 @@
+namespace mine2d.core.data;
+
 class World
 {
     public Dictionary<string, Chunk> Chunks { get; set; } = new Dictionary<string, Chunk>();
@@ -75,6 +77,6 @@ class World
 
     public bool HasTileAt(int x, int y)
     {
-        return this.HasChunkAt(x, y) && this.GetChunkAt(x, y).hasTileAt(new Vector2(x, y));
+        return this.HasChunkAt(x, y) && this.GetChunkAt(x, y).HasTileAt(new Vector2(x, y));
     }
 }

@@ -1,4 +1,6 @@
-enum EventPriority : int
+namespace mine2d.engine.system;
+
+enum EventPriority
 {
     Lowest = 0,
     Low = 1,

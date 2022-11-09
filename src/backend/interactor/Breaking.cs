@@ -1,3 +1,8 @@
+using mine2d.backend.data;
+using mine2d.engine.system.annotations;
+
+namespace mine2d.backend.interactor;
+
 [Interactor]
 class Breaking
 {
@@ -7,8 +12,8 @@ class Breaking
         var ctx = Context.Get();
         ctx.GameState.Players.ForEach(player =>
             {
-                Math.Max(0, player.MiningCooldown -= 1);
-                if (player.Mining != null && player.MiningCooldown == 0)
+                player.MiningCooldown = Math.Max(0, player.MiningCooldown - 1);
+                if (player.Mining != Vector2.Zero && player.MiningCooldown == 0)
                 {
                     var chunk = ctx.GameState.World.GetChunkAt(player.Mining);
                     // chunk.SetTileAt(player.Mining, tile with { Hits = tile.Hits + 1 });

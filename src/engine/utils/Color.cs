@@ -1,33 +1,35 @@
+namespace mine2d.engine.utils;
+
 class Color
 {
-    public int r,
-        g,
-        b,
-        a;
+    public int R,
+        G,
+        B,
+        A;
 
     public Color(int r, int g, int b, int a)
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
+        this.R = r;
+        this.G = g;
+        this.B = b;
+        this.A = a;
     }
 
     public Color(int r, int g, int b)
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = 255;
+        this.R = r;
+        this.G = g;
+        this.B = b;
+        this.A = 255;
     }
 
-    public SDL_Color toSDLColor()
+    public SDL_Color ToSdlColor()
     {
         SDL_Color color = new();
-        color.r = (byte)r;
-        color.g = (byte)g;
-        color.b = (byte)b;
-        color.a = (byte)a;
+        color.r = (byte)this.R;
+        color.g = (byte)this.G;
+        color.b = (byte)this.B;
+        color.a = (byte)this.A;
         return color;
     }
 }

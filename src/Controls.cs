@@ -1,13 +1,13 @@
-using static SDL2.SDL;
+namespace mine2d;
 
 enum Control
 {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    STAY,
-    CONFIRM,
+    Up,
+    Down,
+    Left,
+    Right,
+    Stay,
+    Confirm,
 }
 
 static class ControlKeyExtension
@@ -16,17 +16,17 @@ static class ControlKeyExtension
     {
         switch (c)
         {
-            case Control.UP:
+            case Control.Up:
                 return SDL_Keycode.SDLK_w;
-            case Control.DOWN:
+            case Control.Down:
                 return SDL_Keycode.SDLK_s;
-            case Control.LEFT:
+            case Control.Left:
                 return SDL_Keycode.SDLK_a;
-            case Control.RIGHT:
+            case Control.Right:
                 return SDL_Keycode.SDLK_d;
-            case Control.STAY:
+            case Control.Stay:
                 return SDL_Keycode.SDLK_LCTRL;
-            case Control.CONFIRM:
+            case Control.Confirm:
                 return SDL_Keycode.SDLK_SPACE;
             default:
                 throw new ArgumentException("Invalid control");

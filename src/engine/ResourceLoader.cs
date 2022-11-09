@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 
+namespace mine2d.engine;
+
 class ResourceLoader
 {
     private string assemblyName;
@@ -14,11 +16,12 @@ class ResourceLoader
 #if (DEBUG)
         Console.WriteLine("Loading resource: " + resourceName);
         return File.ReadAllText(ToPath(resourceName));
-#endif
+#else
         using var stream = this.GetType()
             .Assembly.GetManifestResourceStream($"{this.assemblyName}.{resourceName}");
         using var reader = new StreamReader(stream!);
         return reader.ReadToEnd();
+#endif
     }
 
     public byte[] LoadBytes(string resourceName)

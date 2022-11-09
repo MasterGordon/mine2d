@@ -1,11 +1,13 @@
-enum Tiles : int
+namespace mine2d.core.tiles;
+
+enum Tiles
 {
-    stone = 1,
+    Stone = 1,
 }
 
 class TileRegistry
 {
-    public Dictionary<int, Tile> Tiles { get; set; } = new Dictionary<int, Tile>();
+    public Dictionary<int, Tile> Tiles { get; set; } = new();
 
     public void RegisterTile()
     {

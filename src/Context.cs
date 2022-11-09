@@ -1,3 +1,11 @@
+using mine2d.backend;
+using mine2d.core.tiles;
+using mine2d.engine;
+using mine2d.frontend;
+using mine2d.state;
+
+namespace mine2d;
+
 class Context
 {
     public bool IsHost { get; set; }
@@ -9,7 +17,7 @@ class Context
     public Renderer Renderer { get; set; }
     public TileRegistry TileRegistry { get; set; }
     public ResourceLoader ResourceLoader { get; set; }
-    public static Context instance { get; set; }
+    public static Context Instance { get; set; }
 
     public Context(
         bool isHost,
@@ -30,16 +38,16 @@ class Context
         this.Window = window;
         this.TileRegistry = new TileRegistry();
         this.ResourceLoader = new ResourceLoader();
-        Context.instance = this;
+        Context.Instance = this;
     }
 
     public static Context Get()
     {
-        if (Context.instance == null)
+        if (Context.Instance == null)
         {
             throw new Exception("Context not initialized");
         }
 
-        return Context.instance;
+        return Context.Instance;
     }
 }

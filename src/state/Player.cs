@@ -1,3 +1,7 @@
+using mine2d.engine;
+
+namespace mine2d.state;
+
 class Player
 {
     public string Name;

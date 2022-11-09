@@ -1,3 +1,8 @@
+using mine2d.core;
+using mine2d.core.data;
+
+namespace mine2d.state;
+
 class FrontendGameState
 {
     public Vector2 MovementInput;
@@ -14,7 +19,7 @@ class FrontendGameState
 class Settings
 {
     public int GameScale = 4;
-    public int UIScale = 4;
+    public int UiScale = 4;
     public bool ShowCollision = true;
     public bool Fullscreen = false;
 }

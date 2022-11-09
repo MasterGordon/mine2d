@@ -1,13 +1,18 @@
 using System.Text;
+using mine2d.backend.data;
+using mine2d.engine.system.annotations;
+using mine2d.network;
 using Newtonsoft.Json;
 using WatsonTcp;
+
+namespace mine2d.backend;
 
 class Backend : IBackend
 {
     private WatsonTcpServer server;
     private Publisher publisher;
     private Queue<ValueType> pendingPackets = new();
-    private uint tick = 0;
+    private uint tick;
 
     public void Process(double dt)
     {
@@ -17,7 +22,7 @@ class Backend : IBackend
             var packet = this.pendingPackets.Dequeue();
             this.publisher.Publish(packet);
         }
-        this.sendGameState();
+        this.SendGameState();
     }
 
     public void ProcessPacket(ValueType packet)
@@ -34,13 +39,13 @@ class Backend : IBackend
     public void Run()
     {
         this.server = new WatsonTcpServer("127.0.0.1", 42069);
-        this.server.Events.ClientConnected += this.clientConnected;
-        this.server.Events.ClientDisconnected += this.clientDisconnected;
-        this.server.Events.MessageReceived += this.messageReceived;
+        this.server.Events.ClientConnected += this.ClientConnected;
+        this.server.Events.ClientDisconnected += this.ClientDisconnected;
+        this.server.Events.MessageReceived += this.MessageReceived;
         this.server.Start();
     }
 
-    private void clientConnected(object sender, ConnectionEventArgs args)
+    private void ClientConnected(object sender, ConnectionEventArgs args)
     {
         Console.WriteLine("Client connected: " + args.IpPort);
         var gameState = Context.Get().GameState;
@@ -51,12 +56,12 @@ class Backend : IBackend
         }
     }
 
-    private void clientDisconnected(object sender, DisconnectionEventArgs args)
+    private void ClientDisconnected(object sender, DisconnectionEventArgs args)
     {
         Console.WriteLine("Client disconnected: " + args.IpPort);
     }
 
-    private void messageReceived(object sender, MessageReceivedEventArgs args)
+    private void MessageReceived(object sender, MessageReceivedEventArgs args)
     {
         var time = DateTime.Now;
         Console.WriteLine("Message Received: " + args.IpPort);
@@ -64,24 +69,24 @@ class Backend : IBackend
         Console.WriteLine("Received packet: " + packet);
         if (packet != null)
         {
-            pendingPackets.Enqueue(packet);
+            this.pendingPackets.Enqueue(packet);
         }
         Console.WriteLine(DateTime.Now - time);
     }
 
-    private void sendGameState()
+    private void SendGameState()
     {
-        if (server == null)
+        if (this.server == null)
             return;
-        var clients = server.ListClients();
-        if (clients.Count() == 0)
+        var clients = this.server.ListClients().ToArray();
+        if (!clients.Any())
             return;
         var gameState = Context.Get().GameState;
         var json = JsonConvert.SerializeObject(gameState);
         var bytes = Encoding.UTF8.GetBytes(json);
         foreach (var client in clients)
         {
-            server.Send(client, bytes);
+            this.server.Send(client, bytes);
         }
     }
 }

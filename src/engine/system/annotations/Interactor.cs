@@ -1,3 +1,5 @@
+namespace mine2d.engine.system.annotations;
+
 enum InteractorKind
 {
     Client,

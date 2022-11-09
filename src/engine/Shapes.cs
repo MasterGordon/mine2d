@@ -1,11 +1,13 @@
+namespace mine2d.engine;
+
 struct Line
 {
-    public Vector2 start;
-    public Vector2 end;
+    public Vector2 Start;
+    public Vector2 End;
 
     public Line(Vector2 start, Vector2 end)
     {
-        this.start = start;
-        this.end = end;
+        this.Start = start;
+        this.End = end;
     }
 }
