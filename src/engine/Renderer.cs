@@ -40,6 +40,19 @@ class Renderer
         SDL_RenderFillRect(renderer, ref rect);
     }
 
+    public void DrawOutline(int x, int y, int w, int h)
+    {
+        var rect = new SDL_Rect
+        {
+            x = x,
+            y = y,
+            w = w,
+            h = h
+        };
+
+        _ = SDL_RenderDrawRect(renderer, ref rect);
+    }
+
     public void DrawLines(double[][] points)
     {
         SDL_Point[] sdlPoints = new SDL_Point[points.Length];

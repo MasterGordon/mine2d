@@ -6,7 +6,9 @@ class FrontendGameState
     public int WindowHeight;
     public Guid PlayerGuid;
     public Camera Camera = new Camera();
+    public Vector2 MousePosition;
     public Settings Settings { get; set; } = new Settings();
+    public string PlayerName { get; set; } = "Player";
 }
 
 class Settings
@@ -14,6 +16,7 @@ class Settings
     public int GameScale = 4;
     public int UIScale = 4;
     public bool ShowCollision = true;
+    public bool Fullscreen = false;
 }
 
 class GameState

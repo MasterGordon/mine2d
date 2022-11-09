@@ -1,15 +1,12 @@
 class Frontend : IFrontend
 {
-    private string playerName = "Player";
-    private bool fullscreen = false;
-
     public void Init()
     {
         var ctx = Context.Get();
-        this.playerName = Context.Get().IsHost ? "Host" : "Client";
+        ctx.FrontendGameState.PlayerName = ctx.IsHost ? "Host" : "Client";
         var guid = Guid.NewGuid();
         ctx.FrontendGameState.PlayerGuid = guid;
-        var connectPacket = new ConnectPacket(playerName, guid);
+        var connectPacket = new ConnectPacket(ctx.FrontendGameState.PlayerName, guid);
         ctx.Backend.ProcessPacket(connectPacket);
         ctx.TileRegistry.RegisterTile();
         var (width, height) = ctx.Window.GetSize();
@@ -39,23 +36,29 @@ class Frontend : IFrontend
                     ctx.FrontendGameState.Camera.CenterOn(player.Position);
                 }
             }
+            if (e.type == SDL_EventType.SDL_MOUSEMOTION)
+            {
+                var mousePos = new Vector2(e.motion.x, e.motion.y);
+                Console.WriteLine($"Mouse moved to {mousePos}");
+                ctx.FrontendGameState.MousePosition = mousePos;
+            }
             if (e.type == SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {
                 var movementInput = ctx.FrontendGameState.MovementInput;
                 if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_F11)
                 {
-                    if (!fullscreen)
+                    if (!ctx.FrontendGameState.Settings.Fullscreen)
                     {
-                        SDL_SetWindowFullscreen(
+                        _ = SDL_SetWindowFullscreen(
                             ctx.Window.GetRaw(),
                             (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP
                         );
                     }
                     else
                     {
-                        SDL_SetWindowFullscreen(ctx.Window.GetRaw(), 0);
+                        _ = SDL_SetWindowFullscreen(ctx.Window.GetRaw(), 0);
                     }
-                    fullscreen = !fullscreen;
+                    ctx.FrontendGameState.Settings.Fullscreen = !ctx.FrontendGameState.Settings.Fullscreen;
                 }
                 if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_A)
                 {
@@ -107,11 +110,17 @@ class Frontend : IFrontend
             )
             {
                 if (e.key.repeat == 1)
+                {
                     continue;
+                }
+
                 var movement = ctx.FrontendGameState.MovementInput;
                 if (movement.Length() > 0)
+                {
                     movement = Vector2.Normalize(movement);
-                ctx.Backend.ProcessPacket(new MovePacket(playerName, movement));
+                }
+
+                ctx.Backend.ProcessPacket(new MovePacket(ctx.FrontendGameState.PlayerName, movement));
             }
             if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_ESCAPE)
             {
@@ -125,10 +134,15 @@ class Frontend : IFrontend
         new WorldRenderer().Render();
         ctx.GameState.Players.ForEach(player =>
         {
-            if (player.Name == playerName)
+            if (player.Name == ctx.FrontendGameState.PlayerName)
+            {
                 ctx.Renderer.SetColor(0, 0, 255, 255);
+            }
             else
+            {
                 ctx.Renderer.SetColor(255, 0, 0, 255);
+            }
+
             ctx.Renderer.DrawRect(
                 (player.Position.X - (int)camera.position.X) * scale,
                 (player.Position.Y - (int)camera.position.Y) * scale - 32 * scale,
@@ -136,6 +150,20 @@ class Frontend : IFrontend
                 32 * scale
             );
         });
+        var absoluteMousePos = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + camera.position;
+        if (ctx.GameState.World.HasTileAt((int)absoluteMousePos.X, (int)absoluteMousePos.Y))
+        {
+            var a = Constants.TileSize;
+            var tilePos = new Vector2(absoluteMousePos.X - absoluteMousePos.X % a, absoluteMousePos.Y - absoluteMousePos.Y % a);
+            ctx.Renderer.SetColor(255, 255, 255, 255);
+            ctx.Renderer.DrawOutline(
+                (int)tilePos.X * scale - (int)camera.position.X * scale,
+                (int)tilePos.Y * scale - (int)camera.position.Y * scale,
+                16 * scale,
+                16 * scale
+            );
+        }
+
         ctx.Renderer.Present();
     }
 }

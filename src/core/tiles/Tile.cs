@@ -8,8 +8,8 @@ class Tile
         this.Name = name;
 
         var rl = Context.Get().ResourceLoader;
-        var res = rl.LoadToIntPtr("assets." + textureName + ".png");
-        var sdlBuffer = SDL_RWFromMem(res.ptr, res.size);
+        var (ptr, size) = rl.LoadToIntPtr("assets." + textureName + ".png");
+        var sdlBuffer = SDL_RWFromMem(ptr, size);
         var surface = IMG_Load_RW(sdlBuffer, 1);
         var texture = Context.Get().Renderer.CreateTextureFromSurface(surface);
         this.Texture = texture;
@@ -33,16 +33,5 @@ class Tile
             Constants.TileSize * scale,
             Constants.TileSize * scale
         );
-    }
-
-    public SDL_Rect GetCollisionRect(int x, int y)
-    {
-        return new SDL_Rect()
-        {
-            x = x,
-            y = y,
-            w = Constants.TileSize,
-            h = Constants.TileSize
-        };
     }
 }

@@ -65,7 +65,11 @@ class World
 
     public int GetTileAt(int x, int y)
     {
-        var chunk = this.GetChunkAt(x, y);
-        return 0;
+        return this.GetChunkAt(x, y).GetTileAt(x, y);
+    }
+
+    public bool HasTileAt(int x, int y)
+    {
+        return this.HasChunkAt(x, y) && this.GetChunkAt(x, y).hasTileAt(new Vector2(x, y));
     }
 }

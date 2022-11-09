@@ -9,11 +9,11 @@ class TileRegistry
 
     public void RegisterTile()
     {
-        Tiles.Add(1, new Tile("stone", "stone"));
+        this.Tiles.Add(1, new Tile("stone", "stone"));
     }
 
     public Tile GetTile(int id)
     {
-        return Tiles[id];
+        return this.Tiles[id];
     }
 }

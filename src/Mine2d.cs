@@ -1,13 +1,12 @@
 class Mine2d : Game
 {
-    private Context ctx;
+    private readonly Context ctx;
 
     public Mine2d(bool isHost)
     {
         var window = new Window("MultiPlayerGame" + (isHost ? " - host" : ""), 1200, 800);
-        if (isHost)
-        {
-            this.ctx = new Context(
+        this.ctx = isHost
+            ? new Context(
                 isHost,
                 new Backend(),
                 new Frontend(),
@@ -15,11 +14,8 @@ class Mine2d : Game
                 new FrontendGameState(),
                 new Renderer(window),
                 window
-            );
-        }
-        else
-        {
-            this.ctx = new Context(
+            )
+            : new Context(
                 isHost,
                 new RemoteBackend(),
                 new Frontend(),
@@ -28,19 +24,18 @@ class Mine2d : Game
                 new Renderer(window),
                 window
             );
-        }
         Bootstrapper.Bootstrap();
-        ctx.Backend.Init();
-        ctx.Frontend.Init();
+        this.ctx.Backend.Init();
+        this.ctx.Frontend.Init();
     }
 
     protected override void draw()
     {
-        ctx.Frontend.Process();
+        this.ctx.Frontend.Process();
     }
 
     protected override void update(double dt)
     {
-        ctx.Backend.Process(dt);
+        this.ctx.Backend.Process(dt);
     }
 }
