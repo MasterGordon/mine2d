@@ -2,15 +2,15 @@ namespace mine2d.backend.data;
 
 public interface IPacket
 {
-    string Type { get; }
+    public string Type { get; }
 }
 
-readonly struct MovePacket : IPacket
+public struct MovePacket : IPacket
 {
-    public string Type => "move";
+    public readonly string Type => "move";
 
-    readonly public string PlayerName;
-    readonly public Vector2 Movement;
+    public readonly string PlayerName;
+    public readonly Vector2 Movement;
 
     public MovePacket(string playerName, Vector2 movement)
     {
@@ -19,9 +19,9 @@ readonly struct MovePacket : IPacket
     }
 }
 
-readonly struct ConnectPacket
+public readonly struct ConnectPacket : IPacket
 {
-    public readonly string Type = "connect";
+    public readonly string Type => "connect";
     public readonly string PlayerName;
     public readonly Guid PlayerGuid;
 
@@ -32,9 +32,9 @@ readonly struct ConnectPacket
     }
 }
 
-readonly struct TickPacket
+readonly struct TickPacket : IPacket
 {
-    public readonly string Type = "tick";
+    public readonly string Type => "tick";
     public readonly uint Tick;
 
     public TickPacket(uint tick)
@@ -43,9 +43,9 @@ readonly struct TickPacket
     }
 }
 
-readonly struct SelfMovedPacket
+readonly struct SelfMovedPacket : IPacket
 {
-    public readonly string Type = "selfMoved";
+    public readonly string Type => "selfMoved";
     public readonly Vector2 Target;
 
     public SelfMovedPacket(Vector2 target)

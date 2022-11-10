@@ -11,7 +11,7 @@ public static class PacketUtils
         {
             Console.WriteLine(pp.Name);
         }
-        var p = t.GetField(nameof(IPacket.Type));
+        var p = t.GetProperty(nameof(IPacket.Type));
         if (p == null)
         {
             throw new ArgumentNullException(nameof(p), "p undef");
