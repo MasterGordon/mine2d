@@ -47,7 +47,7 @@ class Frontend : IFrontend
             {
                 var mousePos = new Vector2(e.motion.x, e.motion.y);
                 ctx.FrontendGameState.MousePosition = mousePos;
-                if (ctx.GameState.Players.Find(player => player.Guid == ctx.FrontendGameState.PlayerGuid).Mining != Vector2.Zero)
+                if (ctx.GameState.Players.Find(player => player.Guid == ctx.FrontendGameState.PlayerGuid)?.Mining != Vector2.Zero)
                 {
                     var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
                     ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
