@@ -42,7 +42,9 @@ class Publisher
                 {
                     continue;
                 }
-                var del = Delegate.CreateDelegate(
+                var del = method.GetParameters().Length == 0 ?
+                    Delegate.CreateDelegate(typeof(Action), method) :
+                    Delegate.CreateDelegate(
                     typeof(Action<>).MakeGenericTypeSafely(method.GetParameters()[0].ParameterType),
                     method
                 );
@@ -87,7 +89,14 @@ class Publisher
             }
             foreach (var del in this.subscribers[type])
             {
-                del.DynamicInvoke(packet);
+                if (del.Method.GetParameters().Length == 0)
+                {
+                    del.DynamicInvoke();
+                }
+                else
+                {
+                    del.DynamicInvoke(packet);
+                }
             }
         }
     }

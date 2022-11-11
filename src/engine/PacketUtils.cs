@@ -7,10 +7,6 @@ public static class PacketUtils
     public static string GetType(ValueType packet)
     {
         var t = packet.GetType();
-        foreach (var pp in t.GetProperties())
-        {
-            Console.WriteLine(pp.Name);
-        }
         var p = t.GetProperty(nameof(IPacket.Type));
         if (p == null)
         {

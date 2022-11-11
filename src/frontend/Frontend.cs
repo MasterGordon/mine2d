@@ -46,28 +46,21 @@ class Frontend : IFrontend
             if (e.type == SDL_EventType.SDL_MOUSEMOTION)
             {
                 var mousePos = new Vector2(e.motion.x, e.motion.y);
-                Console.WriteLine($"Mouse moved to {mousePos}");
                 ctx.FrontendGameState.MousePosition = mousePos;
+                if (ctx.GameState.Players.Find(player => player.Guid == ctx.FrontendGameState.PlayerGuid).Mining != Vector2.Zero)
+                {
+                    var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
+                    ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
+                }
             }
             if (e.type == SDL_EventType.SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
             {
                 var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
-                if (ctx.GameState.World.HasChunkAt(amp))
-                {
-                    var chunk = ctx.GameState.World.GetChunkAt(amp);
-                    var tile = chunk.GetTileAt(amp);
-                    var tileId = tile.Id;
-                    if (tile.Id != 0)
-                    {
-                        var tileRegistry = ctx.TileRegistry;
-                        var hardness = tileRegistry.GetTile(tileId).Hardness;
-                        chunk.SetTileAt(amp, tile with { Hits = tile.Hits + 1 });
-                        if (tile.Hits >= hardness)
-                        {
-                            chunk.SetTileAt(amp, STile.From(0));
-                        }
-                    }
-                }
+                ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
+            }
+            if (e.type == SDL_EventType.SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
+            {
+                ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, Vector2.Zero));
             }
             if (e.type == SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {

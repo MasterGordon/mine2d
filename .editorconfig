@@ -68,4 +68,5 @@ dotnet_style_qualification_for_method = true:warning
 dotnet_style_qualification_for_property = true:warning
 dotnet_style_qualification_for_event = true:warning
 csharp_style_unused_value_expression_statement_preference = false
+csharp_style_namespace_declarations=file_scoped:warning
 dotnet_diagnostic.CA1805.severity = none

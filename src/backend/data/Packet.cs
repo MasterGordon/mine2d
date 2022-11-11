@@ -9,8 +9,8 @@ public struct MovePacket : IPacket
 {
     public readonly string Type => "move";
 
-    public readonly string PlayerName;
-    public readonly Vector2 Movement;
+    public readonly string PlayerName { get; }
+    public readonly Vector2 Movement { get; }
 
     public MovePacket(string playerName, Vector2 movement)
     {
@@ -22,8 +22,8 @@ public struct MovePacket : IPacket
 public readonly struct ConnectPacket : IPacket
 {
     public readonly string Type => "connect";
-    public readonly string PlayerName;
-    public readonly Guid PlayerGuid;
+    public readonly string PlayerName { get; }
+    public readonly Guid PlayerGuid { get; }
 
     public ConnectPacket(string playerName, Guid playerGuid)
     {
@@ -32,10 +32,10 @@ public readonly struct ConnectPacket : IPacket
     }
 }
 
-readonly struct TickPacket : IPacket
+public readonly struct TickPacket : IPacket
 {
     public readonly string Type => "tick";
-    public readonly uint Tick;
+    public readonly uint Tick { get; }
 
     public TickPacket(uint tick)
     {
@@ -43,13 +43,26 @@ readonly struct TickPacket : IPacket
     }
 }
 
-readonly struct SelfMovedPacket : IPacket
+public readonly struct SelfMovedPacket : IPacket
 {
     public readonly string Type => "selfMoved";
-    public readonly Vector2 Target;
+    public readonly Vector2 Target { get; }
 
     public SelfMovedPacket(Vector2 target)
     {
+        this.Target = target;
+    }
+}
+
+public readonly struct BreakPacket : IPacket
+{
+    public readonly string Type => "break";
+    public readonly Guid PlayerGuid { get; }
+    public readonly Vector2 Target { get; }
+
+    public BreakPacket(Guid playerGuid, Vector2 target)
+    {
+        this.PlayerGuid = playerGuid;
         this.Target = target;
     }
 }
