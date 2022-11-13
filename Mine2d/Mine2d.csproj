@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>mine2d</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimmerDefaultAction>link</TrimmerDefaultAction>
@@ -17,6 +16,7 @@
     <PackageReference Include="ppy.SDL2-CS" Version="1.0.596-alpha" />
     <PackageReference Include="WatsonTcp" Version="4.8.14.14" />
   </ItemGroup>
+  
   <ItemGroup>
     <EmbeddedResource Include="assets/*" />
   </ItemGroup>
