@@ -4,10 +4,10 @@ using mine2d.engine.system.annotations;
 
 namespace mine2d.backend.interactor;
 
-[InteractorAttribute]
+[Interactor]
 public class Breaking
 {
-    [InteractionAttribute(InteractorKind.Hybrid, "tick")]
+    [Interaction(InteractorKind.Hybrid, "tick")]
     public static void TickHybrid()
     {
         var ctx = Context.Get();
@@ -35,7 +35,7 @@ public class Breaking
         );
     }
 
-    [InteractionAttribute(InteractorKind.Server, "break")]
+    [Interaction(InteractorKind.Server, "break")]
     public static void BreakServer(BreakPacket packet)
     {
         var ctx = Context.Get();

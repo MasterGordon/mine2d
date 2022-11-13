@@ -4,10 +4,10 @@ using mine2d.state;
 
 namespace mine2d.backend.interactor;
 
-[InteractorAttribute]
+[Interactor]
 public class Connect
 {
-    [InteractionAttribute(InteractorKind.Server, "connect")]
+    [Interaction(InteractorKind.Server, "connect")]
     public static void ConnectServer(ConnectPacket packet)
     {
         var ctx = Context.Get();

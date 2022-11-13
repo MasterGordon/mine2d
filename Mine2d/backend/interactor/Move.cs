@@ -4,10 +4,10 @@ using mine2d.engine.system.annotations;
 
 namespace mine2d.backend.interactor;
 
-[InteractorAttribute]
+[Interactor]
 public class Move
 {
-    [InteractionAttribute(InteractorKind.Hybrid, "move")]
+    [Interaction(InteractorKind.Hybrid, "move")]
     public static void MoveHybrid(MovePacket packet)
     {
         var ctx = Context.Get();
@@ -18,7 +18,7 @@ public class Move
         }
     }
 
-    [InteractionAttribute(InteractorKind.Hybrid, "tick")]
+    [Interaction(InteractorKind.Hybrid, "tick")]
     public static void TickHybrid()
     {
         var ctx = Context.Get();
@@ -26,7 +26,7 @@ public class Move
         ctx.GameState.Players.ForEach(PlayerEntity.Collide);
     }
 
-    [InteractionAttribute(InteractorKind.Client, "tick")]
+    [Interaction(InteractorKind.Client, "tick")]
     public static void SelfMovedClient()
     {
         var camera = Context.Get().FrontendGameState.Camera;
