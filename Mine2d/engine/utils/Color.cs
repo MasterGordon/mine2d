@@ -1,6 +1,6 @@
 namespace mine2d.engine.utils;
 
-class Color
+public class Color
 {
     public int R,
         G,

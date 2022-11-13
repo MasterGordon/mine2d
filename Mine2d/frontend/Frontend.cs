@@ -1,11 +1,10 @@
 using mine2d.backend.data;
 using mine2d.core;
-using mine2d.core.data;
 using mine2d.frontend.renderer;
 
 namespace mine2d.frontend;
 
-class Frontend : IFrontend
+public class Frontend : IFrontend
 {
     public void Init()
     {
@@ -38,7 +37,7 @@ class Frontend : IFrontend
                     ctx.FrontendGameState.WindowHeight = e.window.data2;
                     Console.WriteLine($"Window resized to {e.window.data1}x{e.window.data2}");
                     var player = ctx.GameState.Players.Find(
-                        p => p.Guid == ctx.FrontendGameState.PlayerGuid
+                        p => p.Id == ctx.FrontendGameState.PlayerGuid
                     );
                     ctx.FrontendGameState.Camera.CenterOn(player.Position);
                 }
@@ -47,7 +46,7 @@ class Frontend : IFrontend
             {
                 var mousePos = new Vector2(e.motion.x, e.motion.y);
                 ctx.FrontendGameState.MousePosition = mousePos;
-                if (ctx.GameState.Players.Find(player => player.Guid == ctx.FrontendGameState.PlayerGuid)?.Mining != Vector2.Zero)
+                if (ctx.GameState.Players.Find(player => player.Id == ctx.FrontendGameState.PlayerGuid)?.Mining != Vector2.Zero)
                 {
                     var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
                     ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
@@ -67,17 +66,10 @@ class Frontend : IFrontend
                 var movementInput = ctx.FrontendGameState.MovementInput;
                 if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_F11)
                 {
-                    if (!ctx.FrontendGameState.Settings.Fullscreen)
-                    {
-                        _ = SDL_SetWindowFullscreen(
-                            ctx.Window.GetRaw(),
-                            (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP
-                        );
-                    }
-                    else
-                    {
-                        _ = SDL_SetWindowFullscreen(ctx.Window.GetRaw(), 0);
-                    }
+                    _ = SDL_SetWindowFullscreen(
+                        ctx.Window.GetRaw(),
+                        ctx.FrontendGameState.Settings.Fullscreen ? 0 : (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP
+                    );
                     ctx.FrontendGameState.Settings.Fullscreen = !ctx.FrontendGameState.Settings.Fullscreen;
                 }
                 if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_A)

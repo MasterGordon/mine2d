@@ -1,9 +1,9 @@
 namespace mine2d.engine;
 
-struct Line
+public struct Line
 {
-    public Vector2 Start;
-    public Vector2 End;
+    public Vector2 Start { get; set; }
+    public Vector2 End { get; set; }
 
     public Line(Vector2 start, Vector2 end)
     {

@@ -1,8 +1,8 @@
 namespace mine2d.core;
 
-class Camera
+public class Camera
 {
-    public Vector2 Position;
+    public Vector2 Position { get; set; }
 
     public Camera()
     {

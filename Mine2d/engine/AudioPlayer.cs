@@ -1,15 +1,15 @@
 namespace mine2d.engine;
 
-enum Sound { }
+public enum Sound { }
 
-class AudioPlayer
+public class AudioPlayer
 {
-    private Dictionary<Sound, byte[]> audioFiles = new();
-    private ResourceLoader resourceLoader = new();
+    private readonly Dictionary<Sound, byte[]> audioFiles = new();
+    private readonly ResourceLoader resourceLoader = new();
 
     public AudioPlayer()
     {
-        SDL2.SDL_mixer.Mix_OpenAudio(44100, SDL2.SDL_mixer.MIX_DEFAULT_FORMAT, 2, 2048);
+        _ = SDL2.SDL_mixer.Mix_OpenAudio(44100, SDL2.SDL_mixer.MIX_DEFAULT_FORMAT, 2, 2048);
     }
 
     public void Register(Sound name, string path)

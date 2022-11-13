@@ -4,10 +4,10 @@ using mine2d.engine.system.annotations;
 
 namespace mine2d.backend.interactor;
 
-[Interactor]
+[InteractorAttribute]
 public class Breaking
 {
-    [Interaction(InteractorKind.Hybrid, "tick")]
+    [InteractionAttribute(InteractorKind.Hybrid, "tick")]
     public static void TickHybrid()
     {
         var ctx = Context.Get();
@@ -35,11 +35,11 @@ public class Breaking
         );
     }
 
-    [Interaction(InteractorKind.Server, "break")]
+    [InteractionAttribute(InteractorKind.Server, "break")]
     public static void BreakServer(BreakPacket packet)
     {
         var ctx = Context.Get();
-        var player = ctx.GameState.Players.Find(p => p.Guid == packet.PlayerGuid);
+        var player = ctx.GameState.Players.Find(p => p.Id == packet.PlayerGuid);
         if (player == null)
         {
             return;

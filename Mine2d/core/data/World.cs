@@ -1,6 +1,6 @@
 namespace mine2d.core.data;
 
-class World
+public class World
 {
     public Dictionary<string, Chunk> Chunks { get; set; } = new Dictionary<string, Chunk>();
 

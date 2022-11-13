@@ -1,6 +1,6 @@
 namespace mine2d.engine.system.annotations;
 
-enum InteractorKind
+public enum InteractorKind
 {
     Client,
     Server,
@@ -8,15 +8,15 @@ enum InteractorKind
 }
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-class Interactor : Attribute { }
+public class InteractorAttribute : Attribute { }
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-class Interaction : Attribute
+public class InteractionAttribute : Attribute
 {
-    public string Type;
-    public InteractorKind Kind;
+    public string Type { get; set; }
+    public InteractorKind Kind { get; set; }
 
-    public Interaction(InteractorKind kind, string type)
+    public InteractionAttribute(InteractorKind kind, string type)
     {
         this.Type = type;
         this.Kind = kind;

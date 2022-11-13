@@ -1,6 +1,6 @@
 namespace mine2d.core.data;
 
-class Chunk
+public class Chunk
 {
     public STile[,] Tiles { get; set; } = new STile[Constants.ChunkSize, Constants.ChunkSize];
     public int X { get; set; }

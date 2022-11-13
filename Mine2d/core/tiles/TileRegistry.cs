@@ -1,11 +1,11 @@
 namespace mine2d.core.tiles;
 
-enum Tiles
+public enum Tiles
 {
     Stone = 1,
 }
 
-class TileRegistry
+public class TileRegistry
 {
     public Dictionary<int, Tile> Tiles { get; set; } = new();
 

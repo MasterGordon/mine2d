@@ -2,18 +2,18 @@ using System.Runtime.InteropServices;
 
 namespace mine2d.engine;
 
-class ResourceLoader
+public class ResourceLoader
 {
-    private string assemblyName;
+    private readonly string assemblyName;
 
     public ResourceLoader()
     {
         this.assemblyName = this.GetType().Assembly.GetName().Name!;
     }
 
-    public string LoadString(string resourceName)
+    public static string LoadString(string resourceName)
     {
-#if (DEBUG)
+#if DEBUG
         Console.WriteLine("Loading resource: " + resourceName);
         return File.ReadAllText(ToPath(resourceName));
 #else
@@ -41,7 +41,7 @@ class ResourceLoader
         return (ptr, bytes.Length);
     }
 
-    public void SaveString(string resourceName, string content)
+    public static void SaveString(string resourceName, string content)
     {
         using var stream = new StreamWriter(ToPath(resourceName));
         stream.Write(content);
@@ -50,6 +50,6 @@ class ResourceLoader
     private static string ToPath(string resourceName)
     {
         var s = resourceName.Split('.');
-        return String.Join('/', s[..^1]) + "." + s[^1];
+        return string.Join('/', s[..^1]) + "." + s[^1];
     }
 }

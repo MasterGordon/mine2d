@@ -2,18 +2,18 @@ using mine2d.state;
 
 namespace mine2d.core;
 
-class PlayerEntity
+public class PlayerEntity
 {
     public static bool IsSelf(Player p)
     {
-        return p.Guid == GetSelf().Guid;
+        return p.Id == GetSelf().Id;
     }
 
     public static Player GetSelf()
     {
         var ctx = Context.Get();
         var player = ctx.GameState.Players.FirstOrDefault(
-            p => p.Guid == ctx.FrontendGameState.PlayerGuid
+            p => p.Id == ctx.FrontendGameState.PlayerGuid
         );
         return player;
     }

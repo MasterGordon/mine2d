@@ -4,7 +4,7 @@ using mine2d.core.world;
 
 namespace mine2d.core;
 
-class Bootstrapper
+public class Bootstrapper
 {
     public static void Bootstrap()
     {

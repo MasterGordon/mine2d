@@ -1,8 +1,9 @@
 using mine2d.engine.utils;
+using Mine2d.engine;
 
 namespace mine2d.engine;
 
-class Renderer
+public class Renderer
 {
     private readonly IntPtr renderer;
     private IntPtr font;
@@ -15,12 +16,16 @@ class Renderer
             -1,
             SDL_RendererFlags.SDL_RENDERER_ACCELERATED
         );
+        if (this.renderer == IntPtr.Zero)
+        {
+            throw new SDLException(SDL_GetError());
+        }
     }
 
     public void Clear()
     {
-        SDL_SetRenderDrawColor(this.renderer, 0, 0, 0, 255);
-        SDL_RenderClear(this.renderer);
+        ProcessStatus(SDL_SetRenderDrawColor(this.renderer, 0, 0, 0, 255));
+        ProcessStatus(SDL_RenderClear(this.renderer));
     }
 
     public void Present()
@@ -43,7 +48,7 @@ class Renderer
             h = h
         };
 
-        SDL_RenderFillRect(this.renderer, ref rect);
+        ProcessStatus(SDL_RenderFillRect(this.renderer, ref rect));
     }
 
     public void DrawOutline(int x, int y, int w, int h)
@@ -56,7 +61,7 @@ class Renderer
             h = h
         };
 
-        _ = SDL_RenderDrawRect(this.renderer, ref rect);
+        ProcessStatus(SDL_RenderDrawRect(this.renderer, ref rect));
     }
 
     public void DrawLines(double[][] points)
@@ -68,12 +73,12 @@ class Renderer
             sdlPoints[i].y = (int)points[i][1];
         }
 
-        SDL_RenderDrawLines(this.renderer, sdlPoints, points.Length);
+        ProcessStatus(SDL_RenderDrawLines(this.renderer, sdlPoints, points.Length));
     }
 
     public void SetColor(int r, int g, int b, int a = 255)
     {
-        SDL_SetRenderDrawColor(this.renderer, (byte)r, (byte)g, (byte)b, (byte)a);
+        ProcessStatus(SDL_SetRenderDrawColor(this.renderer, (byte)r, (byte)g, (byte)b, (byte)a));
     }
 
     public void SetFont(IntPtr font, SDL_Color color)
@@ -93,7 +98,7 @@ class Renderer
         var surfaceMessage = TTF_RenderText_Solid(this.font, text, this.color);
         var texture = SDL_CreateTextureFromSurface(this.renderer, surfaceMessage);
 
-        SDL_QueryTexture(texture, out _, out _, out var width, out var height);
+        ProcessStatus(SDL_QueryTexture(texture, out _, out _, out var width, out var height));
 
         var rect = new SDL_Rect
         {
@@ -109,7 +114,7 @@ class Renderer
             rect.y -= height / 2;
         }
 
-        SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect);
+        ProcessStatus(SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect));
         SDL_DestroyTexture(texture);
         SDL_FreeSurface(surfaceMessage);
     }
@@ -133,7 +138,7 @@ class Renderer
             w = w,
             h = h
         };
-        _ = SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect);
+        ProcessStatus(SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect));
     }
 
     public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int offsetIndex, int srcWidth, int srcHeight)
@@ -152,6 +157,14 @@ class Renderer
             w = srcWidth,
             h = srcHeight,
         };
-        _ = SDL_RenderCopy(this.renderer, texture, ref srcRect, ref rect);
+        ProcessStatus(SDL_RenderCopy(this.renderer, texture, ref srcRect, ref rect));
+    }
+
+    public static void ProcessStatus(int status)
+    {
+        if (status != 0)
+        {
+            throw new SDLException(SDL_GetError());
+        }
     }
 }

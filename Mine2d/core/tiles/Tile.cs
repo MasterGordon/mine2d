@@ -2,7 +2,7 @@ using mine2d.core.data;
 
 namespace mine2d.core.tiles;
 
-class Tile
+public class Tile
 {
     public string Name { get; set; }
     public int Hardness { get; set; }

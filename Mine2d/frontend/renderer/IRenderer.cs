@@ -1,6 +1,6 @@
 namespace mine2d.frontend.renderer;
 
-interface IRenderer
+public interface IRenderer
 {
     public void Render();
 }

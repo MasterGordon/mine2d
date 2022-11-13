@@ -1,8 +1,8 @@
 namespace mine2d.engine;
 
-class Window
+public class Window
 {
-    IntPtr window;
+    private readonly IntPtr window;
 
     public Window(string title, int w, int h)
     {
@@ -33,9 +33,7 @@ class Window
 
     public (int width, int height) GetSize()
     {
-        int w,
-            h;
-        SDL_GetWindowSize(this.window, out w, out h);
+        SDL_GetWindowSize(this.window, out var w, out var h);
         return (w, h);
     }
 

@@ -2,7 +2,7 @@ using mine2d.core.tiles;
 
 namespace mine2d.core.data;
 
-struct STile
+public struct STile
 {
     public int Id { get; set; }
     public int Hits { get; set; }

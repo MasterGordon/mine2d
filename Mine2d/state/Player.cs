@@ -2,14 +2,14 @@ using mine2d.engine;
 
 namespace mine2d.state;
 
-class Player
+public class Player
 {
-    public string Name;
-    public Vector2 Position;
-    public Vector2 Movement;
-    public Guid Guid;
-    public Vector2 Mining;
-    public int MiningCooldown;
+    public string Name { get; set; }
+    public Vector2 Position { get; set; }
+    public Vector2 Movement { get; set; }
+    public Guid Id { get; set; }
+    public Vector2 Mining { get; set; }
+    public int MiningCooldown { get; set; }
 
     public Line GetBottomCollisionLine()
     {

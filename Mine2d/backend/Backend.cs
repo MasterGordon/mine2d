@@ -7,11 +7,11 @@ using WatsonTcp;
 
 namespace mine2d.backend;
 
-class Backend : IBackend
+public class Backend : IBackend
 {
     private WatsonTcpServer server;
     private Publisher publisher;
-    private Queue<ValueType> pendingPackets = new();
+    private readonly Queue<ValueType> pendingPackets = new();
     private uint tick;
 
     public void Process(double dt)
@@ -77,10 +77,16 @@ class Backend : IBackend
     private void SendGameState()
     {
         if (this.server == null)
+        {
             return;
+        }
+
         var clients = this.server.ListClients().ToArray();
         if (!clients.Any())
+        {
             return;
+        }
+
         var gameState = Context.Get().GameState;
         var json = JsonConvert.SerializeObject(gameState);
         var bytes = Encoding.UTF8.GetBytes(json);

@@ -1,11 +1,11 @@
 namespace mine2d.engine;
 
-abstract class Game
+public abstract class Game
 {
     public const int Tps = 128;
 
-    private bool running = true;
-    private Queue<int> fpsQueue = new();
+    private readonly bool running = true;
+    private readonly Queue<int> fpsQueue = new();
     protected abstract void Update(double dt);
     protected abstract void Draw();
 
@@ -21,7 +21,10 @@ abstract class Game
             var fps = (int)(1 / dt.TotalSeconds);
             this.fpsQueue.Enqueue(fps);
             while (this.fpsQueue.Count > fps)
+            {
                 this.fpsQueue.Dequeue();
+            }
+
             while (tAcc >= TimeSpan.FromSeconds(1.0 / Tps))
             {
                 this.Update(dt.TotalSeconds);

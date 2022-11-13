@@ -1,6 +1,6 @@
 namespace mine2d;
 
-enum Control
+public enum Control
 {
     Up,
     Down,
@@ -10,26 +10,19 @@ enum Control
     Confirm,
 }
 
-static class ControlKeyExtension
+public static class ControlKeyExtension
 {
     public static SDL_Keycode Key(this Control c)
     {
-        switch (c)
+        return c switch
         {
-            case Control.Up:
-                return SDL_Keycode.SDLK_w;
-            case Control.Down:
-                return SDL_Keycode.SDLK_s;
-            case Control.Left:
-                return SDL_Keycode.SDLK_a;
-            case Control.Right:
-                return SDL_Keycode.SDLK_d;
-            case Control.Stay:
-                return SDL_Keycode.SDLK_LCTRL;
-            case Control.Confirm:
-                return SDL_Keycode.SDLK_SPACE;
-            default:
-                throw new ArgumentException("Invalid control");
-        }
+            Control.Up => SDL_Keycode.SDLK_w,
+            Control.Down => SDL_Keycode.SDLK_s,
+            Control.Left => SDL_Keycode.SDLK_a,
+            Control.Right => SDL_Keycode.SDLK_d,
+            Control.Stay => SDL_Keycode.SDLK_LCTRL,
+            Control.Confirm => SDL_Keycode.SDLK_SPACE,
+            _ => throw new ArgumentException("Invalid control"),
+        };
     }
 }

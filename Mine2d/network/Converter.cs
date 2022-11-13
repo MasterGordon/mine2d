@@ -1,11 +1,12 @@
 using System.Text;
 using mine2d.backend.data;
+using Mine2d.network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace mine2d.network;
 
-class Converter
+public class Converter
 {
     public static ValueType ParsePacket(byte[] bytes)
     {
@@ -19,7 +20,7 @@ class Converter
         var type = parsedRaw.GetValue("type");
         if (type == null)
         {
-            throw new Exception("Packet has no type");
+            throw new PacketException("Packet has no type");
         }
         var packetType = type.Value<string>();
         Console.WriteLine("Packet type: " + packetType);
@@ -27,7 +28,7 @@ class Converter
         {
             "move" => parsedRaw.ToObject<MovePacket>(),
             "connect" => parsedRaw.ToObject<ConnectPacket>(),
-            _ => throw new Exception("Unknown packet type")
+            _ => throw new PacketException("Unknown packet type")
         };
     }
 

@@ -2,7 +2,7 @@ using mine2d.core.data;
 
 namespace mine2d.core.world;
 
-class ChunkGenerator
+public class ChunkGenerator
 {
     public static Chunk CreateFilledChunk(int x, int y, STile fill)
     {

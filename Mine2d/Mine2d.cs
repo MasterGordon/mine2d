@@ -6,7 +6,7 @@ using mine2d.state;
 
 namespace mine2d;
 
-class Mine2d : Game
+public class Mine2d : Game
 {
     private readonly Context ctx;
 

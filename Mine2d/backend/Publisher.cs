@@ -5,7 +5,7 @@ using mine2d.engine.system.annotations;
 
 namespace mine2d.backend;
 
-class Publisher
+public class Publisher
 {
     private readonly Dictionary<string, HashSet<Delegate>> subscribers =
         new();
@@ -24,7 +24,7 @@ class Publisher
             .GetTypesSafe();
         foreach (var type in types)
         {
-            var attrs = type.GetCustomAttributes(typeof(Interactor), false);
+            var attrs = type.GetCustomAttributes(typeof(InteractorAttribute), false);
             if (attrs.Length == 0)
             {
                 continue;
@@ -32,12 +32,12 @@ class Publisher
             var methods = type.GetMethods();
             foreach (var method in methods)
             {
-                var attrs2 = method.GetCustomAttributes(typeof(Interaction), false);
+                var attrs2 = method.GetCustomAttributes(typeof(InteractionAttribute), false);
                 if (attrs2.Length == 0)
                 {
                     continue;
                 }
-                var attr = (Interaction)attrs2[0];
+                var attr = (InteractionAttribute)attrs2[0];
                 if (attr.Kind != this.kind && this.kind != InteractorKind.Hybrid)
                 {
                     continue;

@@ -4,10 +4,10 @@ using mine2d.state;
 
 namespace mine2d.backend.interactor;
 
-[Interactor]
-class Connect
+[InteractorAttribute]
+public class Connect
 {
-    [Interaction(InteractorKind.Server, "connect")]
+    [InteractionAttribute(InteractorKind.Server, "connect")]
     public static void ConnectServer(ConnectPacket packet)
     {
         var ctx = Context.Get();
@@ -18,7 +18,7 @@ class Connect
                 new Player
                 {
                     Name = packet.PlayerName,
-                    Guid = packet.PlayerGuid,
+                    Id = packet.PlayerGuid,
                     Position = new Vector2(20, 16 * 16),
                     Movement = new Vector2(0, 0)
                 }

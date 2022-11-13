@@ -6,7 +6,7 @@ using mine2d.state;
 
 namespace mine2d;
 
-class Context
+public class Context
 {
     public bool IsHost { get; set; }
     public IBackend Backend { get; set; }
@@ -38,16 +38,16 @@ class Context
         this.Window = window;
         this.TileRegistry = new TileRegistry();
         this.ResourceLoader = new ResourceLoader();
-        Context.Instance = this;
+        Instance = this;
     }
 
     public static Context Get()
     {
-        if (Context.Instance == null)
+        if (Instance == null)
         {
             throw new Exception("Context not initialized");
         }
 
-        return Context.Instance;
+        return Instance;
     }
 }
