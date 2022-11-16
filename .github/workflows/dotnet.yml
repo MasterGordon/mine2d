@@ -22,11 +22,11 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
-      run: dotnet publish -r linux-x64
+      run: dotnet publish -r linux-x64 --self-contained
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
     # Artifact name
         name: Linux build
     # A file, directory or wildcard pattern that describes what to upload
-        path: bin/Debug/net6.0/linux-x64/publish/asdlteroids
+        path: Mine2d/bin/Debug/net6.0/linux-x64/publish/Mine2d
