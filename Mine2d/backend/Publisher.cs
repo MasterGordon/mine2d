@@ -9,6 +9,8 @@ public class Publisher
 {
     private readonly Dictionary<string, HashSet<Delegate>> subscribers =
         new();
+    private readonly HashSet<string> clientOnlySubscriptions = new();
+    private readonly HashSet<string> serverSubscriptions = new();
     private readonly InteractorKind kind;
 
     public Publisher(InteractorKind kind)
@@ -24,20 +26,28 @@ public class Publisher
             .GetTypesSafe();
         foreach (var type in types)
         {
-            var attrs = type.GetCustomAttributes(typeof(InteractorAttribute), false);
-            if (attrs.Length == 0)
+            var classAttrs = type.GetCustomAttributes(typeof(InteractorAttribute), false);
+            if (classAttrs.Length == 0)
             {
                 continue;
             }
             var methods = type.GetMethods();
             foreach (var method in methods)
             {
-                var attrs2 = method.GetCustomAttributes(typeof(InteractionAttribute), false);
-                if (attrs2.Length == 0)
+                var methodAttrs = method.GetCustomAttributes(typeof(InteractionAttribute), false);
+                if (methodAttrs.Length == 0)
                 {
                     continue;
                 }
-                var attr = (InteractionAttribute)attrs2[0];
+                var attr = (InteractionAttribute)methodAttrs[0];
+                if (attr.Kind is InteractorKind.Server or InteractorKind.Hybrid)
+                {
+                    this.serverSubscriptions.Add(attr.Type);
+                }
+                if (attr.Kind is InteractorKind.Client)
+                {
+                    this.clientOnlySubscriptions.Add(attr.Type);
+                }
                 if (attr.Kind != this.kind && this.kind != InteractorKind.Hybrid)
                 {
                     continue;
@@ -51,6 +61,7 @@ public class Publisher
                 this.Subscribe(attr.Type, del);
             }
         }
+        this.clientOnlySubscriptions.ExceptWith(this.serverSubscriptions);
     }
 
     private void Subscribe(string type, Delegate callback)
@@ -99,5 +110,15 @@ public class Publisher
                 }
             }
         }
+    }
+
+    public bool IsClientOnlyPacket(string type)
+    {
+        return this.clientOnlySubscriptions.Contains(type);
+    }
+
+    public bool IsServerPacket(string type)
+    {
+        return this.serverSubscriptions.Contains(type);
     }
 }

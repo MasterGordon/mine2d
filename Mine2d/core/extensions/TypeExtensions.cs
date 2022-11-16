@@ -16,8 +16,8 @@ public static class TypeExtensions
         {
             var missingTypes = e.Types
                 .Where(t => typeArguments.Contains(t) && t != null);
-            
-            throw new Exception($"Failed to make generic type {type} with arguments {string.Join(", ", missingTypes)}", e);
+
+            throw new ArgumentException($"Failed to make generic type {type} with arguments {string.Join(", ", missingTypes)}", e);
         }
     }
 }

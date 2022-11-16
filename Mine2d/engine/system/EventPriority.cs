@@ -2,10 +2,10 @@ namespace mine2d.engine.system;
 
 public enum EventPriority
 {
-    Lowest = 0,
-    Low = 1,
-    Normal = 2,
-    High = 3,
-    Highest = 4,
-    Important = 5,
+    Lowest = -2,
+    Low = -1,
+    Normal = 0,
+    High = 1,
+    Highest = 2,
+    Important = 3,
 }

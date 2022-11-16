@@ -1,5 +1,6 @@
 using System.Text;
 using mine2d.backend.data;
+using mine2d.engine;
 using mine2d.engine.system.annotations;
 using mine2d.state;
 using Newtonsoft.Json;
@@ -7,7 +8,7 @@ using WatsonTcp;
 
 namespace mine2d.backend;
 
-class RemoteBackend : IBackend
+public class RemoteBackend : IBackend
 {
     private WatsonTcpClient client;
     private Publisher publisher;
@@ -27,6 +28,10 @@ class RemoteBackend : IBackend
     public void ProcessPacket(ValueType packet)
     {
         this.publisher.Publish(packet);
+        if (this.publisher.IsClientOnlyPacket(PacketUtils.GetType(packet)))
+        {
+            return;
+        }
         var json = JsonConvert.SerializeObject(packet);
         var bytes = Encoding.UTF8.GetBytes(json);
         this.client.Send(bytes);
