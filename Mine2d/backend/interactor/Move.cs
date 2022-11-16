@@ -22,8 +22,20 @@ public class Move
     public static void TickHybrid()
     {
         var ctx = Context.Get();
+        var fromPositions = new Dictionary<Guid, Vector2>();
+        foreach (var player in ctx.GameState.Players)
+        {
+            fromPositions.Add(player.Id, player.Position);
+        }
         ctx.GameState.Players.ForEach(PlayerEntity.Move);
         ctx.GameState.Players.ForEach(PlayerEntity.Collide);
+        foreach (var player in ctx.GameState.Players)
+        {
+            if (player.Position != fromPositions[player.Id])
+            {
+                ctx.Backend.ProcessPacket(new PlayerMovedPacket(player.Id, player.Position));
+            }
+        }
     }
 
     [Interaction(InteractorKind.Client, "tick")]

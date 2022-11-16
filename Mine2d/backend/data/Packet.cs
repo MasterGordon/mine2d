@@ -1,3 +1,5 @@
+using mine2d.core.data;
+
 namespace mine2d.backend.data;
 
 public interface IPacket
@@ -64,5 +66,33 @@ public readonly struct BreakPacket : IPacket
     {
         this.PlayerGuid = playerGuid;
         this.Target = target;
+    }
+}
+
+public readonly struct PlayerMovedPacket : IPacket
+{
+    public readonly string Type => "playerMoved";
+    public readonly Guid PlayerId { get; }
+    public readonly Vector2 Target { get; }
+
+    public PlayerMovedPacket(Guid playerId, Vector2 target)
+    {
+        this.PlayerId = playerId;
+        this.Target = target;
+    }
+}
+
+public readonly struct BlockBrokenPacket : IPacket
+{
+    public readonly string Type => "blockBroken";
+    public readonly Guid PlayerId { get; }
+    public readonly Vector2 Target { get; }
+    public readonly STile Tile { get; }
+
+    public BlockBrokenPacket(Guid playerId, Vector2 target, STile tile)
+    {
+        this.PlayerId = playerId;
+        this.Target = target;
+        this.Tile = tile;
     }
 }

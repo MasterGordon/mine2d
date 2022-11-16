@@ -19,7 +19,7 @@ public class Connect
                 {
                     Name = packet.PlayerName,
                     Id = packet.PlayerGuid,
-                    Position = new Vector2(20, 16 * 16),
+                    Position = new Vector2(32 * 16 * 1000 + 16 * 14.5f, 32 * 16 * 10 + 16 * 14.5f),
                     Movement = new Vector2(0, 0)
                 }
             );

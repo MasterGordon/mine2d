@@ -1,12 +1,14 @@
 using mine2d.backend.data;
-using mine2d.core;
 using mine2d.frontend.renderer;
 using Mine2d.frontend;
+using Mine2d.frontend.renderer;
 
 namespace mine2d.frontend;
 
 public class Frontend : IFrontend
 {
+    private IRenderer gameRenderer;
+
     public void Init()
     {
         var ctx = Context.Get();
@@ -19,6 +21,7 @@ public class Frontend : IFrontend
         var (width, height) = ctx.Window.GetSize();
         ctx.FrontendGameState.WindowWidth = width;
         ctx.FrontendGameState.WindowHeight = height;
+        this.gameRenderer = new GameRenderer();
     }
 
     public void Process()
@@ -27,40 +30,7 @@ public class Frontend : IFrontend
         EventService.PollEvents();
 
         ctx.Renderer.Clear();
-        var scale = ctx.FrontendGameState.Settings.GameScale;
-        var camera = Context.Get().FrontendGameState.Camera;
-        new WorldRenderer().Render();
-        ctx.GameState.Players.ForEach(player =>
-        {
-            if (player.Name == ctx.FrontendGameState.PlayerName)
-            {
-                ctx.Renderer.SetColor(0, 0, 255);
-            }
-            else
-            {
-                ctx.Renderer.SetColor(255, 0, 0);
-            }
-
-            ctx.Renderer.DrawRect(
-                (player.Position.X - (int)camera.Position.X) * scale,
-                (player.Position.Y - (int)camera.Position.Y) * scale - 32 * scale,
-                16 * scale,
-                32 * scale
-            );
-        });
-        var absoluteMousePos = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + camera.Position;
-        if (ctx.GameState.World.HasTileAt((int)absoluteMousePos.X, (int)absoluteMousePos.Y))
-        {
-            var a = Constants.TileSize;
-            var tilePos = new Vector2(absoluteMousePos.X - absoluteMousePos.X % a, absoluteMousePos.Y - absoluteMousePos.Y % a);
-            ctx.Renderer.SetColor(255, 255, 255);
-            ctx.Renderer.DrawOutline(
-                (int)tilePos.X * scale - (int)camera.Position.X * scale,
-                (int)tilePos.Y * scale - (int)camera.Position.Y * scale,
-                16 * scale,
-                16 * scale
-            );
-        }
+        this.gameRenderer.Render();
 
         ctx.Renderer.Present();
     }
