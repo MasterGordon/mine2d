@@ -1,6 +1,5 @@
 using Mine2d.core.extensions;
 using Mine2d.engine.system;
-using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
 
 namespace Mine2d.frontend;

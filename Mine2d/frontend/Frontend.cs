@@ -1,7 +1,5 @@
 using Mine2d.backend.data;
 using Mine2d.frontend.renderer;
-using Mine2d.frontend;
-using Mine2d.frontend.renderer;
 
 namespace Mine2d.frontend;
 

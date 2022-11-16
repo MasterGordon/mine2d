@@ -1,6 +1,4 @@
-using Mine2d;
 using Mine2d.core;
-using Mine2d.frontend.renderer;
 
 namespace Mine2d.frontend.renderer;
 

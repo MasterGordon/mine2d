@@ -1,5 +1,3 @@
-using Mine2d;
-using Mine2d.backend.data;
 using Mine2d.engine.system;
 
 namespace Mine2d.frontend;

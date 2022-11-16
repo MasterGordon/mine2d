@@ -1,5 +1,3 @@
-using Mine2d.engine.system;
-
 namespace Mine2d.engine.system.annotations;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]

@@ -1,6 +1,3 @@
-using Mine2d;
-using Mine2d.frontend.renderer;
-
 namespace Mine2d.frontend.renderer;
 
 public class PlayerRenderer : IRenderer
