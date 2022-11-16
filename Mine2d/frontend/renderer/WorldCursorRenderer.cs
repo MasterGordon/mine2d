@@ -1,6 +1,6 @@
-using mine2d;
-using mine2d.core;
-using mine2d.frontend.renderer;
+using Mine2d;
+using Mine2d.core;
+using Mine2d.frontend.renderer;
 
 namespace Mine2d.frontend.renderer;
 

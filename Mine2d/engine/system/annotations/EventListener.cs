@@ -1,4 +1,4 @@
-using mine2d.engine.system;
+using Mine2d.engine.system;
 
 namespace Mine2d.engine.system.annotations;
 

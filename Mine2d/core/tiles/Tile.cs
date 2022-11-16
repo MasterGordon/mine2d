@@ -1,6 +1,6 @@
-using mine2d.core.data;
+using Mine2d.core.data;
 
-namespace mine2d.core.tiles;
+namespace Mine2d.core.tiles;
 
 public class Tile
 {

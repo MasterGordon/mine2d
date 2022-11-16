@@ -1,6 +1,6 @@
-using mine2d.backend.data;
+using Mine2d.backend.data;
 
-namespace mine2d.engine;
+namespace Mine2d.engine;
 
 public static class PacketUtils
 {

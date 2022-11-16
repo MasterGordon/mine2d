@@ -1,9 +1,9 @@
-using mine2d;
-using mine2d.backend.data;
-using mine2d.core.data;
-using mine2d.core.tiles;
-using mine2d.core.world;
-using mine2d.engine.system.annotations;
+using Mine2d;
+using Mine2d.backend.data;
+using Mine2d.core.data;
+using Mine2d.core.tiles;
+using Mine2d.core.world;
+using Mine2d.engine.system.annotations;
 
 namespace Mine2d.backend.interactor;
 

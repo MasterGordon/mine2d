@@ -1,6 +1,6 @@
-using mine2d.core.data;
+using Mine2d.core.data;
 
-namespace mine2d.backend.data;
+namespace Mine2d.backend.data;
 
 public interface IPacket
 {

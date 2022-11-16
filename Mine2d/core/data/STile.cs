@@ -1,6 +1,6 @@
-using mine2d.core.tiles;
+using Mine2d.core.tiles;
 
-namespace mine2d.core.data;
+namespace Mine2d.core.data;
 
 public struct STile
 {

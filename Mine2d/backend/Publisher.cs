@@ -1,9 +1,9 @@
 using System.Reflection;
-using mine2d.core.extensions;
-using mine2d.engine;
-using mine2d.engine.system.annotations;
+using Mine2d.core.extensions;
+using Mine2d.engine;
+using Mine2d.engine.system.annotations;
 
-namespace mine2d.backend;
+namespace Mine2d.backend;
 
 public class Publisher
 {

@@ -1,4 +1,4 @@
-namespace mine2d.engine;
+namespace Mine2d.engine;
 
 public abstract class Game
 {

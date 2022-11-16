@@ -1,7 +1,7 @@
-using mine2d.engine.utils;
+using Mine2d.engine.utils;
 using Mine2d.engine;
 
-namespace mine2d.engine;
+namespace Mine2d.engine;
 
 public class Renderer
 {

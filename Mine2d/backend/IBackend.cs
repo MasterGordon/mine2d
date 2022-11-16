@@ -1,4 +1,4 @@
-namespace mine2d.backend;
+namespace Mine2d.backend;
 
 public interface IBackend
 {

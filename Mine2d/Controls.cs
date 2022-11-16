@@ -1,4 +1,4 @@
-namespace mine2d;
+namespace Mine2d;
 
 public enum Control
 {

@@ -1,6 +1,6 @@
-using mine2d.state;
+using Mine2d.state;
 
-namespace mine2d.core;
+namespace Mine2d.core;
 
 public class PlayerEntity
 {

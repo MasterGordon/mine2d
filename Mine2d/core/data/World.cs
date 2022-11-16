@@ -1,4 +1,4 @@
-namespace mine2d.core.data;
+namespace Mine2d.core.data;
 
 public class World
 {

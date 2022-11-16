@@ -1,11 +1,11 @@
 using System.Text;
-using mine2d.backend.data;
-using mine2d.engine.system.annotations;
-using mine2d.network;
+using Mine2d.backend.data;
+using Mine2d.engine.system.annotations;
+using Mine2d.network;
 using Newtonsoft.Json;
 using WatsonTcp;
 
-namespace mine2d.backend;
+namespace Mine2d.backend;
 
 public class Backend : IBackend
 {

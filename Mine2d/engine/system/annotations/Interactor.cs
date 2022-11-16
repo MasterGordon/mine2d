@@ -1,4 +1,4 @@
-namespace mine2d.engine.system.annotations;
+namespace Mine2d.engine.system.annotations;
 
 public enum InteractorKind
 {

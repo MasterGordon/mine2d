@@ -1,4 +1,4 @@
-namespace mine2d.engine.utils;
+namespace Mine2d.engine.utils;
 
 public class Color
 {

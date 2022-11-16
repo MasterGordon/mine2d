@@ -1,7 +1,7 @@
-using mine2d.core;
-using mine2d.core.data;
+using Mine2d.core;
+using Mine2d.core.data;
 
-namespace mine2d.state;
+namespace Mine2d.state;
 
 public class FrontendGameState
 {

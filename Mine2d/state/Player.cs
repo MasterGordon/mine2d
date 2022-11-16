@@ -1,6 +1,6 @@
-using mine2d.engine;
+using Mine2d.engine;
 
-namespace mine2d.state;
+namespace Mine2d.state;
 
 public class Player
 {

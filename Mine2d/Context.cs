@@ -1,10 +1,10 @@
-using mine2d.backend;
-using mine2d.core.tiles;
-using mine2d.engine;
-using mine2d.frontend;
-using mine2d.state;
+using Mine2d.backend;
+using Mine2d.core.tiles;
+using Mine2d.engine;
+using Mine2d.frontend;
+using Mine2d.state;
 
-namespace mine2d;
+namespace Mine2d;
 
 public class Context
 {

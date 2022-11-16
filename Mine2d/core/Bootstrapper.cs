@@ -1,8 +1,8 @@
-using mine2d.core.data;
-using mine2d.core.tiles;
-using mine2d.core.world;
+using Mine2d.core.data;
+using Mine2d.core.tiles;
+using Mine2d.core.world;
 
-namespace mine2d.core;
+namespace Mine2d.core;
 
 public class Bootstrapper
 {

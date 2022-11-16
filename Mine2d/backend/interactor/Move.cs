@@ -1,8 +1,8 @@
-using mine2d.backend.data;
-using mine2d.core;
-using mine2d.engine.system.annotations;
+using Mine2d.backend.data;
+using Mine2d.core;
+using Mine2d.engine.system.annotations;
 
-namespace mine2d.backend.interactor;
+namespace Mine2d.backend.interactor;
 
 [Interactor]
 public class Move

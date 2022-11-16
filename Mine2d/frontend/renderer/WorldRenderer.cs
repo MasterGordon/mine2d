@@ -1,6 +1,6 @@
-using mine2d.core;
+using Mine2d.core;
 
-namespace mine2d.frontend.renderer;
+namespace Mine2d.frontend.renderer;
 
 public class WorldRenderer : IRenderer
 {

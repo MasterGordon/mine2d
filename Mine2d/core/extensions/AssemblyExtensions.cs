@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace mine2d.core.extensions;
+namespace Mine2d.core.extensions;
 
 public static class AssemblyExtensions
 {

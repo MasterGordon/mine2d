@@ -1,6 +1,6 @@
 using Mine2d.engine;
 
-namespace mine2d.engine;
+namespace Mine2d.engine;
 
 public class FontManager
 {

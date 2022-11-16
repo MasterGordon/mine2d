@@ -1,4 +1,4 @@
-namespace mine2d.frontend;
+namespace Mine2d.frontend;
 
 public interface IFrontend
 {

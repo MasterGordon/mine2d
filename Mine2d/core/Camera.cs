@@ -1,4 +1,4 @@
-namespace mine2d.core;
+namespace Mine2d.core;
 
 public class Camera
 {

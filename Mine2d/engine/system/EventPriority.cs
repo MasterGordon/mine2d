@@ -1,4 +1,4 @@
-namespace mine2d.engine.system;
+namespace Mine2d.engine.system;
 
 public enum EventPriority
 {

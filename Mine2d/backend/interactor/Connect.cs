@@ -1,8 +1,8 @@
-using mine2d.backend.data;
-using mine2d.engine.system.annotations;
-using mine2d.state;
+using Mine2d.backend.data;
+using Mine2d.engine.system.annotations;
+using Mine2d.state;
 
-namespace mine2d.backend.interactor;
+namespace Mine2d.backend.interactor;
 
 [Interactor]
 public class Connect

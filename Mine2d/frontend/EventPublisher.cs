@@ -1,5 +1,5 @@
-using mine2d.core.extensions;
-using mine2d.engine.system;
+using Mine2d.core.extensions;
+using Mine2d.engine.system;
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
 

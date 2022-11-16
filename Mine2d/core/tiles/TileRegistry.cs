@@ -1,4 +1,4 @@
-namespace mine2d.core.tiles;
+namespace Mine2d.core.tiles;
 
 public enum Tiles
 {

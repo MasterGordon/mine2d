@@ -1,4 +1,4 @@
-﻿namespace mine2d;
+﻿namespace Mine2d;
 
 public class Program
 {
@@ -6,7 +6,7 @@ public class Program
     {
         var isHost = !args.Contains("--client");
         // bool isHost = true;
-        var game = new Mine2d(isHost);
+        var game = new Mine2dGame(isHost);
         game.Run();
     }
 }

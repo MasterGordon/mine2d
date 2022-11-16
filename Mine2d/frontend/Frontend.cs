@@ -1,9 +1,9 @@
-using mine2d.backend.data;
-using mine2d.frontend.renderer;
+using Mine2d.backend.data;
+using Mine2d.frontend.renderer;
 using Mine2d.frontend;
 using Mine2d.frontend.renderer;
 
-namespace mine2d.frontend;
+namespace Mine2d.frontend;
 
 public class Frontend : IFrontend
 {

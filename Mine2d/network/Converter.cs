@@ -1,10 +1,10 @@
 using System.Text;
-using mine2d.backend.data;
+using Mine2d.backend.data;
 using Mine2d.network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace mine2d.network;
+namespace Mine2d.network;
 
 public class Converter
 {

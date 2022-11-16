@@ -1,7 +1,7 @@
-using mine2d.core.data;
-using mine2d.core.tiles;
+using Mine2d.core.data;
+using Mine2d.core.tiles;
 
-namespace mine2d.core.world;
+namespace Mine2d.core.world;
 
 public class ChunkGenerator
 {

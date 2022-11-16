@@ -1,16 +1,16 @@
-using mine2d.backend;
-using mine2d.core;
-using mine2d.engine;
-using mine2d.frontend;
-using mine2d.state;
+using Mine2d.backend;
+using Mine2d.core;
+using Mine2d.engine;
+using Mine2d.frontend;
+using Mine2d.state;
 
-namespace mine2d;
+namespace Mine2d;
 
-public class Mine2d : Game
+public class Mine2dGame : Game
 {
     private readonly Context ctx;
 
-    public Mine2d(bool isHost)
+    public Mine2dGame(bool isHost)
     {
         var window = new Window("MultiPlayerGame" + (isHost ? " - host" : ""), 1200, 800);
         this.ctx = isHost
