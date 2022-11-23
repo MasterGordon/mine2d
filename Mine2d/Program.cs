@@ -1,4 +1,6 @@
-﻿namespace Mine2d;
+﻿using Mine2d.game;
+
+namespace Mine2d;
 
 public class Program
 {

@@ -1,3 +1,5 @@
+using Mine2d.game;
+
 namespace Mine2d.engine;
 
 public class TextureFactory
@@ -14,16 +16,16 @@ public class TextureFactory
 
     public IntPtr CreateTexture(string[] path)
     {
-        var target = this.loadTexture(path[0]);
+        var target = this.LoadTexture(path[0]);
         for (var i = 1; i < path.Length; i++)
         {
-            var t = this.loadTexture(path[i]);
-            target = this.mergeTextures(target, t);
+            var t = this.LoadTexture(path[i]);
+            target = this.MergeTextures(target, t);
         }
         return target;
     }
 
-    private IntPtr mergeTextures(IntPtr t1, IntPtr t2)
+    private IntPtr MergeTextures(IntPtr t1, IntPtr t2)
     {
         var (w, h) = this.renderer.GetTextureSize(t1);
         var target = SDL_CreateTexture(this.renderer.GetRaw(), SDL_PIXELFORMAT_RGBA8888, (int)SDL_TextureAccess.SDL_TEXTUREACCESS_TARGET, w, h);
@@ -35,7 +37,7 @@ public class TextureFactory
         return target;
     }
 
-    private IntPtr loadTexture(string path)
+    private IntPtr LoadTexture(string path)
     {
         if (this.textureCache.TryGetValue(path, out var value))
         {

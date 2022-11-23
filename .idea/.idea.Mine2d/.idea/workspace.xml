@@ -8,16 +8,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="647d77fa-e9ab-4317-9087-0d31c3323ae0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Mine2d/assets/breaking.ase" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine2d/assets/breaking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine2d/assets/font.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mine2d/assets/stone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Mine2d/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.Mine2d/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mine2d/game/core/tiles/TileRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Mine2d/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mine2d/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mine2d/Mine2d.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/Mine2d.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/breaking.ase" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/breaking.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/font.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/stone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Folder.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d.sln.DotSettings" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/Context.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/Context.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/Controls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/Controls.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/Import.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/GlobalUsings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/Mine2dGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/Mine2dGame.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/Backend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/Backend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/IBackend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/IBackend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/Publisher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/Publisher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/RemoteBackend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/RemoteBackend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/data/Packet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/data/Packet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/interactor/Breaking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/interactor/Breaking.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/interactor/Connect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/interactor/Connect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/interactor/Move.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/interactor/Move.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/backend/interactor/WorldGeneration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/interactor/WorldGeneration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/Bootstrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/Bootstrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/Camera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/Constants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/Constants.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/PlayerEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/PlayerEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/data/Chunk.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/data/Chunk.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/data/STile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/data/STile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/data/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/data/World.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/extensions/AssemblyExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/extensions/AssemblyExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/extensions/TypeExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/extensions/TypeExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/tiles/OreTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/tiles/OreTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/tiles/TextureCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/tiles/TextureCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/tiles/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/tiles/Tile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/tiles/TileRegistry.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/core/world/ChunkGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/core/world/ChunkGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/engine/PacketUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/PacketUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/engine/Shapes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/engine/TextureFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/TextureFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/EventPublisher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/EventPublisher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/EventService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/EventService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/Frontend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/Frontend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/IFrontend.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/networking/IFrontend.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/events/Exit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/events/Exit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/events/Fullscreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/events/Fullscreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/events/PlayerBreakInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/events/PlayerBreakInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/events/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/events/PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/events/Resize.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/events/Resize.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/BackgroundRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/renderer/BackgroundRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/GameRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/renderer/GameRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/IRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/engine/IRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/PlayerRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/renderer/PlayerRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/WorldCursorRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/renderer/WorldCursorRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/frontend/renderer/WorldRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/frontend/renderer/WorldRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/network/Converter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/network/Converter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/network/PacketException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/backend/network/PacketException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/state/GameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/state/GameState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mine2d/state/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Mine2d/game/state/Player.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +71,16 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/48db0d883a624d62aa8ff0ff392ea93517600/62/b09add12/WatsonTcpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/Game.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/Renderer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/networking/Backend.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/networking/Frontend.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/networking/IBackend.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/engine/networking/IFrontend.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/game/Context.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/game/backend/network/Converter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mine2d/game/core/tiles/Tile.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="sqwxszt3" />
@@ -49,13 +102,14 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.5005688",
     "last_opened_file_path": "/mnt/storage_01/data/Dev/repos/Mine2d/Mine2d/Mine2d.csproj",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -109,7 +163,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668298144432</updated>
-      <workItem from="1668298147381" duration="717000" />
+      <workItem from="1668298147381" duration="4112000" />
+      <workItem from="1669217635437" duration="1866000" />
+      <workItem from="1669223179688" duration="19000" />
+      <workItem from="1669223234527" duration="1396000" />
     </task>
     <servers />
   </component>
