@@ -23,7 +23,7 @@ public class EventPublisher
     {
         var types = this.GetType().Assembly
             .GetTypesSafe()
-            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Mine2d.frontend.events", StringComparison.Ordinal));
+            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Mine2d.game.frontend.events", StringComparison.Ordinal));
         foreach (var type in types)
         {
             var methods = type.GetMethods()
