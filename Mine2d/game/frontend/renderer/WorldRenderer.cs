@@ -12,7 +12,7 @@ public class WorldRenderer : IRenderer
     public WorldRenderer()
     {
         var rl = Context.Get().ResourceLoader;
-        var (ptr, size) = rl.LoadToIntPtr("assets.light.png");
+        var (ptr, size) = rl.LoadToIntPtr("assets.light2.png");
         var sdlBuffer = SDL_RWFromMem(ptr, size);
         var surface = IMG_Load_RW(sdlBuffer, 1);
         this.light = Context.Get().Renderer.CreateTextureFromSurface(surface);
