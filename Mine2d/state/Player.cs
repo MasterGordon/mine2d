@@ -1,5 +1,3 @@
-using Mine2d.engine;
-
 namespace Mine2d.state;
 
 public class Player
@@ -11,8 +9,8 @@ public class Player
     public Vector2 Mining { get; set; }
     public int MiningCooldown { get; set; }
 
-    public Line GetBottomCollisionLine()
+    public Vector2 GetCenter()
     {
-        return new Line(this.Position, this.Position + new Vector2(16, 0));
+        return this.Position + new Vector2(7, -14);
     }
 }

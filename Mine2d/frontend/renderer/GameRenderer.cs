@@ -6,6 +6,7 @@ public class GameRenderer : IRenderer
 
     public GameRenderer()
     {
+        this.renderers.Add(new BackgroundRenderer());
         this.renderers.Add(new WorldRenderer());
         this.renderers.Add(new PlayerRenderer());
         this.renderers.Add(new WorldCursorRenderer());

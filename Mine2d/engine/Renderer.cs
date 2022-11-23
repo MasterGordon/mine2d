@@ -159,11 +159,27 @@ public class Renderer
         ProcessStatus(SDL_RenderCopy(this.renderer, texture, ref srcRect, ref rect));
     }
 
+    public static void SetTextureColorModulate(IntPtr texture, int r, int g, int b)
+    {
+        ProcessStatus(SDL_SetTextureColorMod(texture, (byte)r, (byte)g, (byte)b));
+    }
+
+    public static void SetTextureColorModulate(IntPtr texture, int a)
+    {
+        SetTextureColorModulate(texture, a, a, a);
+    }
+
     public static void ProcessStatus(int status)
     {
         if (status != 0)
         {
             throw new SDLException(SDL_GetError());
         }
+    }
+
+    internal (int srcW, int srcH) GetTextureSize(IntPtr src)
+    {
+        ProcessStatus(SDL_QueryTexture(src, out _, out _, out var srcW, out var srcH));
+        return (srcW, srcH);
     }
 }

@@ -12,7 +12,7 @@ public class Window
             SDL_WINDOWPOS_CENTERED,
             w,
             h,
-            SDL_WindowFlags.SDL_WINDOW_VULKAN | SDL_WindowFlags.SDL_WINDOW_RESIZABLE
+            SDL_WindowFlags.SDL_WINDOW_OPENGL | SDL_WindowFlags.SDL_WINDOW_RESIZABLE
         );
     }
 

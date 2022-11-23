@@ -18,6 +18,43 @@ public class ChunkGenerator
         return chunk;
     }
 
+    public static Chunk CreateChunk(int x, int y)
+    {
+        var fill = new STile
+        {
+            Id = (int)Tiles.Stone,
+        };
+        var chunk = new Chunk(x, y);
+        for (var i = 0; i < Constants.ChunkSize; i++)
+        {
+            for (var j = 0; j < Constants.ChunkSize; j++)
+            {
+                if (new Random().Next(0, 100) < 10)
+                {
+                    fill.Id = (int)Tiles.Ore1;
+                }
+                else if (new Random().Next(0, 100) < 10)
+                {
+                    fill.Id = (int)Tiles.Ore2;
+                }
+                else if (new Random().Next(0, 100) < 10)
+                {
+                    fill.Id = (int)Tiles.Ore3;
+                }
+                else if (new Random().Next(0, 100) < 10)
+                {
+                    fill.Id = (int)Tiles.Ore4;
+                }
+                else
+                {
+                    fill.Id = (int)Tiles.Stone;
+                }
+                chunk.SetTile(i, j, fill);
+            }
+        }
+        return chunk;
+    }
+
     public static Chunk CreateSpawnChunk(int x, int y)
     {
         var chunk = new Chunk(x, y);

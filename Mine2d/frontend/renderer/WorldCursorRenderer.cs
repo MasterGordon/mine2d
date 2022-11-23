@@ -10,6 +10,11 @@ public class WorldCursorRenderer : IRenderer
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var camera = ctx.FrontendGameState.Camera;
         var absoluteMousePos = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + camera.Position;
+        if (PlayerEntity.GetSelf() == null || (absoluteMousePos - PlayerEntity.GetSelf().GetCenter()).LengthSquared() > Constants.BreakDistance * Constants.BreakDistance)
+        {
+            return;
+        }
+
         if (ctx.GameState.World.HasTileAt((int)absoluteMousePos.X, (int)absoluteMousePos.Y))
         {
             var ts = Constants.TileSize;

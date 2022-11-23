@@ -31,8 +31,10 @@ public class PlayerEntity
         do
         {
             var pL = p.Position + new Vector2(0, -8);
+            var pL2 = p.Position + new Vector2(0, -24);
             hasCollision =
-                world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL);
+                world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL)
+            || world.HasChunkAt(pL2) && world.GetChunkAt(pL2).HasTileAt(pL2);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { X = 0 };
@@ -41,9 +43,11 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pR = p.Position + new Vector2(16, -8);
+            var pR = p.Position + new Vector2(14, -8);
+            var pR2 = p.Position + new Vector2(14, -24);
             hasCollision =
-                world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
+                world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR)
+            || world.HasChunkAt(pR2) && world.GetChunkAt(pR2).HasTileAt(pR2);
             if (hasCollision)
             {
                 p.Movement = p.Movement with { X = 0 };
@@ -52,8 +56,8 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pL = p.Position;
-            var pR = p.Position + new Vector2(16, 0);
+            var pL = p.Position + new Vector2(0, 0);
+            var pR = p.Position + new Vector2(14, 0);
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL)
                 || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
@@ -65,8 +69,8 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pL = p.Position + new Vector2(0, -32);
-            var pR = p.Position + new Vector2(16, -32);
+            var pL = p.Position + new Vector2(0, -28);
+            var pR = p.Position + new Vector2(14, -28);
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL)
                 || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);

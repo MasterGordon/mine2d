@@ -14,7 +14,11 @@ public class WorldGeneration
         new Vector2(0, 1),
         new Vector2(1, 0),
         new Vector2(0, -1),
-        new Vector2(-1, 0)
+        new Vector2(-1, 0),
+        new Vector2(1, 1),
+        new Vector2(1, -1),
+        new Vector2(-1, -1),
+        new Vector2(-1, 1)
     };
 
     [Interaction(InteractorKind.Server, "playerMoved")]
@@ -30,7 +34,7 @@ public class WorldGeneration
             if (!hasChunkGenerated)
             {
                 var chunkPos = World.ToChunkPos(generationTarget);
-                world.AddChunk(ChunkGenerator.CreateFilledChunk((int)chunkPos.X, (int)chunkPos.Y, STile.From(Tiles.Stone)));
+                world.AddChunk(ChunkGenerator.CreateChunk((int)chunkPos.X, (int)chunkPos.Y));
             }
         }
     }

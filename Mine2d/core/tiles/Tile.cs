@@ -1,4 +1,5 @@
 using Mine2d.core.data;
+using Mine2d.engine;
 
 namespace Mine2d.core.tiles;
 
@@ -26,6 +27,13 @@ public class Tile
         SDL_FreeSurface(surface);
     }
 
+    public Tile(string name, IntPtr texture, int hardness)
+    {
+        this.Name = name;
+        this.Hardness = hardness;
+        this.texture = texture;
+    }
+
     ~Tile()
     {
         SDL_DestroyTexture(this.texture);
@@ -36,6 +44,7 @@ public class Tile
         var renderer = Context.Get().Renderer;
         var scale = Context.Get().FrontendGameState.Settings.GameScale;
         var camera = Context.Get().FrontendGameState.Camera;
+        Renderer.SetTextureColorModulate(this.texture, 255);
         renderer.DrawTexture(
             this.texture,
             (x - (int)camera.Position.X) * scale,
