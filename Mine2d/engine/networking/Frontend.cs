@@ -17,6 +17,7 @@ public class Frontend : IFrontend
         var connectPacket = new ConnectPacket(ctx.FrontendGameState.PlayerName, guid);
         ctx.Backend.ProcessPacket(connectPacket);
         ctx.TileRegistry.RegisterTile();
+        ctx.ItemRegistry.RegisterItems();
         var (width, height) = ctx.Window.GetSize();
         ctx.FrontendGameState.WindowWidth = width;
         ctx.FrontendGameState.WindowHeight = height;

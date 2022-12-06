@@ -34,11 +34,6 @@ public class Tile
         this.texture = texture;
     }
 
-    ~Tile()
-    {
-        SDL_DestroyTexture(this.texture);
-    }
-
     public void Render(int x, int y, STile tile)
     {
         var renderer = Context.Get().Renderer;

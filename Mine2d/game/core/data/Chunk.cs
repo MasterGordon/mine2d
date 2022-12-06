@@ -5,6 +5,7 @@ public class Chunk
     public STile[,] Tiles { get; set; } = new STile[Constants.ChunkSize, Constants.ChunkSize];
     public int X { get; set; }
     public int Y { get; set; }
+    public List<Entity> Entities { get; set; } = new();
 
     public Chunk(int x, int y)
     {
@@ -75,5 +76,10 @@ public class Chunk
     {
         return pos - new Vector2(this.X * Constants.ChunkSize * Constants.TileSize,
             this.Y * Constants.ChunkSize * Constants.TileSize);
+    }
+
+    public void AddEntity(Entity entity)
+    {
+        this.Entities.Add(entity);
     }
 }

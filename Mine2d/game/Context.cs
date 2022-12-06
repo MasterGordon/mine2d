@@ -1,5 +1,6 @@
 using Mine2d.engine;
 using Mine2d.engine.networking;
+using Mine2d.game.core.items;
 using Mine2d.game.core.tiles;
 using Mine2d.game.state;
 
@@ -15,7 +16,9 @@ public class Context
     public Window Window { get; set; }
     public Renderer Renderer { get; set; }
     public TileRegistry TileRegistry { get; set; }
+    public ItemRegistry ItemRegistry { get; set; }
     public ResourceLoader ResourceLoader { get; set; }
+    public TextureFactory TextureFactory { get; set; }
     public static Context Instance { get; set; }
 
     public Context(
@@ -35,8 +38,10 @@ public class Context
         this.FrontendGameState = frontendGameState;
         this.Renderer = renderer;
         this.Window = window;
-        this.TileRegistry = new TileRegistry();
         this.ResourceLoader = new ResourceLoader();
+        this.TextureFactory = new TextureFactory(this.ResourceLoader, this.Renderer);
+        this.TileRegistry = new TileRegistry();
+        this.ItemRegistry = new ItemRegistry();
         Instance = this;
     }
 

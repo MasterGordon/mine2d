@@ -18,6 +18,7 @@ public class Backend : IBackend
     public void Process(double dt)
     {
         this.ProcessPacket(new TickPacket(this.tick++));
+        Context.Get().GameState.Tick = this.tick;
         while (this.pendingPackets.Count > 0)
         {
             var packet = this.pendingPackets.Dequeue();

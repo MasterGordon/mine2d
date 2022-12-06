@@ -12,6 +12,7 @@ public class GameRenderer : IRenderer
         this.renderers.Add(new WorldRenderer());
         this.renderers.Add(new PlayerRenderer());
         this.renderers.Add(new WorldCursorRenderer());
+        this.renderers.Add(new ItemRenderer());
     }
 
     public void Render()

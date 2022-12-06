@@ -43,6 +43,7 @@ public class Breaking
                     chunk.SetTileAt(player.Mining, tile with { Hits = tile.Hits + 1 });
                     if (tile.Hits >= hardness)
                     {
+                        ctx.Backend.ProcessPacket(new BlockBrokenPacket(player.Id, player.Mining, tile));
                         chunk.SetTileAt(player.Mining, STile.From(0));
                     }
                 }

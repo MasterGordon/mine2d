@@ -8,10 +8,10 @@ public class TextureFactory
     private readonly Renderer renderer;
     private readonly Dictionary<string, IntPtr> textureCache = new();
 
-    public TextureFactory()
+    public TextureFactory(ResourceLoader resourceLoader, Renderer renderer)
     {
-        this.resourceLoader = Context.Get().ResourceLoader;
-        this.renderer = Context.Get().Renderer;
+        this.resourceLoader = resourceLoader;
+        this.renderer = renderer;
     }
 
     public IntPtr CreateTexture(string[] path)
