@@ -6,7 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ppy.SDL2-CS" Version="1.0.596-alpha" />
