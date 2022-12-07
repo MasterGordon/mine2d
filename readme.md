@@ -1,4 +1,4 @@
-# Mine2d
+# Mining to Deep (mine2d)
 
 ## Local Development
 

@@ -21,7 +21,6 @@ public class ItemPhysics
                 if (entity is ItemEntity itemEntity)
                 {
                     itemEntity.Velocity += new Vector2(0, 0.1f);
-                    itemEntity.Velocity *= new Vector2(0.7f, 1f);
                     var nextPos = itemEntity.Position + itemEntity.Velocity;
                     if (world.HasChunkAt(nextPos) && world.GetChunkAt(nextPos).HasTileAt(nextPos))
                     {
@@ -41,16 +40,20 @@ public class ItemPhysics
         var world = gameState.World;
         foreach (var chunk in world.Chunks)
         {
-            foreach (var player in gameState.Players)
+            var entities = chunk.Value.Entities;
+            foreach (var entity in entities)
             {
+                foreach (var player in gameState.Players)
+                {
 
-                var items = chunk.Value.Entities.RemoveAll(e =>
-                {
-                    return e is ItemEntity itemEntity && (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8;
-                });
-                if (items > 0)
-                {
-                    Context.Get().GameAudio.Play(Sound.ItemPickup);
+                    var items = chunk.Value.Entities.RemoveAll(e =>
+                    {
+                        return e is ItemEntity itemEntity && (player.GetCenter() - itemEntity.Position).LengthSquared() < 8 * 8;
+                    });
+                    if (items > 0)
+                    {
+                        Context.Get().GameAudio.Play(Sound.ItemPickup);
+                    }
                 }
             }
         }

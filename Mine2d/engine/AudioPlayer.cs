@@ -1,6 +1,11 @@
 namespace Mine2d.engine;
 
-public enum Sound { }
+public enum Sound
+{
+    BlockHit,
+    BlockBreak,
+    ItemPickup,
+}
 
 public class AudioPlayer
 {
@@ -22,6 +27,7 @@ public class AudioPlayer
     {
         var buffer = this.audioFiles[name];
         var sound = SDL2.SDL_mixer.Mix_QuickLoad_WAV(buffer);
-        SDL2.SDL_mixer.Mix_PlayChannel((int)name, sound, 0);
+
+        var ret = SDL2.SDL_mixer.Mix_PlayChannel((int)name, sound, 0);
     }
 }

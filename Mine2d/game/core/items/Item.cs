@@ -22,7 +22,7 @@ public class Item
         var renderer = ctx.Renderer;
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var targetPos = (position - ctx.FrontendGameState.Camera.Position) * scale -
-            new Vector2(6 * scale);
+            new Vector2(4 * scale, 6 * scale);
         renderer.DrawTexture(this.texture, (int)targetPos.X, (int)targetPos.Y, 8 * scale, 8 * scale);
     }
 }

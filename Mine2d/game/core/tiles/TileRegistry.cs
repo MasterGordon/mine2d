@@ -1,3 +1,5 @@
+using Mine2d.game.core.data;
+
 namespace Mine2d.game.core.tiles;
 
 public enum Tiles
@@ -15,7 +17,7 @@ public class TileRegistry
 
     public void RegisterTile()
     {
-        this.Tiles.Add(1, new Tile("stone", "stone", 5));
+        this.Tiles.Add(1, new Tile("stone", "stone", 5, ItemId.Stone));
         this.Tiles.Add(2, new OreTile("ore1", new[] { "stone", "ore1" }, 5));
         this.Tiles.Add(3, new OreTile("ore2", new[] { "stone", "ore2" }, 7));
         this.Tiles.Add(4, new OreTile("ore3", new[] { "stone", "ore3" }, 8));

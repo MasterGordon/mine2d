@@ -19,6 +19,7 @@
   
   <ItemGroup>
     <EmbeddedResource Include="assets/*" />
+    <EmbeddedResource Include="assets/audio/*" />
   </ItemGroup>
 
 </Project>

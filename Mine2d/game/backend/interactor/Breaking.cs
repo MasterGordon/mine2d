@@ -1,3 +1,4 @@
+using Mine2d.engine;
 using Mine2d.engine.system.annotations;
 using Mine2d.game.backend.data;
 using Mine2d.game.core;
@@ -43,7 +44,8 @@ public class Breaking
                     chunk.SetTileAt(player.Mining, tile with { Hits = tile.Hits + 1 });
                     if (tile.Hits >= hardness)
                     {
-                        ctx.Backend.ProcessPacket(new BlockBrokenPacket(player.Id, player.Mining, tile));
+                        var blockPos = new Vector2((int)Math.Floor(player.Mining.X / 16) * 16, (int)Math.Floor(player.Mining.Y / 16) * 16);
+                        ctx.Backend.ProcessPacket(new BlockBrokenPacket(player.Id, blockPos, tile));
                         chunk.SetTileAt(player.Mining, STile.From(0));
                     }
                 }
@@ -61,5 +63,13 @@ public class Breaking
             return;
         }
         player.Mining = packet.Target;
+    }
+
+    [Interaction(InteractorKind.Server, "blockBroken")]
+    public static void BreakServer(BlockBrokenPacket packet)
+    {
+        var ctx = Context.Get();
+        var tile = ctx.TileRegistry.GetTile(packet.Tile.Id);
+        tile.DropItem(packet.Target);
     }
 }
