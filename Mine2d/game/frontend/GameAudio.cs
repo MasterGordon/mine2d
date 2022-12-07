@@ -10,7 +10,7 @@ public class GameAudio
     {
         this.audioPlayer = new();
         this.audioPlayer.Register(Sound.BlockBreak, "assets.audio.block_break.wav");
-        this.audioPlayer.Register(Sound.BlockHit, "assets.audio.block_hit.wav");
+        this.audioPlayer.Register(Sound.BlockHit, "assets.audio.block_hit_alt.wav");
         this.audioPlayer.Register(Sound.ItemPickup, "assets.audio.item_pickup.wav");
     }
 

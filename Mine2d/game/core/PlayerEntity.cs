@@ -22,6 +22,13 @@ public class PlayerEntity
     {
         p.Movement += Constants.Gravity;
         p.Position += p.Movement;
+        if (p.Movement.Y > 8)
+        {
+            p.Movement = p.Movement with
+            {
+                Y = 8
+            };
+        }
     }
 
     public static void Collide(Player p)

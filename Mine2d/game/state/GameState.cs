@@ -18,7 +18,7 @@ public class FrontendGameState
 
 public class Settings
 {
-    public int GameScale { get; set; } = 4;
+    public int GameScale { get; set; } = 6;
     public int UiScale { get; set; } = 4;
     public bool ShowCollision { get; set; } = true;
     public bool Fullscreen { get; set; } = false;

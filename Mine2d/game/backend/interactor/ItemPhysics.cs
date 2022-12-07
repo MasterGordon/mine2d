@@ -1,5 +1,6 @@
 using Mine2d.engine;
 using Mine2d.engine.system.annotations;
+using Mine2d.game.core.data;
 using Mine2d.game.core.data.entities;
 
 namespace Mine2d.game.backend.interactor;
@@ -44,14 +45,17 @@ public class ItemPhysics
             foreach (var player in gameState.Players)
             {
 
-                var items = chunk.Value.Entities.RemoveAll(e =>
+                var items = chunk.Value.Entities.Where(e =>
                 {
-                    return e is ItemEntity itemEntity && (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8;
+                    return e is ItemEntity itemEntity &&
+                    (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8 &&
+                    player.inventory.PickupItemStack(new ItemStack { Id = itemEntity.ItemId, Count = 1 });
                 });
-                if (items > 0)
+                if (items.Any())
                 {
                     Context.Get().GameAudio.Play(Sound.ItemPickup);
                 }
+                _ = chunk.Value.Entities.RemoveAll(e => items.Contains(e));
             }
         }
     }
