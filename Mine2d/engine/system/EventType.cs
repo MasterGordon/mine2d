@@ -9,4 +9,5 @@ public enum EventType
     KeyDown,
     KeyUp,
     WindowResize,
+    MouseWheel,
 }

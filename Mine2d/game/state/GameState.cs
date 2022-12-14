@@ -14,6 +14,7 @@ public class FrontendGameState
     public Vector2 MousePosition { get; set; }
     public Settings Settings { get; set; } = new Settings();
     public string PlayerName { get; set; } = "Player";
+    public int HotbarIndex { get; set; }
 }
 
 public class Settings

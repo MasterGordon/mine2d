@@ -38,6 +38,10 @@ public class EventService
             {
                 EventPublisher.Publish(EventType.KeyUp, e);
             }
+            if (e.type == SDL_EventType.SDL_MOUSEWHEEL)
+            {
+                EventPublisher.Publish(EventType.MouseWheel, e);
+            }
         }
     }
 }
