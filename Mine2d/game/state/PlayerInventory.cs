@@ -9,6 +9,7 @@ public class PlayerInventory
 
     public bool PickupItemStack(ItemStack itemStack)
     {
+        Console.WriteLine("Picking up" + itemStack.Id + "  " + itemStack.Count);
         var slot = InventoryUtils.GetFirstMatchingSlot(this.Hotbar, itemStack.Id);
         if (slot == -1)
         {
