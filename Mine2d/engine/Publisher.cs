@@ -1,78 +1,86 @@
 using System.Reflection;
-using Mine2d.engine.networking;
+using Mine2d.engine.extensions;
 using Mine2d.engine.system.annotations;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.core.extensions;
 
 namespace Mine2d.engine;
 
+public delegate void InteractionHandler(Packet packet);
+
 public class Publisher
 {
-    private readonly Dictionary<string, HashSet<Delegate>> subscribers =
-        new();
-    private readonly HashSet<string> clientOnlySubscriptions = new();
-    private readonly HashSet<string> serverSubscriptions = new();
+    private readonly Dictionary<PacketType, HashSet<MethodInfo>> subscribers = new();
+    private readonly HashSet<PacketType> clientOnlySubscriptions = new();
+    private readonly HashSet<PacketType> serverSubscriptions = new();
     private readonly InteractorKind kind;
 
     public Publisher(InteractorKind kind)
     {
+        Enum.GetValues<PacketType>()
+            .ForEach(type => this.subscribers[type] = new HashSet<MethodInfo>());
+        
         this.kind = kind;
         this.Scan();
     }
 
     private void Scan()
     {
-        var types = Assembly
+        Assembly
             .GetAssembly(this.GetType())!
-            .GetTypesSafe();
-        foreach (var type in types)
-        {
-            var classAttrs = type.GetCustomAttributes(typeof(InteractorAttribute), false);
-            if (classAttrs.Length == 0)
+            .GetTypesSafe()
+            .Where(t => t.HasAttribute<InteractorAttribute>())
+            .SelectMany(t => t.GetMethods())
+            .Where(m => m.HasAttribute<InteractionAttribute>())
+            .ForEach(method =>
             {
-                continue;
-            }
-            var methods = type.GetMethods();
-            foreach (var method in methods)
-            {
-                var methodAttrs = method.GetCustomAttributes(typeof(InteractionAttribute), false);
-                if (methodAttrs.Length == 0)
+                var attribute = method.GetCustomAttribute<InteractionAttribute>()!;
+                Console.WriteLine($"Registering interaction method {method.Name} declared in {method.DeclaringType}");
+                Console.WriteLine($"InteractorKind: {attribute.Kind}");
+                Console.WriteLine($"PacketType: {attribute.Type}");
+                
+                switch (attribute.Kind)
                 {
-                    continue;
+                    case InteractorKind.Hybrid:
+                    case InteractorKind.Server:
+                        this.serverSubscriptions.Add(attribute.Type);
+                        break;
+                    case InteractorKind.Client:
+                        this.clientOnlySubscriptions.Add(attribute.Type);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(attribute.Kind), attribute.Kind, null);
                 }
-                var attr = (InteractionAttribute)methodAttrs[0];
-                if (attr.Kind is InteractorKind.Server or InteractorKind.Hybrid)
+                
+                if (attribute.Kind == this.kind || this.kind == InteractorKind.Hybrid)
                 {
-                    this.serverSubscriptions.Add(attr.Type);
+                    this.subscribers[attribute.Type].Add(method);
+                    Console.WriteLine("Subscribed!");
                 }
-                if (attr.Kind is InteractorKind.Client)
-                {
-                    this.clientOnlySubscriptions.Add(attr.Type);
-                }
-                if (attr.Kind != this.kind && this.kind != InteractorKind.Hybrid)
-                {
-                    continue;
-                }
-                var del = method.GetParameters().Length == 0 ?
-                    Delegate.CreateDelegate(typeof(Action), method) :
-                    Delegate.CreateDelegate(
-                    typeof(Action<>).MakeGenericTypeSafely(method.GetParameters()[0].ParameterType),
-                    method
-                );
-                this.Subscribe(attr.Type, del);
-            }
-        }
-        this.clientOnlySubscriptions.ExceptWith(this.serverSubscriptions);
+                
+                Console.WriteLine();
+            });
     }
 
-    private void Subscribe(string type, Delegate callback)
+    public void Publish(Packet packet)
     {
-        if (!this.subscribers.ContainsKey(type))
-        {
-            this.subscribers[type] = new HashSet<Delegate>();
-        }
-        this.subscribers[type].Add(callback);
+        if (packet.Type != PacketType.Tick)
+            Console.WriteLine($"[{nameof(Publisher)}] Publishing {packet.Type}");
+
+        this.subscribers[packet.Type]
+            .ForEach(handler =>
+            {
+                var parameterCount = handler.GetParameters().Length;
+                handler.Invoke(null, parameterCount > 0 ? new object[] { packet } : null);
+            });
     }
 
+    public bool IsClientOnlyPacket(Packet packet)
+        => this.clientOnlySubscriptions.Contains(packet.Type);
+
+    public bool IsServerPacket(Packet packet)
+        => this.serverSubscriptions.Contains(packet.Type);
+    
     public void Dump()
     {
         foreach (var pair in this.subscribers)
@@ -83,42 +91,5 @@ public class Publisher
                 Console.WriteLine(del);
             }
         }
-    }
-
-    public void Publish(ValueType packet)
-    {
-        var type = PacketUtils.GetType(packet);
-        if (type != "tick")
-        {
-            Console.WriteLine("Publishing packet: " + type);
-        }
-        if (this.subscribers.ContainsKey(type))
-        {
-            if (type != "tick")
-            {
-                Console.WriteLine("Found " + this.subscribers[type].Count + " subscribers");
-            }
-            foreach (var del in this.subscribers[type])
-            {
-                if (del.Method.GetParameters().Length == 0)
-                {
-                    del.DynamicInvoke();
-                }
-                else
-                {
-                    del.DynamicInvoke(packet);
-                }
-            }
-        }
-    }
-
-    public bool IsClientOnlyPacket(string type)
-    {
-        return this.clientOnlySubscriptions.Contains(type);
-    }
-
-    public bool IsServerPacket(string type)
-    {
-        return this.serverSubscriptions.Contains(type);
     }
 }

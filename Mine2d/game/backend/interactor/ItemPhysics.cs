@@ -1,6 +1,6 @@
 using Mine2d.engine;
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.core.data;
 using Mine2d.game.core.data.entities;
 
@@ -10,8 +10,8 @@ namespace Mine2d.game.backend.interactor;
 public class ItemPhysics
 {
 
-    [Interaction(InteractorKind.Hybrid, "tick")]
-    public static void TickHybrid()
+    [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
+    public static void TickHybrid(TickPacket packet)    
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
@@ -36,8 +36,8 @@ public class ItemPhysics
         }
     }
 
-    [Interaction(InteractorKind.Hybrid, "tick")]
-    public static void Pickup(TickPacket tickPacket)
+    [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
+    public static void Pickup(TickPacket packet)
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
@@ -51,12 +51,12 @@ public class ItemPhysics
                     Console.WriteLine("Where");
                     return e is ItemEntity itemEntity &&
                     (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8 &&
-                    player.inventory.PickupItemStack(new ItemStack { Id = itemEntity.ItemId, Count = 1 });
-                });
+                    player.Inventory.PickupItemStack(new ItemStack { Id = itemEntity.ItemId, Count = 1 });
+                }).ToList();
                 if (items.Any())
                 {
                     Context.Get().GameAudio.Play(Sound.ItemPickup);
-                    Console.WriteLine(tickPacket.Tick + "  " + items.Count());
+                    Console.WriteLine(packet.Tick + "  " + items.Count());
                 }
                 _ = chunk.Value.Entities.RemoveAll(e => items.Contains(e));
             }

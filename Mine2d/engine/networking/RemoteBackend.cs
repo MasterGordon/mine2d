@@ -1,7 +1,7 @@
 using System.Text;
 using Mine2d.engine.system.annotations;
 using Mine2d.game;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.state;
 using Newtonsoft.Json;
 using WatsonTcp;
@@ -12,12 +12,16 @@ public class RemoteBackend : IBackend
 {
     private WatsonTcpClient client;
     private Publisher publisher;
-    private readonly Queue<ValueType> pendingPackets = new();
+    private readonly Queue<Packet> pendingPackets = new();
     private uint tick;
 
     public void Process(double dt)
     {
-        this.ProcessPacket(new TickPacket(this.tick++));
+        this.ProcessPacket(new TickPacket
+        {
+            Tick = ++this.tick
+        });
+        
         while (this.pendingPackets.Count > 0)
         {
             var packet = this.pendingPackets.Dequeue();
@@ -25,13 +29,12 @@ public class RemoteBackend : IBackend
         }
     }
 
-    public void ProcessPacket(ValueType packet)
+    public void ProcessPacket(Packet packet)
     {
         this.publisher.Publish(packet);
-        if (this.publisher.IsClientOnlyPacket(PacketUtils.GetType(packet)))
-        {
+        if (this.publisher.IsClientOnlyPacket(packet))
             return;
-        }
+        
         var json = JsonConvert.SerializeObject(packet);
         var bytes = Encoding.UTF8.GetBytes(json);
         this.client.Send(bytes);

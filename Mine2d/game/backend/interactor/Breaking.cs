@@ -1,6 +1,5 @@
-using Mine2d.engine;
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.core;
 using Mine2d.game.core.data;
 
@@ -9,7 +8,7 @@ namespace Mine2d.game.backend.interactor;
 [Interactor]
 public class Breaking
 {
-    [Interaction(InteractorKind.Hybrid, "tick")]
+    [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
     public static void TickHybrid()
     {
         var ctx = Context.Get();
@@ -45,7 +44,12 @@ public class Breaking
                     if (tile.Hits >= hardness)
                     {
                         var blockPos = new Vector2((int)Math.Floor(player.Mining.X / 16) * 16, (int)Math.Floor(player.Mining.Y / 16) * 16);
-                        ctx.Backend.ProcessPacket(new BlockBrokenPacket(player.Id, blockPos, tile));
+                        ctx.Backend.ProcessPacket(new BlockBrokenPacket
+                        {
+                            PlayerGuid = player.Id,
+                            Target = blockPos,
+                            Tile = tile
+                        });
                         chunk.SetTileAt(player.Mining, STile.From(0));
                     }
                 }
@@ -53,7 +57,7 @@ public class Breaking
         }
     }
 
-    [Interaction(InteractorKind.Server, "break")]
+    [Interaction(InteractorKind.Server, PacketType.Break)]
     public static void BreakServer(BreakPacket packet)
     {
         var ctx = Context.Get();
@@ -65,7 +69,7 @@ public class Breaking
         player.Mining = packet.Target;
     }
 
-    [Interaction(InteractorKind.Server, "blockBroken")]
+    [Interaction(InteractorKind.Server, PacketType.BlockBroken)]
     public static void BreakServer(BlockBrokenPacket packet)
     {
         var ctx = Context.Get();

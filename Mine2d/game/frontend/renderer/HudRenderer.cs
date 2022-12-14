@@ -30,9 +30,9 @@ public class HudRenderer : IRenderer
         var (hotbarWidth, hotbarHeight) = renderer.GetTextureSize(this.hotbarTexture);
         var player = PlayerEntity.GetSelf();
         renderer.DrawTexture(this.hotbarTexture, 0, 0, hotbarWidth * uiScale, hotbarHeight * uiScale);
-        for (var i = 0; i < player?.inventory.Hotbar.Length; i++)
+        for (var i = 0; i < player?.Inventory.Hotbar.Length; i++)
         {
-            var stack = player.inventory.Hotbar[i];
+            var stack = player.Inventory.Hotbar[i];
             if (stack == null)
             {
                 continue;

@@ -1,34 +1,43 @@
 using System.Text;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ConnectPacket = Mine2d.game.backend.network.packets.ConnectPacket;
+using TickPacket = Mine2d.game.backend.network.packets.TickPacket;
 
 namespace Mine2d.game.backend.network;
 
 public class Converter
 {
-    public static ValueType ParsePacket(byte[] bytes)
+    public static Packet ParsePacket(byte[] bytes)
     {
         var jsonString = Encoding.UTF8.GetString(bytes);
         return ParsePacket(jsonString);
     }
 
-    public static ValueType ParsePacket(string jsonString)
+    public static Packet ParsePacket(string jsonString)
     {
         var parsedRaw = JObject.Parse(jsonString);
-        var type = parsedRaw.GetValue("type");
-        if (type == null)
-        {
+        var packetType = parsedRaw
+            .GetValue("type")?
+            .Value<PacketType>();
+        
+        if (packetType == null)
             throw new PacketException("Packet has no type");
-        }
-        var packetType = type.Value<string>();
+        
         Console.WriteLine("Packet type: " + packetType);
-        return packetType switch
+        Packet packet = packetType switch
         {
-            "move" => parsedRaw.ToObject<MovePacket>(),
-            "connect" => parsedRaw.ToObject<ConnectPacket>(),
-            _ => throw new PacketException("Unknown packet type")
+            PacketType.Connect => parsedRaw.ToObject<ConnectPacket>(),
+            PacketType.Disconnect => parsedRaw.ToObject<DisconnectPacket>(),
+            PacketType.Tick => parsedRaw.ToObject<TickPacket>(),
+            _ => throw new PacketException($"Unknown packet type: {packetType}")
         };
+        
+        if (packet is null)
+            throw new PacketException($"Failed to parse packet of type: {packetType}");
+
+        return packet;
     }
 
     public static byte[] SerializePacket(ValueType packet)

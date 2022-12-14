@@ -1,5 +1,5 @@
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.state;
 
 namespace Mine2d.game.backend.interactor;
@@ -7,7 +7,7 @@ namespace Mine2d.game.backend.interactor;
 [Interactor]
 public class Connect
 {
-    [Interaction(InteractorKind.Server, "connect")]
+    [Interaction(InteractorKind.Server, PacketType.Connect)]
     public static void ConnectServer(ConnectPacket packet)
     {
         var ctx = Context.Get();

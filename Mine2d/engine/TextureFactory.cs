@@ -1,5 +1,3 @@
-using Mine2d.game;
-
 namespace Mine2d.engine;
 
 public class TextureFactory
