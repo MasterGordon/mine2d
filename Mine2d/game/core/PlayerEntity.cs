@@ -35,6 +35,8 @@ public class PlayerEntity
     {
         var world = Context.Get().GameState.World;
         bool hasCollision;
+        bool hasSetGround = false;
+        bool ground = false;
         do
         {
             var pL = p.Position + new Vector2(0, -8);

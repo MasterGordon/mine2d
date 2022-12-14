@@ -28,4 +28,9 @@ public class TileRegistry
     {
         return this.Tiles[id];
     }
+
+    public int GetTileIdByItemId(ItemId itemId)
+    {
+        return this.Tiles.FirstOrDefault(x => x.Value.Drop == itemId).Key;
+    }
 }

@@ -9,5 +9,6 @@ public enum PacketType
     SelfMoved,
     Break,
     PlayerMoved,
-    BlockBroken
+    BlockBroken,
+    Place
 }

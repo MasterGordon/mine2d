@@ -22,11 +22,11 @@ public class EventService
             {
                 EventPublisher.Publish(EventType.MouseMotion, e);
             }
-            if (e.type == SDL_EventType.SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT)
+            if (e.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
             {
                 EventPublisher.Publish(EventType.MouseButtonDown, e);
             }
-            if (e.type == SDL_EventType.SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT)
+            if (e.type == SDL_EventType.SDL_MOUSEBUTTONUP)
             {
                 EventPublisher.Publish(EventType.MouseButtonUp, e);
             }
