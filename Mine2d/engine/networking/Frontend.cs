@@ -1,5 +1,5 @@
 using Mine2d.game;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.frontend.renderer;
 
 namespace Mine2d.engine.networking;
@@ -14,7 +14,11 @@ public class Frontend : IFrontend
         ctx.FrontendGameState.PlayerName = ctx.IsHost ? "Host" : "Client";
         var guid = Guid.NewGuid();
         ctx.FrontendGameState.PlayerGuid = guid;
-        var connectPacket = new ConnectPacket(ctx.FrontendGameState.PlayerName, guid);
+        var connectPacket = new ConnectPacket
+        {
+            PlayerName = ctx.FrontendGameState.PlayerName,
+            PlayerGuid = guid
+        };
         ctx.Backend.ProcessPacket(connectPacket);
         ctx.TileRegistry.RegisterTile();
         ctx.ItemRegistry.RegisterItems();

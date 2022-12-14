@@ -12,23 +12,23 @@ public class ItemRenderer : IRenderer
         var world = gameState.World;
         foreach (var chunk in world.Chunks)
         {
-            renderChunk(chunk.Value);
+            RenderChunk(chunk.Value);
         }
     }
 
-    private static void renderChunk(Chunk chunk)
+    private static void RenderChunk(Chunk chunk)
     {
         var entities = chunk.Entities;
         foreach (var entity in entities)
         {
             if (entity is ItemEntity itemEntity)
             {
-                renderItem(itemEntity);
+                RenderItem(itemEntity);
             }
         }
     }
 
-    private static void renderItem(ItemEntity itemEntity)
+    private static void RenderItem(ItemEntity itemEntity)
     {
         var item = itemEntity.ItemId;
         var position = itemEntity.Position;

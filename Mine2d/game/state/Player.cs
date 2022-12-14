@@ -8,7 +8,7 @@ public class Player
     public Guid Id { get; set; }
     public Vector2 Mining { get; set; }
     public int MiningCooldown { get; set; }
-    public PlayerInventory inventory { get; set; } = new();
+    public PlayerInventory Inventory { get; set; } = new();
 
     public Vector2 GetCenter()
     {

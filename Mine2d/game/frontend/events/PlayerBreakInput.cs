@@ -1,6 +1,6 @@
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 
 namespace Mine2d.game.frontend.events;
 
@@ -18,7 +18,12 @@ public class PlayerBreakInput
             var amp = ctx.FrontendGameState.MousePosition
                 / ctx.FrontendGameState.Settings.GameScale
                 + ctx.FrontendGameState.Camera.Position;
-            ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
+            
+            ctx.Backend.ProcessPacket(new BreakPacket
+            {
+                PlayerGuid = ctx.FrontendGameState.PlayerGuid,
+                Target = amp
+            });
         }
     }
 
@@ -31,8 +36,15 @@ public class PlayerBreakInput
         }
 
         var ctx = Context.Get();
-        var amp = ctx.FrontendGameState.MousePosition / ctx.FrontendGameState.Settings.GameScale + ctx.FrontendGameState.Camera.Position;
-        ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, amp));
+        var amp = ctx.FrontendGameState.MousePosition 
+            / ctx.FrontendGameState.Settings.GameScale
+            + ctx.FrontendGameState.Camera.Position;
+        
+        ctx.Backend.ProcessPacket(new BreakPacket
+        {
+            PlayerGuid = ctx.FrontendGameState.PlayerGuid,
+            Target = amp
+        });
     }
 
     [EventListener(EventType.MouseButtonUp)]
@@ -44,6 +56,10 @@ public class PlayerBreakInput
         }
 
         var ctx = Context.Get();
-        ctx.Backend.ProcessPacket(new BreakPacket(ctx.FrontendGameState.PlayerGuid, Vector2.Zero));
+        ctx.Backend.ProcessPacket(new BreakPacket
+        {
+            PlayerGuid = ctx.FrontendGameState.PlayerGuid,
+            Target = Vector2.Zero
+        });
     }
 }

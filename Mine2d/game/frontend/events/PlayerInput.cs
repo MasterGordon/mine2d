@@ -1,6 +1,6 @@
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 
 namespace Mine2d.game.frontend.events;
 
@@ -80,6 +80,10 @@ public class PlayerInput
         {
             movement = Vector2.Normalize(movement);
         }
-        ctx.Backend.ProcessPacket(new MovePacket(ctx.FrontendGameState.PlayerName, movement));
+        ctx.Backend.ProcessPacket(new MovePacket
+        {
+            PlayerName = ctx.FrontendGameState.PlayerName,
+            Movement = movement
+        });
     }
 }

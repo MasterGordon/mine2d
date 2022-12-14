@@ -1,5 +1,5 @@
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.core;
 
 namespace Mine2d.game.backend.interactor;
@@ -7,7 +7,7 @@ namespace Mine2d.game.backend.interactor;
 [Interactor]
 public class Move
 {
-    [Interaction(InteractorKind.Hybrid, "move")]
+    [Interaction(InteractorKind.Hybrid, PacketType.Move)]
     public static void MoveHybrid(MovePacket packet)
     {
         var ctx = Context.Get();
@@ -18,7 +18,7 @@ public class Move
         }
     }
 
-    [Interaction(InteractorKind.Hybrid, "tick")]
+    [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
     public static void TickHybrid()
     {
         var ctx = Context.Get();
@@ -33,12 +33,16 @@ public class Move
         {
             if (player.Position != fromPositions[player.Id])
             {
-                ctx.Backend.ProcessPacket(new PlayerMovedPacket(player.Id, player.Position));
+                ctx.Backend.ProcessPacket(new PlayerMovedPacket
+                {
+                    PlayerGuid = player.Id,
+                    Target = player.Position
+                });
             }
         }
     }
-
-    [Interaction(InteractorKind.Client, "tick")]
+    
+    [Interaction(InteractorKind.Client, PacketType.Tick)]
     public static void SelfMovedClient()
     {
         var camera = Context.Get().FrontendGameState.Camera;

@@ -1,5 +1,5 @@
 using Mine2d.engine.system.annotations;
-using Mine2d.game.backend.data;
+using Mine2d.game.backend.network.packets;
 using Mine2d.game.core.data;
 using Mine2d.game.core.world;
 
@@ -19,7 +19,7 @@ public class WorldGeneration
         new(-1, 1)
     };
 
-    [Interaction(InteractorKind.Server, "playerMoved")]
+    [Interaction(InteractorKind.Server, PacketType.PlayerMoved)]
     public static void PlayerMovedServer(PlayerMovedPacket packet)
     {
         var ctx = Context.Get();
@@ -28,7 +28,7 @@ public class WorldGeneration
         {
             var generationTarget = packet.Target + direction * 16 * 32;
             var hasChunkGenerated = world.HasChunkAt(generationTarget);
-
+    
             if (!hasChunkGenerated)
             {
                 var chunkPos = World.ToChunkPos(generationTarget);

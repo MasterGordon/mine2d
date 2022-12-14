@@ -1,8 +1,8 @@
 using System.Text;
 using Mine2d.engine.system.annotations;
 using Mine2d.game;
-using Mine2d.game.backend.data;
 using Mine2d.game.backend.network;
+using Mine2d.game.backend.network.packets;
 using Newtonsoft.Json;
 using WatsonTcp;
 
@@ -12,22 +12,25 @@ public class Backend : IBackend
 {
     private WatsonTcpServer server;
     private Publisher publisher;
-    private readonly Queue<ValueType> pendingPackets = new();
+    private readonly Queue<Packet> pendingPackets = new();
     private uint tick;
 
     public void Process(double dt)
     {
-        this.ProcessPacket(new TickPacket(this.tick++));
+        this.ProcessPacket(new TickPacket
+        {
+            Tick = ++this.tick
+        });
+        
         Context.Get().GameState.Tick = this.tick;
         while (this.pendingPackets.Count > 0)
         {
-            var packet = this.pendingPackets.Dequeue();
-            this.publisher.Publish(packet);
+            this.publisher.Publish(this.pendingPackets.Dequeue());
         }
         this.SendGameState();
     }
 
-    public void ProcessPacket(ValueType packet)
+    public void ProcessPacket(Packet packet)
     {
         this.pendingPackets.Enqueue(packet);
     }
@@ -36,6 +39,7 @@ public class Backend : IBackend
     {
         Task.Run(this.Run);
         this.publisher = new Publisher(InteractorKind.Hybrid);
+        this.publisher.Dump();
     }
 
     public void Run()
@@ -65,15 +69,12 @@ public class Backend : IBackend
 
     private void MessageReceived(object sender, MessageReceivedEventArgs args)
     {
-        var time = DateTime.Now;
         Console.WriteLine("Message Received: " + args.IpPort);
+        
         var packet = Converter.ParsePacket(args.Data);
-        Console.WriteLine("Received packet: " + packet);
-        if (packet != null)
-        {
-            this.pendingPackets.Enqueue(packet);
-        }
-        Console.WriteLine(DateTime.Now - time);
+        Console.WriteLine($"Received packet: {packet.Type}");
+        
+        this.pendingPackets.Enqueue(packet);
     }
 
     private void SendGameState()
