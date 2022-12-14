@@ -6,11 +6,12 @@ namespace Mine2d.game.frontend.events;
 
 public class PlayerBreakInput
 {
-    [EventListener(EventType.MouseMotion)]
-    public static void OnBreak(SDL_Event e)
+    private static Vector2 mousePos;
+
+    [EventListener(EventType.Tick)]
+    public static void OnTick()
     {
         var ctx = Context.Get();
-        var mousePos = new Vector2(e.motion.x, e.motion.y);
         ctx.FrontendGameState.MousePosition = mousePos;
         if (ctx.GameState.Players.Find(player => player.Id == ctx.FrontendGameState.PlayerGuid)?.Mining
             != Vector2.Zero)
@@ -26,6 +27,13 @@ public class PlayerBreakInput
                 Source = BreakSource.Move
             });
         }
+
+    }
+
+    [EventListener(EventType.MouseMotion)]
+    public static void OnBreak(SDL_Event e)
+    {
+        mousePos = new Vector2(e.motion.x, e.motion.y);
     }
 
     [EventListener(EventType.MouseButtonDown)]

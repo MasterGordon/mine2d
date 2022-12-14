@@ -21,12 +21,16 @@ public class Place
         {
             return;
         }
+        if (PlayerEntity.HasCollisionWithAnyPlayer(packet.Target))
+        {
+            return;
+        }
         if (ctx.GameState.World.HasChunkAt(packet.Target))
         {
             var chunk = ctx.GameState.World.GetChunkAt(packet.Target);
             var tile = chunk.GetTileAt(packet.Target);
             var tileId = tile.Id;
-            if (tileId != 0 || player.Inventory.Hotbar[packet.Slot]?.Count <= 0)
+            if (tileId != 0 || player.Inventory.Hotbar[packet.Slot] == null || player.Inventory.Hotbar[packet.Slot]?.Count <= 0)
             {
                 return;
             }

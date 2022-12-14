@@ -43,5 +43,6 @@ public class EventService
                 EventPublisher.Publish(EventType.MouseWheel, e);
             }
         }
+        EventPublisher.Publish(EventType.Tick, new SDL_Event());
     }
 }

@@ -90,4 +90,35 @@ public class PlayerEntity
             }
         } while (hasCollision);
     }
+
+    public static bool HasCollisionWithAnyPlayer(Vector2 pos)
+    {
+        var ctx = Context.Get();
+        var ts = Constants.TileSize;
+        var tilePos = new Vector2(pos.X - pos.X % ts, pos.Y - pos.Y % ts);
+        return ctx.GameState.Players.Any(
+            player =>
+            {
+                var playerPos = player.Position;
+                var playerSize = new Vector2(14, 28);
+                var playerRect = new SDL_Rect
+                {
+                    x = (int)playerPos.X,
+                    y = (int)playerPos.Y - 5,
+                    w = (int)playerSize.X,
+                    h = (int)playerSize.Y
+                };
+                var tileRect = new SDL_Rect
+                {
+                    x = (int)tilePos.X,
+                    y = 24 + (int)tilePos.Y,
+                    w = 16,
+                    h = 16
+                };
+                Console.WriteLine("playerRect: " + playerRect.x + ", " + playerRect.y + ", " + playerRect.w + ", " + playerRect.h);
+                Console.WriteLine("tileRect: " + tileRect.x + ", " + tileRect.y + ", " + tileRect.w + ", " + tileRect.h);
+                return SDL_HasIntersection(ref playerRect, ref tileRect) == SDL_bool.SDL_TRUE;
+            }
+        );
+    }
 }
