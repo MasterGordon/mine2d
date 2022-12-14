@@ -15,18 +15,14 @@ public class WorldCursorRenderer : IRenderer
         {
             return;
         }
-
-        if (ctx.GameState.World.HasTileAt((int)absoluteMousePos.X, (int)absoluteMousePos.Y))
-        {
-            var ts = Constants.TileSize;
-            var tilePos = new Vector2(absoluteMousePos.X - absoluteMousePos.X % ts, absoluteMousePos.Y - absoluteMousePos.Y % ts);
-            ctx.Renderer.SetColor(255, 255, 255);
-            ctx.Renderer.DrawOutline(
-                (int)tilePos.X * scale - (int)camera.Position.X * scale,
-                (int)tilePos.Y * scale - (int)camera.Position.Y * scale,
-                16 * scale,
-                16 * scale
-            );
-        }
+        var ts = Constants.TileSize;
+        var tilePos = new Vector2(absoluteMousePos.X - absoluteMousePos.X % ts, absoluteMousePos.Y - absoluteMousePos.Y % ts);
+        ctx.Renderer.SetColor(255, 255, 255);
+        ctx.Renderer.DrawOutline(
+            (int)tilePos.X * scale - (int)camera.Position.X * scale,
+            (int)tilePos.Y * scale - (int)camera.Position.Y * scale,
+            16 * scale,
+            16 * scale
+        );
     }
 }

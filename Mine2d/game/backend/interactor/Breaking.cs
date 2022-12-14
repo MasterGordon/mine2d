@@ -66,6 +66,10 @@ public class Breaking
         {
             return;
         }
+        if (packet.Source == BreakSource.Move && player.Mining == Vector2.Zero)
+        {
+            return;
+        }
         player.Mining = packet.Target;
     }
 

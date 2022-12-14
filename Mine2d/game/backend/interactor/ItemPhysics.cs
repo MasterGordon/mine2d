@@ -11,7 +11,7 @@ public class ItemPhysics
 {
 
     [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
-    public static void TickHybrid(TickPacket packet)    
+    public static void TickHybrid(TickPacket packet)
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
@@ -48,7 +48,6 @@ public class ItemPhysics
 
                 var items = chunk.Value.Entities.Where(e =>
                 {
-                    Console.WriteLine("Where");
                     return e is ItemEntity itemEntity &&
                     (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8 &&
                     player.Inventory.PickupItemStack(new ItemStack { Id = itemEntity.ItemId, Count = 1 });

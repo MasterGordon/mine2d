@@ -18,11 +18,12 @@ public class PlayerBreakInput
             var amp = ctx.FrontendGameState.MousePosition
                 / ctx.FrontendGameState.Settings.GameScale
                 + ctx.FrontendGameState.Camera.Position;
-            
+
             ctx.Backend.ProcessPacket(new BreakPacket
             {
                 PlayerGuid = ctx.FrontendGameState.PlayerGuid,
-                Target = amp
+                Target = amp,
+                Source = BreakSource.Move
             });
         }
     }
@@ -36,14 +37,15 @@ public class PlayerBreakInput
         }
 
         var ctx = Context.Get();
-        var amp = ctx.FrontendGameState.MousePosition 
+        var amp = ctx.FrontendGameState.MousePosition
             / ctx.FrontendGameState.Settings.GameScale
             + ctx.FrontendGameState.Camera.Position;
-        
+
         ctx.Backend.ProcessPacket(new BreakPacket
         {
             PlayerGuid = ctx.FrontendGameState.PlayerGuid,
-            Target = amp
+            Target = amp,
+            Source = BreakSource.Click
         });
     }
 
@@ -59,7 +61,8 @@ public class PlayerBreakInput
         ctx.Backend.ProcessPacket(new BreakPacket
         {
             PlayerGuid = ctx.FrontendGameState.PlayerGuid,
-            Target = Vector2.Zero
+            Target = Vector2.Zero,
+            Source = BreakSource.Click
         });
     }
 }
