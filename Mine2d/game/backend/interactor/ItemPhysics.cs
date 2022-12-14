@@ -1,5 +1,6 @@
 using Mine2d.engine;
 using Mine2d.engine.system.annotations;
+using Mine2d.game.backend.data;
 using Mine2d.game.core.data;
 using Mine2d.game.core.data.entities;
 
@@ -36,7 +37,7 @@ public class ItemPhysics
     }
 
     [Interaction(InteractorKind.Hybrid, "tick")]
-    public static void Pickup()
+    public static void Pickup(TickPacket tickPacket)
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
@@ -47,6 +48,7 @@ public class ItemPhysics
 
                 var items = chunk.Value.Entities.Where(e =>
                 {
+                    Console.WriteLine("Where");
                     return e is ItemEntity itemEntity &&
                     (player.Position + new Vector2(7, 3) - itemEntity.Position).LengthSquared() < 8 * 8 &&
                     player.inventory.PickupItemStack(new ItemStack { Id = itemEntity.ItemId, Count = 1 });
@@ -54,6 +56,7 @@ public class ItemPhysics
                 if (items.Any())
                 {
                     Context.Get().GameAudio.Play(Sound.ItemPickup);
+                    Console.WriteLine(tickPacket.Tick + "  " + items.Count());
                 }
                 _ = chunk.Value.Entities.RemoveAll(e => items.Contains(e));
             }

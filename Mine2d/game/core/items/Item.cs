@@ -25,4 +25,9 @@ public class Item
             new Vector2(4 * scale, 6 * scale);
         renderer.DrawTexture(this.texture, (int)targetPos.X, (int)targetPos.Y, 8 * scale, 8 * scale);
     }
+
+    public IntPtr GetTexture()
+    {
+        return this.texture;
+    }
 }
