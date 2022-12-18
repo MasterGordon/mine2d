@@ -14,10 +14,12 @@ public class GameRenderer : IRenderer
         this.renderers.Add(new ItemRenderer());
         this.renderers.Add(new WorldCursorRenderer());
         this.renderers.Add(new HudRenderer());
+        this.renderers.Add(new TooltipRenderer());
     }
 
     public void Render()
     {
+        Context.Get().FrontendGameState.Tooltip = null;
         foreach (var renderer in this.renderers)
         {
             renderer.Render();

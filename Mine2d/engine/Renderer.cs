@@ -92,12 +92,17 @@ public class Renderer
         this.color = color.ToSdlColor();
     }
 
-    public void DrawText(string text, int x, int y, bool center = false)
+    public (IntPtr texture, int width, int height, IntPtr surfaceMessage) CreateTextTexture(string text)
     {
         var surfaceMessage = TTF_RenderText_Solid(this.font, text, this.color);
         var texture = SDL_CreateTextureFromSurface(this.renderer, surfaceMessage);
-
         ProcessStatus(SDL_QueryTexture(texture, out _, out _, out var width, out var height));
+        return (texture, width, height, surfaceMessage);
+    }
+
+    public void DrawText(string text, int x, int y, bool center = false)
+    {
+        var (texture, width, height, surfaceMessage) = CreateTextTexture(text);
 
         var rect = new SDL_Rect
         {
@@ -138,6 +143,24 @@ public class Renderer
             h = h
         };
         ProcessStatus(SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect));
+    }
+public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int srcX, int srcY, int srcWidth, int srcHeight)
+    {
+        SDL_Rect rect = new()
+        {
+            x = x,
+            y = y,
+            w = w,
+            h = h
+        };
+        SDL_Rect srcRect = new()
+        {
+            x = srcX,
+            y = srcY,
+            w = srcWidth,
+            h = srcHeight,
+        };
+        ProcessStatus(SDL_RenderCopy(this.renderer, texture, ref srcRect, ref rect));
     }
 
     public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int offsetIndex, int srcWidth, int srcHeight)

@@ -12,11 +12,11 @@ public class PlayerBreakInput
     public static void OnTick()
     {
         var ctx = Context.Get();
-        ctx.FrontendGameState.MousePosition = mousePos;
+        ctx.FrontendGameState.CursorPosition = mousePos;
         if (ctx.GameState.Players.Find(player => player.Id == ctx.FrontendGameState.PlayerGuid)?.Mining
             != Vector2.Zero)
         {
-            var amp = ctx.FrontendGameState.MousePosition
+            var amp = ctx.FrontendGameState.CursorPosition
                 / ctx.FrontendGameState.Settings.GameScale
                 + ctx.FrontendGameState.Camera.Position;
 
@@ -45,7 +45,7 @@ public class PlayerBreakInput
         }
 
         var ctx = Context.Get();
-        var amp = ctx.FrontendGameState.MousePosition
+        var amp = ctx.FrontendGameState.CursorPosition
             / ctx.FrontendGameState.Settings.GameScale
             + ctx.FrontendGameState.Camera.Position;
 

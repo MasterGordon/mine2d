@@ -16,7 +16,7 @@ public class PlayerPlaceInput
         }
 
         var ctx = Context.Get();
-        var amp = ctx.FrontendGameState.MousePosition
+        var amp = ctx.FrontendGameState.CursorPosition
             / ctx.FrontendGameState.Settings.GameScale
             + ctx.FrontendGameState.Camera.Position;
 
