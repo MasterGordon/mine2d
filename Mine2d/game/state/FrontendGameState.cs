@@ -2,6 +2,11 @@ using Mine2d.game.core;
 
 namespace Mine2d.game.state;
 
+public enum Inventory {
+    None,
+    Player
+}
+
 public class FrontendGameState
 {
     public Vector2 MovementInput { get; set; }
@@ -15,6 +20,7 @@ public class FrontendGameState
     public string PlayerName { get; set; } = "Player";
     public int HotbarIndex { get; set; }
     public string Tooltip { get; set; } = "Test";
+    public Inventory OpenInventory { get; set; } = Inventory.None;
 }
 
 public class Settings

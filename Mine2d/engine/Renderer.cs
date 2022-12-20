@@ -102,7 +102,7 @@ public class Renderer
 
     public void DrawText(string text, int x, int y, bool center = false)
     {
-        var (texture, width, height, surfaceMessage) = CreateTextTexture(text);
+        var (texture, width, height, surfaceMessage) = this.CreateTextTexture(text);
 
         var rect = new SDL_Rect
         {
@@ -144,7 +144,7 @@ public class Renderer
         };
         ProcessStatus(SDL_RenderCopy(this.renderer, texture, IntPtr.Zero, ref rect));
     }
-public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int srcX, int srcY, int srcWidth, int srcHeight)
+    public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int srcX, int srcY, int srcWidth, int srcHeight)
     {
         SDL_Rect rect = new()
         {
@@ -200,9 +200,14 @@ public void DrawTexture(IntPtr texture, int x, int y, int w, int h, int srcX, in
         }
     }
 
-    internal (int srcW, int srcH) GetTextureSize(IntPtr src)
+    public (int srcW, int srcH) GetTextureSize(IntPtr src)
     {
         ProcessStatus(SDL_QueryTexture(src, out _, out _, out var srcW, out var srcH));
         return (srcW, srcH);
+    }
+
+    public void SetDrawBlendMode(SDL_BlendMode blendMode)
+    {
+        ProcessStatus(SDL_SetRenderDrawBlendMode(this.renderer, blendMode));
     }
 }

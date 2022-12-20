@@ -35,7 +35,7 @@ public class TextureFactory
         return target;
     }
 
-    private IntPtr LoadTexture(string path)
+    public IntPtr LoadTexture(string path)
     {
         if (this.textureCache.TryGetValue(path, out var value))
         {

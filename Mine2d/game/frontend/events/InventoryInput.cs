@@ -1,12 +1,13 @@
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
+using Mine2d.game.state;
 
 namespace Mine2d.game.frontend.events;
 
 public class InventoryInput
 {
     [EventListener(EventType.KeyDown)]
-    public static void OnKeyDown(SDL_Event e)
+    public static void OnKeyDownSwitchHotbar(SDL_Event e)
     {
         var frontendGameState = Context.Get().FrontendGameState;
         frontendGameState.HotbarIndex = e.key.keysym.sym switch
@@ -36,6 +37,20 @@ public class InventoryInput
         if (frontendGameState.HotbarIndex > 8)
         {
             frontendGameState.HotbarIndex = 0;
+        }
+    }
+
+    [EventListener(EventType.KeyDown)]
+    public static void OnKeyDownOpenInventory(SDL_Event e)
+    {
+        var frontendGameState = Context.Get().FrontendGameState;
+        if(e.key.keysym.sym == SDL_Keycode.SDLK_TAB)
+        {
+            if(frontendGameState.OpenInventory != Inventory.Player) {
+                frontendGameState.OpenInventory = Inventory.Player;
+            } else {
+                frontendGameState.OpenInventory = Inventory.None;
+            }
         }
     }
 }

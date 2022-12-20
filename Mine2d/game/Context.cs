@@ -3,6 +3,7 @@ using Mine2d.engine.networking;
 using Mine2d.game.core.items;
 using Mine2d.game.core.tiles;
 using Mine2d.game.frontend;
+using Mine2d.game.frontend.inventory;
 using Mine2d.game.state;
 
 namespace Mine2d.game;
@@ -21,6 +22,7 @@ public class Context
     public ResourceLoader ResourceLoader { get; set; }
     public TextureFactory TextureFactory { get; set; }
     public GameAudio GameAudio { get; set; }
+    public InventoryRegistry InventoryRegistry { get; set; }
     public static Context Instance { get; set; }
 
     public Context(
@@ -45,6 +47,7 @@ public class Context
         this.TileRegistry = new TileRegistry();
         this.ItemRegistry = new ItemRegistry();
         this.GameAudio = new GameAudio();
+        this.InventoryRegistry = new InventoryRegistry();
         Instance = this;
     }
 
