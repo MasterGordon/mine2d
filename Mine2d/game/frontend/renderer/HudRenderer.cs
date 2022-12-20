@@ -54,8 +54,8 @@ public class HudRenderer : IRenderer
 
             var texture = stack.GetTexture();
             renderer.DrawTexture(texture, (4 + i * 20) * uiScale, 4 * uiScale, 16 * uiScale, 16 * uiScale);
-            renderer.DrawText("" + stack.Count, (4 + i * 20) * uiScale, 18 * uiScale);
-            if(cursorPosition.X >= (4 + i * 20) * uiScale && cursorPosition.X <= (4 + i * 20 + 16) * uiScale && cursorPosition.Y >= 4 * uiScale && cursorPosition.Y <= (4 + 16) * uiScale)
+            renderer.DrawText("" + stack.Count, (4 + i * 20) * uiScale, 14 * uiScale);
+            if (cursorPosition.X >= (4 + i * 20) * uiScale && cursorPosition.X <= (4 + i * 20 + 16) * uiScale && cursorPosition.Y >= 4 * uiScale && cursorPosition.Y <= (4 + 16) * uiScale)
             {
                 Context.Get().FrontendGameState.Tooltip = stack.GetName();
             }

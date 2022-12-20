@@ -4,8 +4,6 @@ namespace Mine2d.game.frontend.renderer;
 
 public class TooltipRenderer : IRenderer
 {
-    private const int TooltipTextureWidth = 9;
-    private const int TooltipTextureHeight = 9;
     private readonly IntPtr tooltipTexture;
 
     public TooltipRenderer()
@@ -22,7 +20,7 @@ public class TooltipRenderer : IRenderer
     {
         var ctx = Context.Get();
         var tooltip = ctx.FrontendGameState.Tooltip;
-        if(tooltip == null || tooltip.Trim().Length == 0)
+        if (tooltip == null || tooltip.Trim().Length == 0)
         {
             return;
         }
@@ -42,7 +40,7 @@ public class TooltipRenderer : IRenderer
             0,
             4,
             4
-        );        
+        );
 
         renderer.DrawTexture(
             this.tooltipTexture,
@@ -68,7 +66,6 @@ public class TooltipRenderer : IRenderer
             4
         );
 
-        Console.WriteLine(height);
         renderer.DrawTexture(
             this.tooltipTexture,
             tooltipX,

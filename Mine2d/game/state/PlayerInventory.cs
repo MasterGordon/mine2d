@@ -6,22 +6,27 @@ namespace Mine2d.game.state;
 public class PlayerInventory
 {
     public ItemStack[] Hotbar { get; set; } = new ItemStack[9];
+    public ItemStack[] Inventory { get; set; } = new ItemStack[5 * 9];
 
     public bool PickupItemStack(ItemStack itemStack)
     {
-        Console.WriteLine("Picking up" + itemStack.Id + "  " + itemStack.Count);
-        var slot = InventoryUtils.GetFirstMatchingSlot(this.Hotbar, itemStack.Id);
+        return PickupItemStack(itemStack, this.Hotbar) || PickupItemStack(itemStack, this.Inventory);
+    }
+
+    public static bool PickupItemStack(ItemStack itemStack, ItemStack[] inventory)
+    {
+        var slot = InventoryUtils.GetFirstMatchingSlot(inventory, itemStack.Id);
         if (slot == -1)
         {
             return false;
         }
-        if (this.Hotbar[slot] == null)
+        if (inventory[slot] == null)
         {
-            this.Hotbar[slot] = itemStack;
+            inventory[slot] = itemStack;
         }
         else
         {
-            this.Hotbar[slot].Count += itemStack.Count;
+            inventory[slot].Count += itemStack.Count;
         }
         return true;
     }

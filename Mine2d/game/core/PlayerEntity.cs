@@ -12,10 +12,9 @@ public class PlayerEntity
     public static Player GetSelf()
     {
         var ctx = Context.Get();
-        var player = ctx.GameState.Players.FirstOrDefault(
+        return ctx.GameState.Players.Find(
             p => p.Id == ctx.FrontendGameState.PlayerGuid
         );
-        return player;
     }
 
     public static void Move(Player p)
@@ -92,7 +91,7 @@ public class PlayerEntity
     public static bool HasCollisionWithAnyPlayer(Vector2 pos)
     {
         var ctx = Context.Get();
-        var ts = Constants.TileSize;
+        const int ts = Constants.TileSize;
         var tilePos = new Vector2(pos.X - pos.X % ts, pos.Y - pos.Y % ts);
         return ctx.GameState.Players.Any(
             player =>
@@ -113,8 +112,6 @@ public class PlayerEntity
                     w = 16,
                     h = 16
                 };
-                Console.WriteLine("playerRect: " + playerRect.x + ", " + playerRect.y + ", " + playerRect.w + ", " + playerRect.h);
-                Console.WriteLine("tileRect: " + tileRect.x + ", " + tileRect.y + ", " + tileRect.w + ", " + tileRect.h);
                 return SDL_HasIntersection(ref playerRect, ref tileRect) == SDL_bool.SDL_TRUE;
             }
         );

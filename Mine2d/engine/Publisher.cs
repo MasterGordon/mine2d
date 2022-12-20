@@ -19,7 +19,7 @@ public class Publisher
     {
         Enum.GetValues<PacketType>()
             .ForEach(type => this.subscribers[type] = new HashSet<MethodInfo>());
-        
+
         this.kind = kind;
         this.Scan();
     }
@@ -38,7 +38,7 @@ public class Publisher
                 Console.WriteLine($"Registering interaction method {method.Name} declared in {method.DeclaringType}");
                 Console.WriteLine($"InteractorKind: {attribute.Kind}");
                 Console.WriteLine($"PacketType: {attribute.Type}");
-                
+
                 switch (attribute.Kind)
                 {
                     case InteractorKind.Hybrid:
@@ -51,14 +51,13 @@ public class Publisher
                     default:
                         throw new ArgumentOutOfRangeException(nameof(attribute.Kind), attribute.Kind, null);
                 }
-                
+
                 if (attribute.Kind == this.kind || this.kind == InteractorKind.Hybrid)
                 {
                     this.subscribers[attribute.Type].Add(method);
                     Console.WriteLine("Subscribed!");
                 }
-                
-                Console.WriteLine();
+
             });
     }
 
@@ -80,7 +79,7 @@ public class Publisher
 
     public bool IsServerPacket(Packet packet)
         => this.serverSubscriptions.Contains(packet.Type);
-    
+
     public void Dump()
     {
         foreach (var pair in this.subscribers)

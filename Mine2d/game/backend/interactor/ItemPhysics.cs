@@ -9,16 +9,14 @@ namespace Mine2d.game.backend.interactor;
 [Interactor]
 public class ItemPhysics
 {
-
     [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
-    public static void TickHybrid(TickPacket packet)
+    public static void TickHybrid()
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
         foreach (var chunk in world.Chunks)
         {
-            var entities = chunk.Value.Entities;
-            foreach (var entity in entities)
+            foreach (var entity in chunk.Value.Entities)
             {
                 if (entity is ItemEntity itemEntity)
                 {
@@ -37,7 +35,7 @@ public class ItemPhysics
     }
 
     [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
-    public static void Pickup(TickPacket packet)
+    public static void Pickup()
     {
         var gameState = Context.Get().GameState;
         var world = gameState.World;
@@ -45,7 +43,6 @@ public class ItemPhysics
         {
             foreach (var player in gameState.Players)
             {
-
                 var items = chunk.Value.Entities.Where(e =>
                 {
                     return e is ItemEntity itemEntity &&
@@ -55,9 +52,8 @@ public class ItemPhysics
                 if (items.Any())
                 {
                     Context.Get().GameAudio.Play(Sound.ItemPickup);
-                    Console.WriteLine(packet.Tick + "  " + items.Count());
                 }
-                _ = chunk.Value.Entities.RemoveAll(e => items.Contains(e));
+                _ = chunk.Value.Entities.RemoveAll(items.Contains);
             }
         }
     }
