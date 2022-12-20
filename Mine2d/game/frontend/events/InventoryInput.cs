@@ -1,3 +1,4 @@
+using Mine2d.engine;
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
 using Mine2d.game.state;
@@ -40,17 +41,42 @@ public class InventoryInput
         }
     }
 
-    [EventListener(EventType.KeyDown)]
+    [EventListener(EventType.KeyDown, EventPriority.Highest)]
     public static void OnKeyDownOpenInventory(SDL_Event e)
     {
         var frontendGameState = Context.Get().FrontendGameState;
         if(e.key.keysym.sym == SDL_Keycode.SDLK_TAB)
         {
-            if(frontendGameState.OpenInventory != Inventory.Player) {
-                frontendGameState.OpenInventory = Inventory.Player;
+            if(frontendGameState.OpenInventory != InventoryKind.Player) {
+                frontendGameState.OpenInventory = InventoryKind.Player;
             } else {
-                frontendGameState.OpenInventory = Inventory.None;
+                frontendGameState.OpenInventory = InventoryKind.None;
             }
+        }
+        if(frontendGameState.OpenInventory != InventoryKind.None)
+        {
+            throw new CancelEventException();
+        }
+    }
+
+    [EventListener(EventType.KeyUp, EventPriority.Highest)]
+    public static void OnKeyUpOpenInventory(SDL_Event e)
+    {
+        var frontendGameState = Context.Get().FrontendGameState;
+        if(frontendGameState.OpenInventory != InventoryKind.None)
+        {
+            throw new CancelEventException();
+        }
+    }
+
+    [EventListener(EventType.MouseButtonDown, EventPriority.Highest)]
+    public static void OnMouseButtonDownOpenInventory(SDL_Event e)
+    {
+        var frontendGameState = Context.Get().FrontendGameState;
+        Context.Get().InventoryRegistry.GetInventory(frontendGameState.OpenInventory)?.OnClick(e);
+        if(frontendGameState.OpenInventory != InventoryKind.None)
+        {
+            throw new CancelEventException();
         }
     }
 }

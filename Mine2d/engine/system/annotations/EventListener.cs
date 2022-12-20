@@ -10,4 +10,10 @@ public class EventListenerAttribute : Attribute
     {
         this.Type = type;
     }
+
+    public EventListenerAttribute(EventType type, EventPriority priority)
+    {
+        this.Type = type;
+        this.Priority = priority;
+    }
 }

@@ -8,15 +8,17 @@ namespace Mine2d.game.frontend.inventory;
 
 public class InventoryRegistry
 {
-    private readonly Dictionary<Inventory, IInventoryRenderer> inventoryRenderers = new();
+    private readonly Dictionary<InventoryKind, Inventory> inventoryRenderers = new();
 
     public InventoryRegistry()
     {
-        this.inventoryRenderers.Add(Inventory.Player, new PlayerInventoryRenderer());
+        this.inventoryRenderers.Add(InventoryKind.Player, new PlayerInventoryRenderer());
     }
 
-    public IInventoryRenderer GetRenderer(Inventory inventory)
+    public Inventory GetInventory(InventoryKind inventory)
     {
+        if(!this.inventoryRenderers.ContainsKey(inventory))
+            return null;
         return this.inventoryRenderers[inventory];
     }
 }

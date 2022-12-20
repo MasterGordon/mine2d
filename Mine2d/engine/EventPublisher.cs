@@ -1,3 +1,4 @@
+using System.Reflection;
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
 using Mine2d.game.core.extensions;
@@ -23,7 +24,7 @@ public class EventPublisher
     {
         var types = this.GetType().Assembly
             .GetTypesSafe()
-            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Mine2d.game.frontend.events", StringComparison.Ordinal));
+            .Where(t => t.Namespace?.StartsWith("Mine2d.game.frontend.events", StringComparison.Ordinal) == true);
         foreach (var type in types)
         {
             var methods = type.GetMethods()
@@ -57,7 +58,7 @@ public class EventPublisher
 
         foreach (var (_, value) in this.eventListeners)
         {
-            value.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+            value.Sort((a, b) => b.Priority.CompareTo(a.Priority));
         }
     }
 
@@ -75,11 +76,11 @@ public class EventPublisher
 
     public void Publish(EventType eventType, SDL_Event e)
     {
-        if (this.eventListeners.ContainsKey(eventType))
+        if (this.eventListeners.TryGetValue(eventType, out var value))
         {
             try
             {
-                foreach (var action in this.eventListeners[eventType])
+                foreach (var action in value)
                 {
                     if (action.Del.Method.GetParameters().Length == 0)
                     {
@@ -91,9 +92,8 @@ public class EventPublisher
                     }
                 }
             }
-            catch (CancelEventException)
+            catch (TargetInvocationException ex) when (ex.InnerException is CancelEventException)
             {
-
             }
         }
     }
@@ -101,7 +101,8 @@ public class EventPublisher
 
 public class CancelEventException : Exception
 {
-    public CancelEventException(string message) : base(message)
+    [System.Diagnostics.DebuggerHidden]
+    public CancelEventException() : base("Event cancelled")
     {
     }
 }
