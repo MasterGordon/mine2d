@@ -30,7 +30,7 @@ public class ChunkGenerator
         {
             for (var j = 0; j < Constants.ChunkSize; j++)
             {
-                fill.Id = (int)wg.GetRandomOreAt(j + y);
+                fill.Id = (int)wg.GetRandomOreAt(j + y*32);
                 chunk.SetTile(i, j, fill);
             }
         }

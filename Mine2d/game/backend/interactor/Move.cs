@@ -41,7 +41,7 @@ public class Move
             }
         }
     }
-    
+
     [Interaction(InteractorKind.Client, PacketType.Tick)]
     public static void SelfMovedClient()
     {

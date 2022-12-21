@@ -110,12 +110,23 @@ namespace Mine2d.game.frontend.inventory
                 {
                     player.Inventory.SwapWithCursor(index, hotbar);
                 }
+                if (e.button.button == SDL_BUTTON_RIGHT)
+                {
+                    if (player.Inventory.Cursor == null)
+                    {
+                        player.Inventory.TakeHalf(index, hotbar);
+                    }
+                    else
+                    {
+                        player.Inventory.DropOne(index, hotbar);
+                    }
+                }
             }
             // is inventory
             if (cursorPosition.X >= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale)
                 && cursorPosition.X <= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 9 * Context.Get().FrontendGameState.Settings.UiScale)
                 && cursorPosition.Y >= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale)
-                && cursorPosition.Y <= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 5 * Context.Get().FrontendGameState.Settings.UiScale)
+                && cursorPosition.Y <= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 6 * Context.Get().FrontendGameState.Settings.UiScale)
             )
             {
                 var player = PlayerEntity.GetSelf();
@@ -125,6 +136,17 @@ namespace Mine2d.game.frontend.inventory
                 if (e.button.button == SDL_BUTTON_LEFT)
                 {
                     player.Inventory.SwapWithCursor(index, inventory);
+                }
+                if (e.button.button == SDL_BUTTON_RIGHT)
+                {
+                    if (player.Inventory.Cursor == null)
+                    {
+                        player.Inventory.TakeHalf(index, inventory);
+                    }
+                    else
+                    {
+                        player.Inventory.DropOne(index, inventory);
+                    }
                 }
             }
         }

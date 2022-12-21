@@ -23,7 +23,7 @@ public class FontManager
 
         var (ptr, size) = this.resourceLoader.LoadToIntPtr(path);
         var sdlBuffer = SDL_RWFromConstMem(ptr, size);
-        var font = TTF_OpenFontRW(sdlBuffer, 1, fontSize);
+        var font = TTF_OpenFontRW(sdlBuffer, 1, fontSize+4);
         if (font == IntPtr.Zero)
         {
             throw new SDLException(TTF_GetError());
