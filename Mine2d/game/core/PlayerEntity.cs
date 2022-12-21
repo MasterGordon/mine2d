@@ -41,8 +41,6 @@ public class PlayerEntity
         {
             X = inputState.GetAxis(InputAxis.Horizontal) * movement.Speed.X
         };
-        Console.WriteLine(movement.IsGrounded);
-        Console.WriteLine(movement.CurrentVelocity);
 
         player.Position += movement.CurrentVelocity;
     }
