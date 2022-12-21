@@ -4,7 +4,8 @@ namespace Mine2d.game.state;
 
 public enum InventoryKind {
     None,
-    Player
+    Player,
+    Workbench
 }
 
 public class FrontendGameState

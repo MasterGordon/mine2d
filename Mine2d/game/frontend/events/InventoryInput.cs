@@ -47,11 +47,15 @@ public class InventoryInput
         var frontendGameState = Context.Get().FrontendGameState;
         if(e.key.keysym.sym == SDL_Keycode.SDLK_TAB)
         {
-            if(frontendGameState.OpenInventory != InventoryKind.Player) {
+            if(frontendGameState.OpenInventory == InventoryKind.None) {
                 frontendGameState.OpenInventory = InventoryKind.Player;
             } else {
                 frontendGameState.OpenInventory = InventoryKind.None;
             }
+        }
+        if(e.key.keysym.sym == SDL_Keycode.SDLK_ESCAPE)
+        {
+            frontendGameState.OpenInventory = InventoryKind.None;
         }
         if(frontendGameState.OpenInventory != InventoryKind.None)
         {

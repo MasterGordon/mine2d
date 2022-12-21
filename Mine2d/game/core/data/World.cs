@@ -98,7 +98,7 @@ public class World
             this.SetTileAt((int)head.Pos.X, (int)head.Pos.Y, stile with { Hits = stile.Hits - 1 });
             if (stile.Hits >= 1)
             {
-                this.Cracks.Enqueue(new CrackQueueEntry { Pos = head.Pos, ResetTime = now.AddSeconds(1) });
+                this.Cracks.Enqueue(new CrackQueueEntry { Pos = head.Pos, ResetTime = now.AddSeconds(0.5) });
                 needsReorder = true;
             }
         }

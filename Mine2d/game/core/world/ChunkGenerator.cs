@@ -5,6 +5,7 @@ namespace Mine2d.game.core.world;
 
 public class ChunkGenerator
 {
+    private static WorldGenerator wg = new WorldGenerator();
     public static Chunk CreateFilledChunk(int x, int y, STile fill)
     {
         var chunk = new Chunk(x, y);
@@ -29,26 +30,7 @@ public class ChunkGenerator
         {
             for (var j = 0; j < Constants.ChunkSize; j++)
             {
-                if (new Random().Next(0, 100) < 10)
-                {
-                    fill.Id = (int)Tiles.Ore1;
-                }
-                else if (new Random().Next(0, 100) < 10)
-                {
-                    fill.Id = (int)Tiles.Ore2;
-                }
-                else if (new Random().Next(0, 100) < 10)
-                {
-                    fill.Id = (int)Tiles.Ore3;
-                }
-                else if (new Random().Next(0, 100) < 10)
-                {
-                    fill.Id = (int)Tiles.Ore4;
-                }
-                else
-                {
-                    fill.Id = (int)Tiles.Stone;
-                }
+                fill.Id = (int)wg.GetRandomOreAt(j + y);
                 chunk.SetTile(i, j, fill);
             }
         }

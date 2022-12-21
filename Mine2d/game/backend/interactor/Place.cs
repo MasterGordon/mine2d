@@ -2,6 +2,8 @@ using Mine2d.engine.system.annotations;
 using Mine2d.game.backend.network.packets;
 using Mine2d.game.core;
 using Mine2d.game.core.data;
+using Mine2d.game.core.tiles;
+using Mine2d.game.state;
 
 namespace Mine2d.game.backend.interactor;
 
@@ -29,7 +31,11 @@ public class Place
         {
             var chunk = ctx.GameState.World.GetChunkAt(packet.Target);
             var tile = chunk.GetTileAt(packet.Target);
+            
             var tileId = tile.Id;
+            if(tileId == (int)Tiles.Workbench) {
+                ctx.FrontendGameState.OpenInventory = InventoryKind.Workbench;
+            }
             if (tileId != 0 || player.Inventory.Hotbar[packet.Slot] == null || player.Inventory.Hotbar[packet.Slot]?.Count <= 0)
             {
                 return;

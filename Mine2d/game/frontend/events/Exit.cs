@@ -14,9 +14,9 @@ public class Exit
     [EventListener(EventType.KeyDown)]
     public static void OnKeyDown(SDL_Event e)
     {
-        if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_ESCAPE)
-        {
-            Environment.Exit(0);
-        }
+        // if (e.key.keysym.scancode == SDL_Scancode.SDL_SCANCODE_ESCAPE)
+        // {
+        //     Environment.Exit(0);
+        // }
     }
 }

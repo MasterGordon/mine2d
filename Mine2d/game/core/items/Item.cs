@@ -15,6 +15,13 @@ public class Item
         this.texture = Context.Get().TextureFactory.CreateTexture(textureName);
     }
 
+    public Item(ItemId id, string name, string textureName)
+    {
+        this.Id = id;
+        this.Name = name;
+        this.texture = Context.Get().TextureFactory.LoadTexture(textureName);
+    }
+
     public void Render(Vector2 position)
     {
         var ctx = Context.Get();

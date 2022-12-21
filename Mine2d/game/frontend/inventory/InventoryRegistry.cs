@@ -9,6 +9,7 @@ public class InventoryRegistry
     public InventoryRegistry()
     {
         this.inventoryRenderers.Add(InventoryKind.Player, new PlayerInventoryRenderer());
+        this.inventoryRenderers.Add(InventoryKind.Workbench, new WorkbenchInventory());
     }
 
     public Inventory GetInventory(InventoryKind inventory)
