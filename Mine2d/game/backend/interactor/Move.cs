@@ -7,18 +7,18 @@ namespace Mine2d.game.backend.interactor;
 [Interactor]
 public class Move
 {
-    [Interaction(InteractorKind.Hybrid, PacketType.Move)]
-    public static void MoveHybrid(MovePacket packet)
-    {
-        var ctx = Context.Get();
-        var player = ctx.GameState.Players.Find(p => p.Name == packet.PlayerName);
-        if (player != null)
-        {
-            player.Movement = packet.Movement * 4;
-        }
-    }
+    // [Interaction(InteractorKind.Hybrid, PacketType.Move)]
+    // public static void MoveHybrid(MovePacket packet)
+    // {
+    //     var ctx = Context.Get();
+    //     var player = ctx.GameState.Players.Find(p => p.Name == packet.PlayerName);
+    //     if (player != null)
+    //     {
+    //         player.Movement += packet.Movement * 2;
+    //     }
+    // }
 
-    [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
+    // [Interaction(InteractorKind.Hybrid, PacketType.Tick)]
     public static void TickHybrid()
     {
         var ctx = Context.Get();

@@ -1,7 +1,6 @@
 using Mine2d.engine;
 using Mine2d.engine.networking;
 using Mine2d.game.core;
-using Mine2d.game.core.data;
 using Mine2d.game.state;
 
 namespace Mine2d.game;

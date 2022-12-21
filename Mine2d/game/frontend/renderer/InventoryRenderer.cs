@@ -17,10 +17,10 @@ namespace Mine2d.game.frontend.renderer
             var inventoryRenderer = ctx.InventoryRegistry.GetInventory(inventory);
             inventoryRenderer.Render();
             var player = PlayerEntity.GetSelf();
-            if (player.Inventory.cursor != null)
+            if (player.Inventory.Cursor != null)
             {
                 var cursorPosition = ctx.FrontendGameState.CursorPosition;
-                var itemTexture = player.Inventory.cursor.GetTexture();
+                var itemTexture = player.Inventory.Cursor.GetTexture();
                 var uiScale = ctx.FrontendGameState.Settings.UiScale;
                 ctx.Renderer.DrawTexture(
                     itemTexture,
@@ -30,7 +30,7 @@ namespace Mine2d.game.frontend.renderer
                     16 * uiScale
                 );
                 ctx.Renderer.DrawText(
-                    "" + player.Inventory.cursor.Count,
+                    "" + player.Inventory.Cursor.Count,
                     (int)(cursorPosition.X + 2),
                     (int)(cursorPosition.Y + (12 * uiScale))
                 );

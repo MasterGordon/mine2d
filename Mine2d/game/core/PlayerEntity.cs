@@ -17,75 +17,91 @@ public class PlayerEntity
         );
     }
 
-    public static void Move(Player p)
+    public static void Move(Player player)
     {
-        p.Movement += Constants.Gravity;
-        p.Position += p.Movement;
-        if (p.Movement.Y > 8)
+        var context = Context.Get();
+        var frontEndState = context.FrontendGameState;
+        var inputState = frontEndState.InputState;
+
+        var movement = player.PlayerMovementState;
+        
+        if (!movement.IsGrounded)
+            movement.CurrentVelocity += Constants.Gravity;
+
+        movement.CurrentVelocity = movement.CurrentVelocity with
         {
-            p.Movement = p.Movement with
-            {
-                Y = 8
-            };
-        }
+            X = inputState.GetAxis(InputAxis.Horizontal)
+        };
+        movement.CurrentMovement = movement.CurrentVelocity * movement.Speed * (float)context.GameState.DeltaTime;
+        
+        player.Position += movement.CurrentMovement;
     }
 
-    public static void Collide(Player p)
+    public static void Collide(Player player)
     {
+        var movement = player.PlayerMovementState;
         var world = Context.Get().GameState.World;
         bool hasCollision;
         do
         {
-            var pL = p.Position + new Vector2(0, -8);
-            var pL2 = p.Position + new Vector2(0, -24);
+            var pL = player.Position + new Vector2(0, -8);
+            var pL2 = player.Position + new Vector2(0, -24);
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL)
             || world.HasChunkAt(pL2) && world.GetChunkAt(pL2).HasSolidTileAt(pL2);
             if (hasCollision)
             {
-                p.Movement = p.Movement with { X = 0 };
-                p.Position += new Vector2(0.1f, 0);
+                movement.CurrentVelocity = movement.CurrentVelocity with { X = 0 };
+                player.Position += new Vector2(0.1f, 0);
             }
         } while (hasCollision);
         do
         {
-            var pR = p.Position + new Vector2(14, -8);
-            var pR2 = p.Position + new Vector2(14, -24);
+            var pR = player.Position + new Vector2(14, -8);
+            var pR2 = player.Position + new Vector2(14, -24);
             hasCollision =
                 world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR)
             || world.HasChunkAt(pR2) && world.GetChunkAt(pR2).HasSolidTileAt(pR2);
             if (hasCollision)
             {
-                p.Movement = p.Movement with { X = 0 };
-                p.Position += new Vector2(-0.1f, 0);
+                movement.CurrentVelocity = movement.CurrentVelocity with { X = 0 };
+                player.Position += new Vector2(-0.1f, 0);
             }
         } while (hasCollision);
         do
         {
-            var pL = p.Position + new Vector2(0, 0);
-            var pR = p.Position + new Vector2(14, 0);
+            var pL = player.Position + new Vector2(0, 0);
+            var pR = player.Position + new Vector2(14, 0);
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL)
                 || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR);
             if (hasCollision)
             {
-                p.Movement = p.Movement with { Y = 0 };
-                p.Position += new Vector2(0, -0.1f);
+                movement.CurrentVelocity = movement.CurrentVelocity with { Y = 0 };
+                player.Position += new Vector2(0, -0.01f);
             }
         } while (hasCollision);
         do
         {
-            var pL = p.Position + new Vector2(0, -28);
-            var pR = p.Position + new Vector2(14, -28);
+            var pL = player.Position + new Vector2(0, -28);
+            var pR = player.Position + new Vector2(14, -28);
             hasCollision =
                 world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL)
                 || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR);
             if (hasCollision)
             {
-                p.Movement = p.Movement with { Y = 0 };
-                p.Position += new Vector2(0, 0.1f);
+                movement.CurrentVelocity = movement.CurrentVelocity with { Y = 0 };
+                player.Position += new Vector2(0, 0.1f);
             }
         } while (hasCollision);
+        
+        {
+            var groundCheckPosition = player.Position - new Vector2(0, -1f);
+            var pL = groundCheckPosition + new Vector2(0, 0);
+            var pR = groundCheckPosition + new Vector2(14, 0);
+            movement.IsGrounded = world.HasChunkAt(pL) && world.GetChunkAt(pL).HasTileAt(pL) 
+                               || world.HasChunkAt(pR) && world.GetChunkAt(pR).HasTileAt(pR);
+        }
     }
 
     public static bool HasCollisionWithAnyPlayer(Vector2 pos)

@@ -21,6 +21,7 @@ public class FrontendGameState
     public int HotbarIndex { get; set; }
     public string Tooltip { get; set; } = "Test";
     public InventoryKind OpenInventory { get; set; } = InventoryKind.None;
+    public InputState InputState { get; set; } = new();
 }
 
 public class Settings

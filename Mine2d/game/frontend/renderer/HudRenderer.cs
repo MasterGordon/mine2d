@@ -29,10 +29,10 @@ public class HudRenderer : IRenderer
 
     public void Render()
     {
-        this.renderHotbar();
+        this.RenderHotbar();
     }
 
-    private void renderHotbar()
+    private void RenderHotbar()
     {
         var renderer = Context.Get().Renderer;
         var uiScale = Context.Get().FrontendGameState.Settings.UiScale;

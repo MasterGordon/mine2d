@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Mine2d.game.core;
 
 namespace Mine2d.game.frontend.inventory
@@ -51,7 +50,7 @@ namespace Mine2d.game.frontend.inventory
                     ((4 + (i * 21)) * uiScale) + this.x,
                     (14 * uiScale) + this.y
                 );
-                if (player.Inventory.cursor == null &&
+                if (player.Inventory.Cursor == null &&
                     cursorPosition.X >= ((4 + (i * 21)) * uiScale) + this.x
                     && cursorPosition.X <= ((4 + (i * 21)) * uiScale) + this.x + (16 * uiScale)
                     && cursorPosition.Y >= (4 * uiScale) + this.y
@@ -82,7 +81,7 @@ namespace Mine2d.game.frontend.inventory
                     ((4 + ((i % 9) * 21)) * uiScale) + this.x,
                     ((14 + 21 + ((i / 9) * 21)) * uiScale) + this.y
                 );
-                if (player.Inventory.cursor == null &&
+                if (player.Inventory.Cursor == null &&
                     cursorPosition.X >= ((4 + ((i % 9) * 21)) * uiScale) + this.x
                     && cursorPosition.X <= ((4 + ((i % 9) * 21)) * uiScale) + this.x + (16 * uiScale)
                     && cursorPosition.Y >= ((4 + 21 + ((i / 9) * 21)) * uiScale) + this.y

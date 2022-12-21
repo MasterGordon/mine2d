@@ -7,7 +7,7 @@ public class PlayerInventory
 {
     public ItemStack[] Hotbar { get; set; } = new ItemStack[9];
     public ItemStack[] Inventory { get; set; } = new ItemStack[5 * 9];
-    public ItemStack cursor { get; set; }
+    public ItemStack Cursor { get; set; }
 
     public bool PickupItemStack(ItemStack itemStack)
     {
@@ -34,6 +34,6 @@ public class PlayerInventory
 
     public void SwapWithCursor(int slot, ItemStack[] inventory)
     {
-        (inventory[slot], this.cursor) = (this.cursor, inventory[slot]);
+        (inventory[slot], this.Cursor) = (this.Cursor, inventory[slot]);
     }
 }

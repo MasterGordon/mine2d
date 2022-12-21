@@ -21,8 +21,10 @@ public class Backend : IBackend
         {
             Tick = ++this.tick
         });
-        
-        Context.Get().GameState.Tick = this.tick;
+            
+        var context = Context.Get();
+        context.GameState.Tick = this.tick;
+        context.GameState.DeltaTime = dt;
         while (this.pendingPackets.Count > 0)
         {
             this.publisher.Publish(this.pendingPackets.Dequeue());
