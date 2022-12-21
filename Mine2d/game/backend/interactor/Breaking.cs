@@ -40,6 +40,13 @@ public class Breaking
                     player.MiningCooldown = 10;
                     var tileRegistry = ctx.TileRegistry;
                     var hardness = tileRegistry.GetTile(tileId).Hardness;
+                    if(tile.Hits == 0) {
+                        ctx.GameState.World.Cracks.Enqueue(new CrackQueueEntry
+                        {
+                            Pos = player.Mining,
+                            ResetTime = DateTime.Now.AddSeconds(5)
+                        });
+                    }
                     chunk.SetTileAt(player.Mining, tile with { Hits = tile.Hits + 1 });
                     if (tile.Hits >= hardness)
                     {
@@ -55,6 +62,7 @@ public class Breaking
                 }
             }
         }
+        Context.Get().GameState.World.ProcessCrackQueue();
     }
 
     [Interaction(InteractorKind.Server, PacketType.Break)]

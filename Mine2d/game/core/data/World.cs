@@ -1,8 +1,15 @@
 namespace Mine2d.game.core.data;
 
+public struct CrackQueueEntry
+{
+    public Vector2 Pos { get; set; }
+    public DateTime ResetTime { get; set; }
+}
+
 public class World
 {
     public Dictionary<string, Chunk> Chunks { get; set; } = new Dictionary<string, Chunk>();
+    public Queue<CrackQueueEntry> Cracks { get; set; } = new();
 
     public void AddChunk(Chunk chunk)
     {
@@ -78,5 +85,28 @@ public class World
     public bool HasTileAt(int x, int y)
     {
         return this.HasChunkAt(x, y) && this.GetChunkAt(x, y).HasTileAt(new Vector2(x, y));
+    }
+
+    public void ProcessCrackQueue()
+    {
+        var now = DateTime.Now;
+        var needsReorder = false;
+        while (this.Cracks.Count > 0 && this.Cracks.Peek().ResetTime < now)
+        {
+            var head = this.Cracks.Dequeue();
+            var stile = this.GetTileAt((int)head.Pos.X, (int)head.Pos.Y);
+            this.SetTileAt((int)head.Pos.X, (int)head.Pos.Y, stile with { Hits = stile.Hits - 1 });
+            if (stile.Hits >= 1)
+            {
+                this.Cracks.Enqueue(new CrackQueueEntry { Pos = head.Pos, ResetTime = now.AddSeconds(1) });
+                needsReorder = true;
+            }
+        }
+        if (needsReorder)
+        {
+            this.Cracks = new(this.Cracks.OrderBy(x => x.ResetTime));
+        }
+        Console.WriteLine(this.Cracks.Count);
+        Console.WriteLine(this.Cracks.ToString());
     }
 }

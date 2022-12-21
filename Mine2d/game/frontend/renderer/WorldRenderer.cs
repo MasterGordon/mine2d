@@ -52,7 +52,7 @@ public class WorldRenderer : IRenderer
                     var chunkOffsetY = chunk.Y * Constants.TileSize * Constants.ChunkSize;
                     var drawX = x * 16 + chunkOffsetX;
                     var drawY = y * 16 + chunkOffsetY;
-                    if (stile.Id == 0)
+                    if (stile.Id == 0 || !tileRegistry.GetTile(stile.Id).IsSolid())
                     {
                         Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), this.overlay));
                         renderer.DrawTexture(
@@ -62,11 +62,11 @@ public class WorldRenderer : IRenderer
                             96 * scale,
                             96 * scale
                         );
-                        continue;
                     }
-                    else
+                    Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), IntPtr.Zero));
+                    if (stile.Id == 0)
                     {
-                        Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), IntPtr.Zero));
+                        continue;
                     }
 
                     var tile = tileRegistry.GetTile(stile.Id);

@@ -9,6 +9,7 @@ public class ItemRegistry
     public void RegisterItems()
     {
         this.Register(ItemId.Stone, new Item(ItemId.Stone, "Stone", new[] { "stone" }));
+        this.Register(ItemId.Workbench, new Item(ItemId.Workbench, "Workbench", new[] { "workbench" }));
     }
 
     public void Register(ItemId id, Item item)

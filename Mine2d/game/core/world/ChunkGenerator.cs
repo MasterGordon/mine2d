@@ -74,7 +74,7 @@ public class ChunkGenerator
         chunk.SetTile(17, 16, STile.From(0));
         chunk.SetTile(14, 16, STile.From(0));
         chunk.SetTile(16, 14, STile.From(0));
-        chunk.SetTile(15, 14, STile.From(0));
+        chunk.SetTile(17, 16, STile.From((int)Tiles.Workbench));
         return chunk;
     }
 }

@@ -12,8 +12,7 @@ public class Item
     {
         this.Id = id;
         this.Name = name;
-        var texture = Context.Get().TextureFactory.CreateTexture(textureName);
-        this.texture = texture;
+        this.texture = Context.Get().TextureFactory.CreateTexture(textureName);
     }
 
     public void Render(Vector2 position)

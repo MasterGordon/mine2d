@@ -36,6 +36,20 @@ public class Chunk
         return this.HasTile(tileX, tileY);
     }
 
+    public bool HasSolidTileAt(Vector2 pos)
+    {
+        return this.HasSolidTileAt((int)pos.X, (int)pos.Y);
+    }
+
+    public bool HasSolidTileAt(int x, int y)
+    {
+        var posInChunk = this.GetPositionInChunk(new Vector2(x, y));
+        var tileX = (int)Math.Floor(posInChunk.X / Constants.TileSize);
+        var tileY = (int)Math.Floor(posInChunk.Y / Constants.TileSize);
+        if(!this.HasTile(tileX, tileY)) return false;
+        return Context.Get().TileRegistry.GetTile(this.GetTile(tileX, tileY).Id).IsSolid();
+    }
+
     public STile GetTileAt(Vector2 pos)
     {
         return this.GetTileAt((int)pos.X, (int)pos.Y);

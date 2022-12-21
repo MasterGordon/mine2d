@@ -14,10 +14,10 @@ public class TextureFactory
 
     public IntPtr CreateTexture(string[] path)
     {
-        var target = this.LoadTexture(path[0]);
+        var target = this.LoadTexture("blocks." + path[0]);
         for (var i = 1; i < path.Length; i++)
         {
-            var t = this.LoadTexture(path[i]);
+            var t = this.LoadTexture("blocks." + path[i]);
             target = this.MergeTextures(target, t);
         }
         return target;

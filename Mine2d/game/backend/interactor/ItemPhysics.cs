@@ -23,7 +23,7 @@ public class ItemPhysics
                     itemEntity.Velocity += new Vector2(0, 0.1f);
                     itemEntity.Velocity *= new Vector2(0.7f, 1f);
                     var nextPos = itemEntity.Position + itemEntity.Velocity;
-                    if (world.HasChunkAt(nextPos) && world.GetChunkAt(nextPos).HasTileAt(nextPos))
+                    if (world.HasChunkAt(nextPos) && world.GetChunkAt(nextPos).HasSolidTileAt(nextPos))
                     {
                         itemEntity.Velocity = new Vector2(0, 0);
                         continue;

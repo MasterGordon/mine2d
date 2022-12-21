@@ -19,7 +19,7 @@ public class Tile
         this.Drop = drop;
 
         var rl = Context.Get().ResourceLoader;
-        var (ptr, size) = rl.LoadToIntPtr("assets." + textureName + ".png");
+        var (ptr, size) = rl.LoadToIntPtr("assets.blocks." + textureName + ".png");
         var sdlBuffer = SDL_RWFromMem(ptr, size);
         var surface = IMG_Load_RW(sdlBuffer, 1);
         this.texture = Context.Get().Renderer.CreateTextureFromSurface(surface);
@@ -91,5 +91,10 @@ public class Tile
         var surface = IMG_Load_RW(sdlBuffer, 1);
         breakingTexture = Context.Get().Renderer.CreateTextureFromSurface(surface);
         SDL_FreeSurface(surface);
+    }
+
+    public virtual bool IsSolid()
+    {
+        return true;
     }
 }

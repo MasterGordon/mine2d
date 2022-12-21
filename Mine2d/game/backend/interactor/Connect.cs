@@ -1,5 +1,6 @@
 using Mine2d.engine.system.annotations;
 using Mine2d.game.backend.network.packets;
+using Mine2d.game.core.data;
 using Mine2d.game.state;
 
 namespace Mine2d.game.backend.interactor;
@@ -14,14 +15,15 @@ public class Connect
         var player = ctx.GameState.Players.Find(p => p.Name == packet.PlayerName);
         if (player == null)
         {
+            player = new Player
+            {
+                Name = packet.PlayerName,
+                Id = packet.PlayerGuid,
+                Position = new Vector2(512244, 5390),
+                Movement = new Vector2(0, 0)
+            };
             ctx.GameState.Players.Add(
-                new Player
-                {
-                    Name = packet.PlayerName,
-                    Id = packet.PlayerGuid,
-                    Position = new Vector2(512244, 5390),
-                    Movement = new Vector2(0, 0)
-                }
+                player
             );
         }
     }
