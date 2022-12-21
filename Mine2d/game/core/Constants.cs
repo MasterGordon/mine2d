@@ -6,4 +6,6 @@ public class Constants
     public const int TileSize = 16;
     public const int BreakDistance = 64;
     public static Vector2 Gravity = new(0, 0.1f);
+
+    public const float JumpSpeed = 3f;
 }

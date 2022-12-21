@@ -106,7 +106,5 @@ public class World
         {
             this.Cracks = new(this.Cracks.OrderBy(x => x.ResetTime));
         }
-        Console.WriteLine(this.Cracks.Count);
-        Console.WriteLine(this.Cracks.ToString());
     }
 }

@@ -9,7 +9,6 @@ public class PlayerPlaceInput
     [EventListener(EventType.MouseButtonDown)]
     public static void OnMouseDown(SDL_Event e)
     {
-        Console.WriteLine("Mouse button down");
         if (e.button.button != SDL_BUTTON_RIGHT)
         {
             return;

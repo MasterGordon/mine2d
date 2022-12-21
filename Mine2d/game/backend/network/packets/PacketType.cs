@@ -10,5 +10,6 @@ public enum PacketType
     Break,
     PlayerMoved,
     BlockBroken,
-    Place
+    Place,
+    Jump
 }

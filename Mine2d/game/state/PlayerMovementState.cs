@@ -4,8 +4,8 @@ public class PlayerMovementState
 {
     public Vector2 Speed { get; set; } = new Vector2
     {
-        X = 50f,
-        Y = 20f,
+        X = 0.65f,
+        Y = 0.5f,
     };
     public float Drag { get; set; } = 0.1f;
     public bool IsGrounded { get; set; } = false;
