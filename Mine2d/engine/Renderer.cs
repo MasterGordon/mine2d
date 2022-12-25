@@ -94,7 +94,7 @@ public class Renderer
 
     public (IntPtr texture, int width, int height, IntPtr surfaceMessage) CreateTextTexture(string text)
     {
-        var surfaceMessage = TTF_RenderText_Solid(this.font, text, this.color);
+        var surfaceMessage = TTF_RenderText_Solid_Wrapped(this.font, text, this.color, 1000);
         var texture = SDL_CreateTextureFromSurface(this.renderer, surfaceMessage);
         ProcessStatus(SDL_QueryTexture(texture, out _, out _, out var width, out var height));
         return (texture, width, height, surfaceMessage);

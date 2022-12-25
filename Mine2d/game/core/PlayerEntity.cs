@@ -21,7 +21,16 @@ public class PlayerEntity
     {
         var context = Context.Get();
         var frontEndState = context.FrontendGameState;
+        var ds = frontEndState.DebugState;
         var inputState = frontEndState.InputState;
+        if (ds.NoClip)
+        {
+            player.Position += new Vector2(
+                inputState.GetAxis(InputAxis.Horizontal) * 2,
+                inputState.GetAxis(InputAxis.Vertical) * 2
+            );
+            return;
+        }
 
         var movement = player.PlayerMovementState;
 
@@ -29,7 +38,7 @@ public class PlayerEntity
         {
             movement.CurrentVelocity += Constants.Gravity;
         }
-        else if(movement.CurrentVelocity.Y > 0)
+        else if (movement.CurrentVelocity.Y > 0)
         {
             movement.CurrentVelocity = movement.CurrentVelocity with
             {
@@ -59,6 +68,7 @@ public class PlayerEntity
 
     public static void Collide(Player player)
     {
+        if (Context.Get().FrontendGameState.DebugState.NoClip) return;
         var movement = player.PlayerMovementState;
         var world = Context.Get().GameState.World;
         bool hasCollision;

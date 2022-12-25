@@ -1,12 +1,8 @@
 using Mine2d.game.core;
+using Mine2d.game.frontend.inventory;
 
 namespace Mine2d.game.state;
 
-public enum InventoryKind {
-    None,
-    Player,
-    Workbench
-}
 
 public class FrontendGameState
 {
@@ -23,6 +19,15 @@ public class FrontendGameState
     public string Tooltip { get; set; } = "Test";
     public InventoryKind OpenInventory { get; set; } = InventoryKind.None;
     public InputState InputState { get; set; } = new();
+    public DebugState DebugState { get; set; } = new();
+}
+
+public class DebugState {
+    public Queue<string> Messages { get; set; } = new();
+    public string ConsoleInput { get; set; } = "";
+    public List<string> ConsoleHistory { get; set; } = new();
+    public int ConsoleHistoryIndex { get; set; } = 0;
+    public bool NoClip { get; set; } = false;
 }
 
 public class Settings

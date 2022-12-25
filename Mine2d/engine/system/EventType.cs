@@ -11,4 +11,6 @@ public enum EventType
     WindowResize,
     MouseWheel,
     Tick,
+    TextInput,
+    Unhandled
 }

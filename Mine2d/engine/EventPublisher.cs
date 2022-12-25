@@ -11,11 +11,11 @@ internal struct EventAction
     public Delegate Del;
 }
 
-public class EventPublisher
+public class eventPublisher
 {
     private readonly Dictionary<EventType, List<EventAction>> eventListeners = new();
 
-    public EventPublisher()
+    public eventPublisher()
     {
         this.Scan();
     }

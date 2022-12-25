@@ -10,6 +10,7 @@ public class InventoryRegistry
     {
         this.inventoryRenderers.Add(InventoryKind.Player, new PlayerInventoryRenderer());
         this.inventoryRenderers.Add(InventoryKind.Workbench, new WorkbenchInventory());
+        this.inventoryRenderers.Add(InventoryKind.DebugConsole, new DebugConsoleInventory());
     }
 
     public Inventory GetInventory(InventoryKind inventory)

@@ -3,6 +3,7 @@ using Mine2d.game.backend.network.packets;
 using Mine2d.game.core;
 using Mine2d.game.core.data;
 using Mine2d.game.core.tiles;
+using Mine2d.game.frontend.inventory;
 using Mine2d.game.state;
 
 namespace Mine2d.game.backend.interactor;

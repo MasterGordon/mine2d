@@ -1,6 +1,7 @@
 using Mine2d.engine;
 using Mine2d.engine.system;
 using Mine2d.engine.system.annotations;
+using Mine2d.game.frontend.inventory;
 using Mine2d.game.state;
 
 namespace Mine2d.game.frontend.events;

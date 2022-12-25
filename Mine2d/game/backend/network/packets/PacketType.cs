@@ -11,5 +11,6 @@ public enum PacketType
     PlayerMoved,
     BlockBroken,
     Place,
-    Jump
+    Jump,
+    DebugCommand
 }
