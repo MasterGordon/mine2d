@@ -6,7 +6,7 @@ namespace Mine2d.game.core.world;
 
 public class ChunkGenerator
 {
-    private static WorldGenerator wg = new WorldGenerator();
+    private static readonly WorldGenerator WG = new();
     public static Chunk CreateFilledChunk(int x, int y, STile fill)
     {
         var chunk = new Chunk(x, y);
@@ -34,9 +34,37 @@ public class ChunkGenerator
             {
                 var n = (Noise.coherentNoise(i + (x * 32), j + (y * 32), 0, 1, 25, 0.5f, 0.9f));
                 // Console.WriteLine(i * (x * 32) + "  "+ j * (y * 32));
-                if(n > 0.08) continue;
-                fill.Id = (int)wg.GetRandomOreAt(j + (y * 32));
+                if (n > 0.08) continue;
                 chunk.SetTile(i, j, fill);
+            }
+        }
+
+        for (var i = 0; i < Constants.ChunkSize; i++)
+        {
+            for (var j = 0; j < Constants.ChunkSize; j++)
+            {
+                if (!chunk.HasTile(i, j))
+                {
+                    if (chunk.HasTile(i, j + 1) && chunk.GetTile(i, j + 1).Id == (int)Tiles.Stone)
+                    {
+                        if (new Random().NextInt64(0, 100) < 5)
+                        {
+                            chunk.SetTile(i, j, STile.From((int)Tiles.DripstoneUp));
+                        }
+                    }
+                    if (chunk.HasTile(i, j - 1) && chunk.GetTile(i, j - 1).Id == (int)Tiles.Stone)
+                    {
+                        if (new Random().NextInt64(0, 100) < 25)
+                        {
+                            chunk.SetTile(i, j, STile.From((int)Tiles.DripstoneDown));
+                        }
+                    }
+                }
+                else
+                {
+                    fill.Id = (int)WG.GetRandomOreAt(j + (y * 32));
+                    chunk.SetTile(i, j, fill);
+                }
             }
         }
         return chunk;

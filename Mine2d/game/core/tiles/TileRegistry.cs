@@ -21,6 +21,8 @@ public enum Tiles
     TungstenOre = 15,
     UraniumOre = 16,
     DiamondOre = 17,
+    DripstoneUp = 18,
+    DripstoneDown = 19,
 }
 
 public class TileRegistry
@@ -46,6 +48,8 @@ public class TileRegistry
         this.Tiles.Add(15, new OreTile("tungsten-ore", new[] { "stone", "tungsten-ore" }, 15, ItemId.RawTungsten));
         this.Tiles.Add(16, new OreTile("uranium-ore", new[] { "stone", "uranium-ore" }, 15, ItemId.RawUranium));
         this.Tiles.Add(17, new OreTile("diamond-ore", new[] { "stone", "diamond-ore" }, 10, ItemId.Diamond));
+        this.Tiles.Add(18, new DecoTile("dripstone-up", "dripstone-up", 5, ItemId.Air));
+        this.Tiles.Add(19, new DecoTile("dripstone-down", "dripstone-down", 5, ItemId.Air));
     }
 
     public Tile GetTile(int id)

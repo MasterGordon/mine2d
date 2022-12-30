@@ -46,7 +46,7 @@ public class Chunk
         var posInChunk = this.GetPositionInChunk(new Vector2(x, y));
         var tileX = (int)Math.Floor(posInChunk.X / Constants.TileSize);
         var tileY = (int)Math.Floor(posInChunk.Y / Constants.TileSize);
-        if(!this.HasTile(tileX, tileY)) return false;
+        if (!this.HasTile(tileX, tileY)) return false;
         return Context.Get().TileRegistry.GetTile(this.GetTile(tileX, tileY).Id).IsSolid();
     }
 
@@ -78,7 +78,7 @@ public class Chunk
 
     public bool HasTile(int x, int y)
     {
-        return x >= 0 && x < this.Tiles.Length && y >= 0 && y < this.Tiles.Length && this.Tiles[x, y].Id != 0;
+        return x >= 0 && x < Constants.ChunkSize && y >= 0 && y < Constants.ChunkSize && this.Tiles[x, y].Id != 0;
     }
 
     public bool HasTile(Vector2 pos)
