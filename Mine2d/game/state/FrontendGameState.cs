@@ -27,12 +27,14 @@ public class DebugState {
     public string ConsoleInput { get; set; } = "";
     public List<string> ConsoleHistory { get; set; } = new();
     public int ConsoleHistoryIndex { get; set; } = 0;
-    public bool NoClip { get; set; } = false;
+    public bool NoClip { get; set; } = true;
+    public bool NoFog { get; set; } = false;
+    public string Overlay { get; set; } = "none";
 }
 
 public class Settings
 {
-    public int GameScale { get; set; } = 6;
+    public int GameScale { get; set; } = 1;
     public int UiScale { get; set; } = 4;
     public bool ShowCollision { get; set; } = true;
     public bool Fullscreen { get; set; } = false;

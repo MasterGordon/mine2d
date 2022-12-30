@@ -4,7 +4,6 @@ using Mine2d.game.core;
 using Mine2d.game.core.data;
 using Mine2d.game.core.tiles;
 using Mine2d.game.frontend.inventory;
-using Mine2d.game.state;
 
 namespace Mine2d.game.backend.interactor;
 
@@ -20,35 +19,11 @@ public class Place
         {
             return;
         }
-        if ((player.GetCenter() - packet.Target).LengthSquared() > Constants.BreakDistance * Constants.BreakDistance)
+        var stack = player.Inventory.Hotbar[packet.Slot];
+        if(stack == null || stack.Count <= 0)
         {
             return;
         }
-        if (PlayerEntity.HasCollisionWithAnyPlayer(packet.Target))
-        {
-            return;
-        }
-        if (ctx.GameState.World.HasChunkAt(packet.Target))
-        {
-            var chunk = ctx.GameState.World.GetChunkAt(packet.Target);
-            var tile = chunk.GetTileAt(packet.Target);
-            
-            var tileId = tile.Id;
-            if(tileId == (int)Tiles.Workbench) {
-                ctx.FrontendGameState.OpenInventory = InventoryKind.Workbench;
-            }
-            if (tileId != 0 || player.Inventory.Hotbar[packet.Slot] == null || player.Inventory.Hotbar[packet.Slot]?.Count <= 0)
-            {
-                return;
-            }
-            player.Inventory.Hotbar[packet.Slot].Count--;
-            var itemId = player.Inventory.Hotbar[packet.Slot].Id;
-            if (player.Inventory.Hotbar[packet.Slot].Count <= 0)
-            {
-                player.Inventory.Hotbar[packet.Slot] = null;
-            }
-            var itemTileId = ctx.TileRegistry.GetTileIdByItemId(itemId);
-            chunk.SetTileAt(packet.Target, STile.From(itemTileId));
-        }
+        ctx.ItemRegistry.GetItem(stack.Id).Interact(stack, packet.Target, player);
     }
 }

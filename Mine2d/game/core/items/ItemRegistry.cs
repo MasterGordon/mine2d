@@ -8,8 +8,8 @@ public class ItemRegistry
 
     public void RegisterItems()
     {
-        this.Register(ItemId.Stone, new Item(ItemId.Stone, "Stone", new[] { "stone" }));
-        this.Register(ItemId.Workbench, new Item(ItemId.Workbench, "Workbench", new[] { "workbench" }));
+        this.Register(ItemId.Stone, new BlockItem(ItemId.Stone, "Stone", new[] { "stone" }));
+        this.Register(ItemId.Workbench, new BlockItem(ItemId.Workbench, "Workbench", new[] { "workbench" }));
         this.Register(ItemId.RawIron, new Item(ItemId.RawCobalt, "Raw Iron", "items.raw-iron" ));
         this.Register(ItemId.RawCopper, new Item(ItemId.RawCopper, "Raw Copper", "items.raw-copper" ));
         this.Register(ItemId.RawTin, new Item(ItemId.RawTin, "Raw Tin", "items.raw-tin" ));

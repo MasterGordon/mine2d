@@ -1,4 +1,5 @@
 using Mine2d.game.core.data;
+using Mine2d.game.state;
 
 namespace Mine2d.game.core.items;
 
@@ -27,7 +28,7 @@ public class Item
         var ctx = Context.Get();
         var renderer = ctx.Renderer;
         var scale = ctx.FrontendGameState.Settings.GameScale;
-        var targetPos = (position - ctx.FrontendGameState.Camera.Position) * scale -
+        var targetPos = ((position - ctx.FrontendGameState.Camera.Position) * scale) -
             new Vector2(4 * scale, 6 * scale);
         renderer.DrawTexture(this.texture, (int)targetPos.X, (int)targetPos.Y, 8 * scale, 8 * scale);
     }
@@ -35,5 +36,8 @@ public class Item
     public IntPtr GetTexture()
     {
         return this.texture;
+    }
+
+    public virtual void Interact(ItemStack stack, Vector2 position, Player player) {
     }
 }

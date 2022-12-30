@@ -1,3 +1,5 @@
+using Mine2d.game;
+
 namespace Mine2d.engine;
 
 public abstract class Game
@@ -6,6 +8,7 @@ public abstract class Game
 
     private readonly bool running = true;
     private readonly Queue<int> fpsQueue = new();
+    private DateTime nextFpsUpdate = DateTime.Now;
     protected abstract void Update(double dt);
     protected abstract void Draw();
 
@@ -23,6 +26,12 @@ public abstract class Game
             while (this.fpsQueue.Count > fps)
             {
                 this.fpsQueue.Dequeue();
+            }
+            if (this.nextFpsUpdate < DateTime.Now && this.fpsQueue.Count > 0)
+            {
+                var avgFps = this.fpsQueue.Sum() / this.fpsQueue.Count;
+                SDL_SetWindowTitle(Context.Get().Window.GetRaw(), "Mine2d - debug - " + avgFps + "fps");
+                this.nextFpsUpdate = DateTime.Now.AddMilliseconds(200);
             }
 
             while (tAcc >= TimeSpan.FromSeconds(1.0 / Tps))

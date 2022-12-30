@@ -1,5 +1,6 @@
 using Mine2d.engine;
 using Mine2d.game.core;
+using Mine2d.game.core.world;
 
 namespace Mine2d.game.frontend.renderer;
 
@@ -41,8 +42,17 @@ public class WorldRenderer : IRenderer
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var camera = Context.Get().FrontendGameState.Camera;
         Renderer.ProcessStatus(SDL_SetTextureBlendMode(this.light, SDL_BlendMode.SDL_BLENDMODE_BLEND));
+        var player = PlayerEntity.GetSelf();
         foreach (var (_, chunk) in world.Chunks)
         {
+            if (player == null)
+            {
+                continue;
+            }
+            if ((player.Position - new Vector2(chunk.X * Constants.ChunkSize * Constants.TileSize, chunk.Y * Constants.ChunkSize * Constants.TileSize)).Length() > 1300)
+            {
+                continue;
+            }
             for (var y = 0; y < Constants.ChunkSize; y++)
             {
                 for (var x = 0; x < Constants.ChunkSize; x++)
@@ -64,17 +74,34 @@ public class WorldRenderer : IRenderer
                         );
                     }
                     Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), IntPtr.Zero));
-                    if (stile.Id == 0)
+                    if (stile.Id != 0)
                     {
-                        continue;
+                        var tile = tileRegistry.GetTile(stile.Id);
+                        tile.Render(drawX, drawY, stile);
                     }
 
-                    var tile = tileRegistry.GetTile(stile.Id);
-                    tile.Render(drawX, drawY, stile);
+                    // Console.WriteLine(
+                    //     (chunk.Y * Constants.ChunkSize) + y + "   "+
+                    //     (chunk.X * Constants.ChunkSize) + x
+                    // );
+                    if (ctx.FrontendGameState.DebugState.Overlay == "noise")
+                    {
+                        ctx.Renderer.DrawText("" + Math.Round(ChunkGenerator.Noise.coherentNoise(
+                        (chunk.X * Constants.ChunkSize) + x,
+                        (chunk.Y * Constants.ChunkSize) + y,
+                        0
+                        ), 4),
+                        (drawX - (int)camera.Position.X) * scale,
+                        (drawY - (int)camera.Position.Y) * scale);
+                    }
                 }
             }
         }
         Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), IntPtr.Zero));
+        if (ctx.FrontendGameState.DebugState.NoFog)
+        {
+            return;
+        }
         Renderer.ProcessStatus(SDL_SetTextureBlendMode(this.overlay, SDL_BlendMode.SDL_BLENDMODE_MUL));
         Renderer.ProcessStatus(SDL_RenderCopy(ctx.Renderer.GetRaw(), this.overlay, IntPtr.Zero, IntPtr.Zero));
         Renderer.ProcessStatus(SDL_SetRenderTarget(ctx.Renderer.GetRaw(), IntPtr.Zero));

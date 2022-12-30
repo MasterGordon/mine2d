@@ -22,8 +22,17 @@ public enum DebugCommand {
     [DebugCommand("", "Disables gravity and collision")]
     NoClip,
 
-    [DebugCommand(" <item> <amount>", "Gives you an item")]
+    [DebugCommand("<scale>", "Sets the scale of the world")]
+    GameScale,
+
+    [DebugCommand("", "Disables fog")]
+    NoFog,
+
+    [DebugCommand(" <item> [amount]", "Gives you an item")]
     Give,
+
+    [DebugCommand("<kind>", "Toggles the debug overlay")]
+    Overlay,
 
     [DebugCommand("", "Lists all commands")]
     Help,

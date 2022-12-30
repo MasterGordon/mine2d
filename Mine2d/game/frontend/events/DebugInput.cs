@@ -47,6 +47,9 @@ public class DebugInput
                     "give" => DebugCommand.Give,
                     "help" => DebugCommand.Help,
                     "noclip" => DebugCommand.NoClip,
+                    "nofog" => DebugCommand.NoFog,
+                    "overlay" => DebugCommand.Overlay,
+                    "gamescale" => DebugCommand.GameScale,
                     _ => DebugCommand.Unknown
                 };
                 var Args = split.Length > 1 ? split[1..] : Array.Empty<string>();

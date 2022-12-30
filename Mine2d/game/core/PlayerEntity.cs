@@ -26,8 +26,8 @@ public class PlayerEntity
         if (ds.NoClip)
         {
             player.Position += new Vector2(
-                inputState.GetAxis(InputAxis.Horizontal) * 2,
-                inputState.GetAxis(InputAxis.Vertical) * 2
+                inputState.GetAxis(InputAxis.Horizontal) * 4,
+                inputState.GetAxis(InputAxis.Vertical) * 4
             );
             return;
         }

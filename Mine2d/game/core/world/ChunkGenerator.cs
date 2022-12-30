@@ -1,3 +1,4 @@
+using Mine2d.engine.lib;
 using Mine2d.game.core.data;
 using Mine2d.game.core.tiles;
 
@@ -19,6 +20,7 @@ public class ChunkGenerator
         return chunk;
     }
 
+    public static readonly OpenSimplexNoise Noise = new();
     public static Chunk CreateChunk(int x, int y)
     {
         var fill = new STile
@@ -30,7 +32,10 @@ public class ChunkGenerator
         {
             for (var j = 0; j < Constants.ChunkSize; j++)
             {
-                fill.Id = (int)wg.GetRandomOreAt(j + y*32);
+                var n = (Noise.coherentNoise(i + (x * 32), j + (y * 32), 0, 1, 25, 0.5f, 0.9f));
+                // Console.WriteLine(i * (x * 32) + "  "+ j * (y * 32));
+                if(n > 0.08) continue;
+                fill.Id = (int)wg.GetRandomOreAt(j + (y * 32));
                 chunk.SetTile(i, j, fill);
             }
         }
