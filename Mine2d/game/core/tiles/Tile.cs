@@ -97,4 +97,8 @@ public class Tile
     {
         return true;
     }
+
+    public virtual void OnInteract(Vector2 position)
+    {
+    }
 }

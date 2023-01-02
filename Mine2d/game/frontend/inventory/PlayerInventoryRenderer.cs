@@ -23,7 +23,12 @@ public class PlayerInventoryRenderer : Inventory
         this.x = (windowWidth - (width - extraSlotsWidth)) / 2;
         this.y = (windowHeight - height) / 2;
         ctx.Renderer.DrawTexture(this.texture, this.x, this.y, width, height);
+        Render(this.x, this.y);
+    }
 
+    public static void Render(int x, int y) {
+        var ctx = Context.Get();
+        var uiScale = ctx.FrontendGameState.Settings.UiScale;
         var player = PlayerEntity.GetSelf();
         var inventory = player.Inventory.Inventory;
         var hotbar = player.Inventory.Hotbar;
@@ -34,7 +39,7 @@ public class PlayerInventoryRenderer : Inventory
             {
                 continue;
             }
-            ItemRenderer.RenderItemStack(stack, new Vector2(((4 + (i * 21)) * uiScale) + this.x, (4 * uiScale) + this.y), player.Inventory.Cursor == null);
+            ItemRenderer.RenderItemStack(stack, new Vector2(((4 + (i * 21)) * uiScale) + x, (4 * uiScale) + y), player.Inventory.Cursor == null);
         }
         for (var i = 0; i < inventory.Length; i++)
         {
@@ -44,28 +49,33 @@ public class PlayerInventoryRenderer : Inventory
                 continue;
             }
 
-            ItemRenderer.RenderItemStack(stack, new Vector2(((4 + ((i % 9) * 21)) * uiScale) + this.x, ((4 + 21 + ((i / 9) * 21)) * uiScale) + this.y), player.Inventory.Cursor == null);
+            ItemRenderer.RenderItemStack(stack, new Vector2(((4 + ((i % 9) * 21)) * uiScale) + x, ((4 + 21 + ((i / 9) * 21)) * uiScale) + y), player.Inventory.Cursor == null);
         }
         var pickaxe = player.Inventory.Pickaxe;
         if (pickaxe != null)
         {
-            ItemRenderer.RenderItemStack(pickaxe, new Vector2(((4 + (9 * 21)) * uiScale) + this.x, (((5 * 21) + 4) * uiScale) + this.y), player.Inventory.Cursor == null);
+            ItemRenderer.RenderItemStack(pickaxe, new Vector2(((4 + (9 * 21)) * uiScale) + x, (((5 * 21) + 4) * uiScale) + y), player.Inventory.Cursor == null, "Test\nTT");
         }
     }
 
     public override void OnClick(SDL_Event e)
     {
+        OnClick(this.x, this.y, e);
+    }
+
+    public static void OnClick(int x, int y, SDL_Event e)
+    {
         var cursorPosition = Context.Get().FrontendGameState.CursorPosition;
         var player = PlayerEntity.GetSelf();
         // is hotbar
-        if (cursorPosition.X >= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.X <= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 9 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.Y >= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.Y <= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale)
+        if (cursorPosition.X >= x + (4 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.X <= x + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 9 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.Y >= y + (4 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.Y <= y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale)
         )
         {
             var hotbar = player.Inventory.Hotbar;
-            var index = (int)((cursorPosition.X - (this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale));
+            var index = (int)((cursorPosition.X - (x + (4 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale));
             if (e.button.button == SDL_BUTTON_LEFT)
             {
                 player.Inventory.SwapWithCursor(index, hotbar);
@@ -82,15 +92,15 @@ public class PlayerInventoryRenderer : Inventory
                 }
             }
         }
-        if (cursorPosition.X >= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.X <= this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 9 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.Y >= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale)
-            && cursorPosition.Y <= this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 6 * Context.Get().FrontendGameState.Settings.UiScale)
+        if (cursorPosition.X >= x + (4 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.X <= x + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 9 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.Y >= y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale)
+            && cursorPosition.Y <= y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * 6 * Context.Get().FrontendGameState.Settings.UiScale)
         )
         {
             var inventory = player.Inventory.Inventory;
-            var index = (int)((cursorPosition.X - (this.x + (4 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale))
-                + ((int)((cursorPosition.Y - (this.y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale)) * 9);
+            var index = (int)((cursorPosition.X - (x + (4 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale))
+                + ((int)((cursorPosition.Y - (y + (4 * Context.Get().FrontendGameState.Settings.UiScale) + (21 * Context.Get().FrontendGameState.Settings.UiScale))) / (21 * Context.Get().FrontendGameState.Settings.UiScale)) * 9);
             if (e.button.button == SDL_BUTTON_LEFT)
             {
                 player.Inventory.SwapWithCursor(index, inventory);
@@ -107,7 +117,7 @@ public class PlayerInventoryRenderer : Inventory
                 }
             }
         }
-        if (IsCursorOnSlot(((4 + (9 * 21)) * Context.Get().FrontendGameState.Settings.UiScale) + this.x, (((5 * 21) + 4) * Context.Get().FrontendGameState.Settings.UiScale) + this.y))
+        if (IsCursorOnSlot(((4 + (9 * 21)) * Context.Get().FrontendGameState.Settings.UiScale) + x, (((5 * 21) + 4) * Context.Get().FrontendGameState.Settings.UiScale) + y))
         {
             if (e.button.button == SDL_BUTTON_LEFT)
             {

@@ -72,6 +72,11 @@ public class World
         return new Vector2((float)chunkX, (float)chunkY);
     }
 
+    public STile GetTileAt(Vector2 pos)
+    {
+        return this.GetTileAt((int)pos.X, (int)pos.Y);
+    }
+
     public STile GetTileAt(int x, int y)
     {
         return this.GetChunkAt(x, y).GetTileAt(x, y);
@@ -80,6 +85,11 @@ public class World
     public void SetTileAt(int x, int y, STile tile)
     {
         this.GetChunkAt(x, y).SetTileAt(x, y, tile);
+    }
+
+    public bool HasTileAt(Vector2 pos)
+    {
+        return this.HasTileAt((int)pos.X, (int)pos.Y);
     }
 
     public bool HasTileAt(int x, int y)

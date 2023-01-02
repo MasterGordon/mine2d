@@ -16,6 +16,11 @@ public enum ItemId
     RawTungsten = 115,
     RawUranium = 116,
     Diamond = 117,
+    Coal = 120,
+    GoldIngot = 121,
+    IronIngot = 122,
     PickaxeBasic = 200,
     PickaxeStone = 201,
+    PickaxeIron = 202,
+    PickaxeGold = 203,
 }

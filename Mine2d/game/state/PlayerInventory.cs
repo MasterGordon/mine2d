@@ -37,6 +37,45 @@ public class PlayerInventory
         return true;
     }
 
+    public bool HasItemStack(ItemStack itemStack)
+    {
+        return HasItemStack(itemStack, this.Hotbar) || HasItemStack(itemStack, this.Inventory);
+    }
+
+    public static bool HasItemStack(ItemStack itemStack, ItemStack[] inventory)
+    {
+        var slot = InventoryUtils.GetFirstMatchingSlot(inventory, itemStack.Id);
+        if (slot == -1)
+        {
+            return false;
+        }
+        if(inventory[slot] == null) return false;
+        return inventory[slot].Count >= itemStack.Count;
+    }
+
+    public bool RemoveItemStack(ItemStack itemStack)
+    {
+        return RemoveItemStack(itemStack, this.Hotbar) || RemoveItemStack(itemStack, this.Inventory);
+    }
+
+    public static bool RemoveItemStack(ItemStack itemStack, ItemStack[] inventory)
+    {
+        var slot = InventoryUtils.GetFirstMatchingSlot(inventory, itemStack.Id);
+        if (slot == -1)
+        {
+            return false;
+        }
+        if (inventory[slot].Count == itemStack.Count)
+        {
+            inventory[slot] = null;
+        }
+        else
+        {
+            inventory[slot].Count -= itemStack.Count;
+        }
+        return true;
+    }
+
     public void SwapWithCursor(int slot, ItemStack[] inventory)
     {
         if (this.Cursor != null && inventory[slot] != null && this.Cursor.Id == inventory[slot].Id && this.Cursor.IsStackable())

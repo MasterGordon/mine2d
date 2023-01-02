@@ -16,7 +16,7 @@ public class FrontendGameState
     public Settings Settings { get; set; } = new Settings();
     public string PlayerName { get; set; } = "Player";
     public int HotbarIndex { get; set; }
-    public string Tooltip { get; set; } = "Test";
+    public string Tooltip { get; set; }
     public InventoryKind OpenInventory { get; set; } = InventoryKind.None;
     public InputState InputState { get; set; } = new();
     public DebugState DebugState { get; set; } = new();

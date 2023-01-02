@@ -13,7 +13,6 @@ public class PlayerRenderer : IRenderer
             this.playerTexture = Context.Get().TextureFactory.LoadTexture("character.character");
         }
         var ctx = Context.Get();
-        var camera = ctx.FrontendGameState.Camera;
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var (width, height) = ctx.Window.GetSize();
         foreach (var player in ctx.GameState.Players)
@@ -26,13 +25,6 @@ public class PlayerRenderer : IRenderer
             {
                 ctx.Renderer.SetColor(255, 0, 0);
             }
-
-            // ctx.Renderer.DrawRect(
-            //     (player.Position.X - (int)camera.Position.X) * scale,
-            //     (player.Position.Y - (int)camera.Position.Y) * scale - 28 * scale,
-            //     14 * scale,
-            //     28 * scale
-            // );
             var y = player.PlayerMovementState.MovingRight ? 32 * 3 : 32 * 1;
             var moving = player.PlayerMovementState.CurrentVelocity.X != 0;
             var dt = (DateTime.Now - DateTime.MinValue).TotalMilliseconds;

@@ -15,8 +15,14 @@ public class PlayerInteract
         {
             return;
         }
+        if (ctx.GameState.World.HasTileAt(packet.Target))
+        {
+            var tile = ctx.TileRegistry.GetTile(ctx.GameState.World.GetTileAt(packet.Target).Id);
+            tile.OnInteract(packet.Target);
+            return;
+        }
         var stack = player.Inventory.Hotbar[packet.Slot];
-        if(stack == null || stack.Count <= 0)
+        if (stack == null || stack.Count <= 0)
         {
             return;
         }

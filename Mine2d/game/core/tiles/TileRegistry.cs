@@ -23,6 +23,7 @@ public enum Tiles
     DiamondOre = 17,
     DripstoneUp = 18,
     DripstoneDown = 19,
+    CoalOre = 20,
 }
 
 public class TileRegistry
@@ -50,6 +51,7 @@ public class TileRegistry
         this.Tiles.Add(17, new OreTile("diamond-ore", new[] { "stone", "diamond-ore" }, 10, ItemId.Diamond));
         this.Tiles.Add(18, new DecoTile("dripstone-up", "dripstone-up", 5, ItemId.Air));
         this.Tiles.Add(19, new DecoTile("dripstone-down", "dripstone-down", 5, ItemId.Air));
+        this.Tiles.Add(20, new OreTile("coal-ore", new[] { "stone", "coal-ore" }, 4, ItemId.Coal));
     }
 
     public Tile GetTile(int id)

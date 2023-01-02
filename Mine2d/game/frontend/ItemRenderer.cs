@@ -10,7 +10,7 @@ public static class ItemRenderer
 {
     private static readonly Dictionary<int, (IntPtr, int, int)> Textures = new();
 
-    public static void RenderItemStack(ItemStack stack, Vector2 position, bool renderTooltip = true)
+    public static void RenderItemStack(ItemStack stack, Vector2 position, bool renderTooltip = true, string description = null)
     {
         var texture = stack.GetTexture();
         var renderer = Context.Get().Renderer;
@@ -36,7 +36,7 @@ public static class ItemRenderer
                 && cursorPosition.Y <= position.Y + (16 * uiScale)
             )
             {
-                Context.Get().FrontendGameState.Tooltip = stack.GetName();
+                Context.Get().FrontendGameState.Tooltip = stack.GetName() + (description != null ? "\n" + description : "");
             }
         }
     }
