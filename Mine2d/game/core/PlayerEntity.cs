@@ -52,6 +52,8 @@ public class PlayerEntity
         };
 
         player.Position += movement.CurrentVelocity;
+        if (movement.CurrentVelocity.X != 0)
+            movement.MovingRight = movement.CurrentVelocity.X > 0;
     }
 
     public static void Jump(Player player)

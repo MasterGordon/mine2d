@@ -1,3 +1,5 @@
+using Mine2d.game.core.items;
+
 namespace Mine2d.game.state;
 
 public class Player
@@ -15,11 +17,24 @@ public class Player
         return this.Position + new Vector2(7, -14);
     }
 
-    public int GetMiningSpeed() {
-        return 10;
+    private PickaxeItem getPickaxe()
+    {
+        if (this.Inventory.Pickaxe == null)
+        {
+            return null;
+        }
+
+        var item = Context.Get().ItemRegistry.GetItem(this.Inventory.Pickaxe.Id);
+        return item as PickaxeItem;
     }
 
-    public int GetHarvestLevel() {
-        return 1;
+    public int GetMiningSpeed()
+    {
+        return this.getPickaxe() == null ? 1 : this.getPickaxe().GetMiningSpeed();
+    }
+
+    public int GetHarvestLevel()
+    {
+        return this.getPickaxe() == null ? 1 : this.getPickaxe().GetHarvestLevel();
     }
 }

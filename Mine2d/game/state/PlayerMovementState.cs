@@ -11,4 +11,5 @@ public class PlayerMovementState
     public bool IsGrounded { get; set; } = false;
     public Vector2 CurrentVelocity { get; set; } = Vector2.Zero;
     public Vector2 CurrentMovement { get; set; } = Vector2.Zero;
+    public bool MovingRight { get; set; } = true;
 }

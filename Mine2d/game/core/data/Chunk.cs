@@ -6,6 +6,7 @@ public class Chunk
     public int X { get; set; }
     public int Y { get; set; }
     public List<Entity> Entities { get; set; } = new();
+    public Dictionary<(int, int), Entity> TileEntities { get; set; } = new();
 
     public Chunk(int x, int y)
     {

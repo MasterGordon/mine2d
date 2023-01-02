@@ -30,7 +30,8 @@ public class ItemRegistry
         this.Register(ItemId.RawTungsten, new Item(ItemId.RawTungsten, "Raw Tungsten", "items.raw-tungsten" ));
         this.Register(ItemId.RawUranium, new Item(ItemId.RawUranium, "Raw Uranium", "items.raw-uranium" ));
         this.Register(ItemId.Diamond, new Item(ItemId.Diamond, "Diamond", "items.diamond" ));
-        this.Register(ItemId.PickaxeBasic, new PickaxeItem(ItemId.PickaxeBasic, "Basic Pickaxe", "items.pickaxe-basic"));
+        this.Register(ItemId.PickaxeBasic, new PickaxeItem(ItemId.PickaxeBasic, "Basic Pickaxe", "items.pickaxe-basic", 15, 4));
+        this.Register(ItemId.PickaxeStone, new PickaxeItem(ItemId.PickaxeStone, "Stone Pickaxe", "items.pickaxe-stone", 25, 6));
     }
 
     public void Register(ItemId id, Item item)
