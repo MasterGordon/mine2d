@@ -14,4 +14,12 @@ public class Player
     {
         return this.Position + new Vector2(7, -14);
     }
+
+    public int GetMiningSpeed() {
+        return 10;
+    }
+
+    public int GetHarvestLevel() {
+        return 1;
+    }
 }

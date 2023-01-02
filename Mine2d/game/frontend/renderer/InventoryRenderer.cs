@@ -20,20 +20,7 @@ public class InventoryRenderer : IRenderer
         if (player.Inventory.Cursor != null)
         {
             var cursorPosition = ctx.FrontendGameState.CursorPosition;
-            var itemTexture = player.Inventory.Cursor.GetTexture();
-            var uiScale = ctx.FrontendGameState.Settings.UiScale;
-            ctx.Renderer.DrawTexture(
-                itemTexture,
-                (int)(cursorPosition.X + 2),
-                (int)(cursorPosition.Y + 2),
-                16 * uiScale,
-                16 * uiScale
-            );
-            ctx.Renderer.DrawText(
-                "" + player.Inventory.Cursor.Count,
-                (int)(cursorPosition.X + 2),
-                (int)(cursorPosition.Y + (12 * uiScale))
-            );
+            ItemRenderer.RenderItemStack(player.Inventory.Cursor, cursorPosition + new Vector2(2, 2));
         }
     }
 }

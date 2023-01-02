@@ -1,5 +1,6 @@
 using Mine2d.game.core;
 using Mine2d.game.core.data;
+using Mine2d.game.core.items;
 
 namespace Mine2d.game.state;
 
@@ -7,6 +8,10 @@ public class PlayerInventory
 {
     public ItemStack[] Hotbar { get; set; } = new ItemStack[9];
     public ItemStack[] Inventory { get; set; } = new ItemStack[5 * 9];
+    public ItemStack Pickaxe { get; set; }
+    public ItemStack Helmet { get; set; }
+    public ItemStack Chestplate { get; set; }
+    public ItemStack Leggings { get; set; }
     public ItemStack Cursor { get; set; }
 
     public bool PickupItemStack(ItemStack itemStack)
@@ -34,7 +39,7 @@ public class PlayerInventory
 
     public void SwapWithCursor(int slot, ItemStack[] inventory)
     {
-        if (this.Cursor != null && inventory[slot] != null && this.Cursor.Id == inventory[slot].Id)
+        if (this.Cursor != null && inventory[slot] != null && this.Cursor.Id == inventory[slot].Id && this.Cursor.IsStackable())
         {
             inventory[slot].Count += this.Cursor.Count;
             this.Cursor = null;
@@ -49,7 +54,7 @@ public class PlayerInventory
     {
         if (inventory[slot] == null)
             return;
-        if(inventory[slot].Count == 1)
+        if (inventory[slot].Count == 1)
         {
             this.Cursor = inventory[slot];
             inventory[slot] = null;
@@ -65,7 +70,7 @@ public class PlayerInventory
         {
             inventory[slot] = new ItemStack(this.Cursor.Id, 1);
         }
-        else if (inventory[slot].Id == this.Cursor.Id)
+        else if (inventory[slot].Id == this.Cursor.Id && this.Cursor.IsStackable())
         {
             inventory[slot].Count++;
         }
@@ -78,5 +83,29 @@ public class PlayerInventory
         {
             this.Cursor = null;
         }
+    }
+
+    public void SwapPickaxeWithCursor()
+    {
+        if (this.Cursor != null && this.Cursor?.GetKind() != ItemKind.Pickaxe) return;
+        (this.Pickaxe, this.Cursor) = (this.Cursor, this.Pickaxe);
+    }
+
+    public void SwapHelmetWithCursor()
+    {
+        if (this.Cursor != null && this.Cursor?.GetKind() != ItemKind.Helmet) return;
+        (this.Helmet, this.Cursor) = (this.Cursor, this.Helmet);
+    }
+
+    public void SwapChestplateWithCursor()
+    {
+        if (this.Cursor != null && this.Cursor?.GetKind() != ItemKind.Chestplate) return;
+        (this.Chestplate, this.Cursor) = (this.Cursor, this.Chestplate);
+    }
+
+    public void SwapLeggingsWithCursor()
+    {
+        if (this.Cursor != null && this.Cursor?.GetKind() != ItemKind.Leggings) return;
+        (this.Leggings, this.Cursor) = (this.Cursor, this.Leggings);
     }
 }

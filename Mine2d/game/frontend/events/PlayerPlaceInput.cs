@@ -4,7 +4,7 @@ using Mine2d.game.backend.network.packets;
 
 namespace Mine2d.game.frontend.events;
 
-public class PlayerPlaceInput
+public class PlayerInteractInput
 {
     [EventListener(EventType.MouseButtonDown)]
     public static void OnMouseDown(SDL_Event e)
@@ -15,11 +15,11 @@ public class PlayerPlaceInput
         }
 
         var ctx = Context.Get();
-        var amp = ctx.FrontendGameState.CursorPosition
-            / ctx.FrontendGameState.Settings.GameScale
+        var amp = (ctx.FrontendGameState.CursorPosition
+            / ctx.FrontendGameState.Settings.GameScale)
             + ctx.FrontendGameState.Camera.Position;
 
-        ctx.Backend.ProcessPacket(new PlacePacket
+        ctx.Backend.ProcessPacket(new PlayerInteractPacket
         {
             PlayerGuid = ctx.FrontendGameState.PlayerGuid,
             Target = amp,

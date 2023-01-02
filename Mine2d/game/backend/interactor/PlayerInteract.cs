@@ -1,17 +1,13 @@
 using Mine2d.engine.system.annotations;
 using Mine2d.game.backend.network.packets;
-using Mine2d.game.core;
-using Mine2d.game.core.data;
-using Mine2d.game.core.tiles;
-using Mine2d.game.frontend.inventory;
 
 namespace Mine2d.game.backend.interactor;
 
 [Interactor]
-public class Place
+public class PlayerInteract
 {
-    [Interaction(InteractorKind.Server, PacketType.Place)]
-    public static void PlaceServer(PlacePacket packet)
+    [Interaction(InteractorKind.Server, PacketType.PlayerInteract)]
+    public static void InteractServer(PlayerInteractPacket packet)
     {
         var ctx = Context.Get();
         var player = ctx.GameState.Players.Find(p => p.Id == packet.PlayerGuid);

@@ -4,7 +4,7 @@ using Mine2d.game.core.data.entities;
 
 namespace Mine2d.game.frontend.renderer;
 
-public class ItemRenderer : IRenderer
+public class ItemEnitityRenderer : IRenderer
 {
     public void Render()
     {

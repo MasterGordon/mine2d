@@ -10,7 +10,7 @@ public enum PacketType
     Break,
     PlayerMoved,
     BlockBroken,
-    Place,
+    PlayerInteract,
     Jump,
     DebugCommand
 }

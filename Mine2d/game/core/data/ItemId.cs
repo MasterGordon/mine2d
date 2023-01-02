@@ -16,4 +16,5 @@ public enum ItemId
     RawTungsten = 115,
     RawUranium = 116,
     Diamond = 117,
+    PickaxeBasic = 200,
 }

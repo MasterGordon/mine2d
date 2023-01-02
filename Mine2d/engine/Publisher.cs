@@ -57,7 +57,6 @@ public class Publisher
                     this.subscribers[attribute.Type].Add(method);
                     Console.WriteLine("Subscribed!");
                 }
-
             });
     }
 

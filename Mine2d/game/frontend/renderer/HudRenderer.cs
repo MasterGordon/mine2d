@@ -37,13 +37,10 @@ public class HudRenderer : IRenderer
         var renderer = Context.Get().Renderer;
         var uiScale = Context.Get().FrontendGameState.Settings.UiScale;
         var activeSlot = Context.Get().FrontendGameState.HotbarIndex;
-        // var window = Context.Get().Window;
-        // var (width, height) = window.GetSize();
         var (hotbarWidth, hotbarHeight) = renderer.GetTextureSize(this.hotbarTexture);
         var player = PlayerEntity.GetSelf();
         renderer.DrawTexture(this.hotbarTexture, 0, 0, hotbarWidth * uiScale, hotbarHeight * uiScale);
         renderer.DrawTexture(this.hotbarActiveTexture, activeSlot * 24 * uiScale, 0, 24 * uiScale, 24 * uiScale);
-        var cursorPosition = Context.Get().FrontendGameState.CursorPosition;
         for (var i = 0; i < player?.Inventory.Hotbar.Length; i++)
         {
             var stack = player.Inventory.Hotbar[i];
@@ -52,13 +49,7 @@ public class HudRenderer : IRenderer
                 continue;
             }
 
-            var texture = stack.GetTexture();
-            renderer.DrawTexture(texture, (4 + (i * 24)) * uiScale, 4 * uiScale, 16 * uiScale, 16 * uiScale);
-            renderer.DrawText("" + stack.Count, (4 + (i * 24)) * uiScale, 14 * uiScale);
-            if (cursorPosition.X >= (4 + (i * 24)) * uiScale && cursorPosition.X <= (4 + (i * 24) + 16) * uiScale && cursorPosition.Y >= 4 * uiScale && cursorPosition.Y <= (4 + 16) * uiScale)
-            {
-                Context.Get().FrontendGameState.Tooltip = stack.GetName();
-            }
+            ItemRenderer.RenderItemStack(stack, new Vector2((4 + (i * 24)) * uiScale, 4 * uiScale));
         }
     }
 }

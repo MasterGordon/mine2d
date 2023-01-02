@@ -65,7 +65,7 @@ public class InventoryInput
     }
 
     [EventListener(EventType.KeyUp, EventPriority.Highest)]
-    public static void OnKeyUpOpenInventory(SDL_Event e)
+    public static void OnKeyUpOpenInventory(SDL_Event _)
     {
         var frontendGameState = Context.Get().FrontendGameState;
         if(frontendGameState.OpenInventory != InventoryKind.None)

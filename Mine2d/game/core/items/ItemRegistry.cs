@@ -2,6 +2,15 @@ using Mine2d.game.core.data;
 
 namespace Mine2d.game.core.items;
 
+public enum ItemKind
+{
+    Default,
+    Pickaxe,
+    Helmet,
+    Chestplate,
+    Leggings,
+}
+
 public class ItemRegistry
 {
     private readonly Dictionary<ItemId, Item> items = new();
@@ -21,6 +30,7 @@ public class ItemRegistry
         this.Register(ItemId.RawTungsten, new Item(ItemId.RawTungsten, "Raw Tungsten", "items.raw-tungsten" ));
         this.Register(ItemId.RawUranium, new Item(ItemId.RawUranium, "Raw Uranium", "items.raw-uranium" ));
         this.Register(ItemId.Diamond, new Item(ItemId.Diamond, "Diamond", "items.diamond" ));
+        this.Register(ItemId.PickaxeBasic, new PickaxeItem(ItemId.PickaxeBasic, "Basic Pickaxe", "items.pickaxe-basic"));
     }
 
     public void Register(ItemId id, Item item)

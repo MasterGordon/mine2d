@@ -40,4 +40,9 @@ public class Item
 
     public virtual void Interact(ItemStack stack, Vector2 position, Player player) {
     }
+
+    public virtual ItemKind GetKind()
+    {
+        return ItemKind.Default;
+    }
 }

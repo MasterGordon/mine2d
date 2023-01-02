@@ -8,7 +8,7 @@ public static class InventoryUtils
     {
         for (var i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i] != null && inventory[i].Id == id)
+            if (inventory[i] != null && inventory[i].Id == id && inventory[i].IsStackable())
             {
                 return i;
             }

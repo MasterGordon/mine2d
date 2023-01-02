@@ -37,9 +37,10 @@ public class Breaking
                 var tileId = tile.Id;
                 if (tileId != 0)
                 {
-                    player.MiningCooldown = 10;
                     var tileRegistry = ctx.TileRegistry;
                     var hardness = tileRegistry.GetTile(tileId).Hardness;
+                    var hardnessBonus = Math.Min(1, player.GetHarvestLevel() / hardness);
+                    player.MiningCooldown = 50 - (player.GetMiningSpeed() * hardnessBonus);
                     if(tile.Hits == 0) {
                         ctx.GameState.World.Cracks.Enqueue(new CrackQueueEntry
                         {
