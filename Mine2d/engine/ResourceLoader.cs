@@ -11,7 +11,7 @@ public class ResourceLoader
         this.assemblyName = this.GetType().Assembly.GetName().Name!;
     }
 
-    public static string LoadString(string resourceName)
+    public string LoadString(string resourceName)
     {
 #if DEBUG
         Console.WriteLine("Loading resource: " + resourceName);
