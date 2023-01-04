@@ -20,6 +20,8 @@ public class FrontendGameState
     public InventoryKind OpenInventory { get; set; } = InventoryKind.None;
     public InputState InputState { get; set; } = new();
     public DebugState DebugState { get; set; } = new();
+    public DateTime NextMusicPlay { get; set; } = DateTime.MinValue;
+    public DateTime NextStepPlay { get; set; } = DateTime.MinValue;
 }
 
 public class DebugState {
