@@ -88,7 +88,7 @@ public class WorldRenderer : IRenderer
                     {
                         ctx.Renderer.DrawText("" + Math.Round(ChunkGenerator.Noise.coherentNoise(
                         (chunk.X * Constants.ChunkSize) + x,
-                        (int)(((chunk.Y * Constants.ChunkSize) + y)*0.7),
+                        (int)(((chunk.Y * Constants.ChunkSize) + y)*0.6),
                         0
                         ), 4),
                         (drawX - (int)camera.Position.X) * scale,
