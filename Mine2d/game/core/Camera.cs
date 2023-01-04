@@ -15,6 +15,6 @@ public class Camera
         var scale = ctx.FrontendGameState.Settings.GameScale;
         var windowWidth = ctx.FrontendGameState.WindowWidth;
         var windowHeight = ctx.FrontendGameState.WindowHeight;
-        this.Position = target - (new Vector2(windowWidth, windowHeight) / 2) / scale;
+        this.Position = target - (new Vector2(windowWidth, windowHeight) / 2 / scale);
     }
 }
