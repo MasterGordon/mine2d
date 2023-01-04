@@ -39,8 +39,8 @@ public class ItemRegistry
         // Pickaxes
         this.Register(ItemId.PickaxeBasic, new PickaxeItem(ItemId.PickaxeBasic, "Basic Pickaxe", "items.pickaxe-basic", 15, 4));
         this.Register(ItemId.PickaxeStone, new PickaxeItem(ItemId.PickaxeStone, "Stone Pickaxe", "items.pickaxe-stone", 25, 6));
-        this.Register(ItemId.PickaxeIron, new PickaxeItem(ItemId.PickaxeIron, "Iron Pickaxe", "items.pickaxe-iron", 40, 7));
-        this.Register(ItemId.PickaxeGold, new PickaxeItem(ItemId.PickaxeGold, "Gold Pickaxe", "items.pickaxe-gold", 60, 8));
+        this.Register(ItemId.PickaxeIron, new PickaxeItem(ItemId.PickaxeIron, "Iron Pickaxe", "items.pickaxe-iron", 30, 7));
+        this.Register(ItemId.PickaxeGold, new PickaxeItem(ItemId.PickaxeGold, "Gold Pickaxe", "items.pickaxe-gold", 35, 9));
         // Materials
         this.Register(ItemId.CopperWire, new Item(ItemId.CopperWire, "Copper Wire", "items.copper-wire" ));
         this.Register(ItemId.Silicon, new Item(ItemId.Silicon, "Silicon", "items.silicon" ));

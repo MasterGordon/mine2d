@@ -82,7 +82,7 @@ public class WorkbenchInventory : Inventory
                     {
                         player.Inventory.RemoveItemStack(i);
                     }
-                    player.Inventory.PickupItemStack(r.Result);
+                    player.Inventory.PickupItemStack(r.Result.Clone());
                 }
             }
 

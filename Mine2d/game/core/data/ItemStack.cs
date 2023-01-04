@@ -36,4 +36,9 @@ public class ItemStack
     {
         return Context.Get().ItemRegistry.GetItem(this.Id).GetKind();
     }
+
+    public ItemStack Clone()
+    {
+        return new ItemStack(this.Id, this.Count);
+    }
 }

@@ -65,7 +65,7 @@ public class ChunkGenerator
                 else
                 {
                     fill.Id = (int)WG.GetRandomOreAt(j + (y * 32));
-                    if (new Random().NextInt64(0, 130) < 1)
+                    if (new Random().NextInt64(0, 100) < 1)
                     {
                         fill.Id = (int)Tiles.CoalOre;
                     }

@@ -134,6 +134,16 @@ public class Workbench : Tile
                 new ItemStack(ItemId.Fuse, 1),
             }
         });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.Workbench, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.Stone, 1),
+                new ItemStack(ItemId.Fuse, 1),
+                new ItemStack(ItemId.CopperWire, 3),
+            }
+        });
     }
 
     public override bool IsSolid()

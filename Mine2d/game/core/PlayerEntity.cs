@@ -76,8 +76,8 @@ public class PlayerEntity
         bool hasCollision;
         do
         {
-            var pL = player.Position + new Vector2(0, -8);
-            var pL2 = player.Position + new Vector2(0, -24);
+            var pL = player.Position + new Vector2(3, -2);
+            var pL2 = player.Position + new Vector2(3, -24);
             hasCollision =
                 (world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL))
             || (world.HasChunkAt(pL2) && world.GetChunkAt(pL2).HasSolidTileAt(pL2));
@@ -89,8 +89,8 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pR = player.Position + new Vector2(14, -8);
-            var pR2 = player.Position + new Vector2(14, -24);
+            var pR = player.Position + new Vector2(12, -2);
+            var pR2 = player.Position + new Vector2(12, -24);
             hasCollision =
                 (world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR))
             || (world.HasChunkAt(pR2) && world.GetChunkAt(pR2).HasSolidTileAt(pR2));
@@ -102,8 +102,8 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pL = player.Position + new Vector2(0, 0);
-            var pR = player.Position + new Vector2(14, 0);
+            var pL = player.Position + new Vector2(3, 0);
+            var pR = player.Position + new Vector2(12, 0);
             hasCollision =
                 (world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL))
                 || (world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR));
@@ -115,8 +115,8 @@ public class PlayerEntity
         } while (hasCollision);
         do
         {
-            var pL = player.Position + new Vector2(0, -28);
-            var pR = player.Position + new Vector2(14, -28);
+            var pL = player.Position + new Vector2(3, -28);
+            var pR = player.Position + new Vector2(12, -28);
             hasCollision =
                 (world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL))
                 || (world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR));
@@ -129,8 +129,8 @@ public class PlayerEntity
 
         {
             var groundCheckPosition = player.Position - new Vector2(0, -1f);
-            var pL = groundCheckPosition + new Vector2(0, 0);
-            var pR = groundCheckPosition + new Vector2(14, 0);
+            var pL = groundCheckPosition + new Vector2(3, 0);
+            var pR = groundCheckPosition + new Vector2(12, 0);
             movement.IsGrounded = (world.HasChunkAt(pL) && world.GetChunkAt(pL).HasSolidTileAt(pL))
                                || (world.HasChunkAt(pR) && world.GetChunkAt(pR).HasSolidTileAt(pR));
         }
