@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mine2d.engine;
 using Mine2d.game.core.data;
 
 namespace Mine2d.game.frontend;
@@ -15,6 +16,11 @@ public static class ItemRenderer
         var texture = stack.GetTexture();
         var renderer = Context.Get().Renderer;
         var uiScale = Context.Get().FrontendGameState.Settings.UiScale;
+        Renderer.ProcessStatus(SDL_SetTextureColorMod(texture, 0, 0, 0));
+        Renderer.ProcessStatus(SDL_SetTextureAlphaMod(texture, 128));
+        renderer.DrawTexture(texture, (int)position.X + uiScale, (int)position.Y + uiScale, 16 * uiScale, 16 * uiScale);
+        Renderer.ProcessStatus(SDL_SetTextureColorMod(texture, 255, 255, 255));
+        Renderer.ProcessStatus(SDL_SetTextureAlphaMod(texture, 255));
         renderer.DrawTexture(texture, (int)position.X, (int)position.Y, 16 * uiScale, 16 * uiScale);
         if (stack.Count > 1)
         {

@@ -30,14 +30,24 @@ public class WorkbenchInventory : Inventory
 
         PlayerInventoryRenderer.Render(this.x, this.y + (50 * uiScale));
         var rX = this.x + (4 * uiScale);
+        var xOffset = 0;
+        var yOffset = 0;
         var rY = this.y + (4 * uiScale);
-        foreach ( var r in Workbench.Recipes) {
+        foreach (var r in Workbench.Recipes)
+        {
             var desc = "Requires:\n";
-            foreach (var i in r.Ingredients) {
+            foreach (var i in r.Ingredients)
+            {
                 desc += $"{i.Count}x {i.GetName()}\n";
             }
-            ItemRenderer.RenderItemStack(r.Result, new Vector2(rX, rY), true, desc);
-            rX += 21 * uiScale;
+            ItemRenderer.RenderItemStack(r.Result, new Vector2(rX + xOffset, rY + yOffset), true, desc);
+
+            xOffset += 21 * uiScale;
+            if (xOffset == 21 * uiScale * 9)
+            {
+                xOffset = 0;
+                yOffset += 21 * uiScale;
+            }
         }
     }
 
@@ -49,27 +59,39 @@ public class WorkbenchInventory : Inventory
         var cursorPosition = Context.Get().FrontendGameState.CursorPosition;
         var player = PlayerEntity.GetSelf();
         var rX = this.x + (4 * uiScale);
+        var xOffset = 0;
+        var yOffset = 0;
         var rY = this.y + (4 * uiScale);
-        foreach ( var r in Workbench.Recipes) {
-            if(cursorPosition.X >= rX && cursorPosition.X <= rX + (21 * uiScale) && cursorPosition.Y >= rY && cursorPosition.Y <= rY + (21 * uiScale)) {
+        foreach (var r in Workbench.Recipes)
+        {
+            if (cursorPosition.X >= rX + xOffset && cursorPosition.X <= rX + xOffset + (21 * uiScale) && cursorPosition.Y >= rY + yOffset && cursorPosition.Y <= rY + yOffset + (21 * uiScale))
+            {
                 Console.WriteLine("Clicked on recipe" + r.Result.GetName());
                 var canCraft = true;
-                foreach (var i in r.Ingredients) {
-                    if (!player.Inventory.HasItemStack(i)) {
+                foreach (var i in r.Ingredients)
+                {
+                    if (!player.Inventory.HasItemStack(i))
+                    {
                         canCraft = false;
                         break;
                     }
                 }
-                if (canCraft) {
-                    foreach (var i in r.Ingredients) {
+                if (canCraft)
+                {
+                    foreach (var i in r.Ingredients)
+                    {
                         player.Inventory.RemoveItemStack(i);
                     }
                     player.Inventory.PickupItemStack(r.Result);
                 }
             }
 
-
-            rX += 21 * uiScale;
+            xOffset += 21 * uiScale;
+            if (xOffset == 21 * uiScale * 9)
+            {
+                xOffset = 0;
+                yOffset += 21 * uiScale;
+            }
         }
     }
 }

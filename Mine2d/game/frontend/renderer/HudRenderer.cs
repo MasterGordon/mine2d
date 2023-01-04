@@ -1,6 +1,7 @@
 using Mine2d.engine;
 using Mine2d.engine.utils;
 using Mine2d.game.core;
+using Mine2d.game.core.data;
 
 namespace Mine2d.game.frontend.renderer;
 
@@ -30,6 +31,7 @@ public class HudRenderer : IRenderer
     public void Render()
     {
         this.RenderHotbar();
+        this.RenderGps();
     }
 
     private void RenderHotbar()
@@ -51,5 +53,23 @@ public class HudRenderer : IRenderer
 
             ItemRenderer.RenderItemStack(stack, new Vector2((4 + (i * 24)) * uiScale, 4 * uiScale));
         }
+    }
+
+    private void RenderGps()
+    {
+        var player = PlayerEntity.GetSelf();
+        if (player?.Inventory.HasItemStack(new ItemStack(ItemId.Gps, 1)) != true) return;
+        var renderer = Context.Get().Renderer;
+        var (wWidth, _) = Context.Get().Window.GetSize();
+        var x = player.PrettyPosition.X.ToString("F2");
+        var y = player.PrettyPosition.Y.ToString("F2");
+        var (texture, width, height, surfaceMessage) = renderer.CreateTextTexture("GPS");
+        renderer.DrawTexture(texture, wWidth - width, 0, width, height);
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surfaceMessage);
+        (texture, width, height, surfaceMessage) = renderer.CreateTextTexture($"X: {x} Y: {y}");
+        renderer.DrawTexture(texture, wWidth - width, height, width, height);
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surfaceMessage);
     }
 }

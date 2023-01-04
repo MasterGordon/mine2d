@@ -54,7 +54,7 @@ public class PlayerInventoryRenderer : Inventory
         var pickaxe = player.Inventory.Pickaxe;
         if (pickaxe != null)
         {
-            ItemRenderer.RenderItemStack(pickaxe, new Vector2(((4 + (9 * 21)) * uiScale) + x, (((5 * 21) + 4) * uiScale) + y), player.Inventory.Cursor == null, "Test\nTT");
+            ItemRenderer.RenderItemStack(pickaxe, new Vector2(((4 + (9 * 21)) * uiScale) + x, (((5 * 21) + 4) * uiScale) + y), player.Inventory.Cursor == null);
         }
     }
 

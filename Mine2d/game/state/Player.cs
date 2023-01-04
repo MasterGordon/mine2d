@@ -6,6 +6,7 @@ public class Player
 {
     public string Name { get; set; }
     public Vector2 Position { get; set; }
+    public Vector2 PrettyPosition { get => (this.Position - new Vector2(512244, 5390)) / 16; }
     public Guid Id { get; set; }
     public Vector2 Mining { get; set; }
     public int MiningCooldown { get; set; }

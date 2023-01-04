@@ -31,12 +31,24 @@ public class ItemRegistry
         this.Register(ItemId.RawUranium, new Item(ItemId.RawUranium, "Raw Uranium", "items.raw-uranium" ));
         this.Register(ItemId.Diamond, new Item(ItemId.Diamond, "Diamond", "items.diamond" ));
         this.Register(ItemId.Coal, new Item(ItemId.Coal, "Coal", "items.coal" ));
+        // Ingots
         this.Register(ItemId.IronIngot, new Item(ItemId.IronIngot, "Iron Ingot", "items.ingot-iron" ));
         this.Register(ItemId.GoldIngot, new Item(ItemId.GoldIngot, "Gold Ingot", "items.ingot-gold" ));
+        this.Register(ItemId.CopperIngot, new Item(ItemId.CopperIngot, "Copper Ingot", "items.ingot-copper" ));
+        this.Register(ItemId.SilverIngot, new Item(ItemId.SilverIngot, "Silver Ingot", "items.ingot-silver" ));
+        // Pickaxes
         this.Register(ItemId.PickaxeBasic, new PickaxeItem(ItemId.PickaxeBasic, "Basic Pickaxe", "items.pickaxe-basic", 15, 4));
         this.Register(ItemId.PickaxeStone, new PickaxeItem(ItemId.PickaxeStone, "Stone Pickaxe", "items.pickaxe-stone", 25, 6));
         this.Register(ItemId.PickaxeIron, new PickaxeItem(ItemId.PickaxeIron, "Iron Pickaxe", "items.pickaxe-iron", 40, 7));
         this.Register(ItemId.PickaxeGold, new PickaxeItem(ItemId.PickaxeGold, "Gold Pickaxe", "items.pickaxe-gold", 60, 8));
+        // Materials
+        this.Register(ItemId.CopperWire, new Item(ItemId.CopperWire, "Copper Wire", "items.copper-wire" ));
+        this.Register(ItemId.Silicon, new Item(ItemId.Silicon, "Silicon", "items.silicon" ));
+        this.Register(ItemId.CircuitBoard, new Item(ItemId.CircuitBoard, "Circuit Board", "items.circuit-board" ));
+        this.Register(ItemId.ElectricCircuit, new Item(ItemId.ElectricCircuit, "Electric Circuit", "items.electric-circuit" ));
+        this.Register(ItemId.Fuse, new Item(ItemId.Fuse, "Fuse", "items.fuse" ));
+        // Utilities
+        this.Register(ItemId.Gps, new Item(ItemId.Gps, "GPS", "items.gps" ));
     }
 
     public void Register(ItemId id, Item item)

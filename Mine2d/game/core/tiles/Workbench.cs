@@ -64,6 +64,76 @@ public class Workbench : Tile
                 new ItemStack(ItemId.RawGold, 1),
             }
         });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.CopperIngot, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.Coal, 1),
+                new ItemStack(ItemId.RawCopper, 1),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.SilverIngot, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.Coal, 1),
+                new ItemStack(ItemId.RawSilver, 1),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.CopperWire, 4),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.CopperIngot, 1),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.Silicon, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.Stone, 16),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.CircuitBoard, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.Silicon, 1),
+                new ItemStack(ItemId.CopperWire, 1),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.ElectricCircuit, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.CircuitBoard, 1),
+                new ItemStack(ItemId.CopperWire, 5),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.Fuse, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.CopperWire, 1),
+                new ItemStack(ItemId.Stone, 1),
+            }
+        });
+        Recipes.Add(new Recipe
+        {
+            Result = new ItemStack(ItemId.Gps, 1),
+            Ingredients = new List<ItemStack>
+            {
+                new ItemStack(ItemId.ElectricCircuit, 1),
+                new ItemStack(ItemId.Fuse, 1),
+            }
+        });
     }
 
     public override bool IsSolid()

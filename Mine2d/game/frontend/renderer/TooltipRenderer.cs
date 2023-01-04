@@ -30,6 +30,7 @@ public class TooltipRenderer : IRenderer
         var tooltipX = (int)tooltipPosition.X;
         var tooltipY = (int)tooltipPosition.Y;
         var (texture, width, height, surfaceMessage) = renderer.CreateTextTexture(tooltip);
+        var tooltipWidth = Math.Min(300, width);
         renderer.DrawTexture(
             this.tooltipTexture,
             tooltipX,
@@ -46,7 +47,7 @@ public class TooltipRenderer : IRenderer
             this.tooltipTexture,
             tooltipX + 4 * uiScale,
             tooltipY,
-            width,
+            tooltipWidth,
             4 * uiScale,
             4,
             0,
@@ -56,7 +57,7 @@ public class TooltipRenderer : IRenderer
 
         renderer.DrawTexture(
             this.tooltipTexture,
-            tooltipX + width + 4 * uiScale,
+            tooltipX + tooltipWidth + 4 * uiScale,
             tooltipY,
             4 * uiScale,
             4 * uiScale,
@@ -82,7 +83,7 @@ public class TooltipRenderer : IRenderer
             this.tooltipTexture,
             tooltipX + 4 * uiScale,
             tooltipY + 4 * uiScale,
-            width,
+            tooltipWidth,
             height,
             4,
             4,
@@ -92,7 +93,7 @@ public class TooltipRenderer : IRenderer
 
         renderer.DrawTexture(
             this.tooltipTexture,
-            tooltipX + width + 4 * uiScale,
+            tooltipX + tooltipWidth + 4 * uiScale,
             tooltipY + 4 * uiScale,
             4 * uiScale,
             height,
@@ -118,7 +119,7 @@ public class TooltipRenderer : IRenderer
             this.tooltipTexture,
             tooltipX + 4 * uiScale,
             tooltipY + height + 4 * uiScale,
-            width,
+            tooltipWidth,
             4 * uiScale,
             4,
             5,
@@ -128,7 +129,7 @@ public class TooltipRenderer : IRenderer
 
         renderer.DrawTexture(
             this.tooltipTexture,
-            tooltipX + width + 4 * uiScale,
+            tooltipX + tooltipWidth + 4 * uiScale,
             tooltipY + height + 4 * uiScale,
             4 * uiScale,
             4 * uiScale,

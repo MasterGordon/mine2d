@@ -21,12 +21,7 @@ public class Connect
                 Position = new Vector2(512244, 5390),
             };
             ctx.GameState.Players.Add(
-                new Player
-                {
-                    Name = packet.PlayerName,
-                    Id = packet.PlayerGuid,
-                    Position = new Vector2(512244, 5390),
-                }
+                player
             );
         }
     }

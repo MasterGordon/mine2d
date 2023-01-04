@@ -76,16 +76,9 @@ public class ChunkGenerator
         return chunk;
     }
 
-    public static Chunk CreateSpawnChunk(int x, int y)
+    public static void CreateSpawnChunk(int x, int y)
     {
-        var chunk = new Chunk(x, y);
-        for (var i = 0; i < Constants.ChunkSize; i++)
-        {
-            for (var j = 0; j < Constants.ChunkSize; j++)
-            {
-                chunk.SetTile(i, j, STile.From(Tiles.Stone));
-            }
-        }
+        var chunk = CreateChunk(x, y);
         chunk.SetTile(16, 16, STile.From(0));
         chunk.SetTile(15, 16, STile.From(0));
         chunk.SetTile(16, 15, STile.From(0));
@@ -95,7 +88,12 @@ public class ChunkGenerator
         chunk.SetTile(17, 16, STile.From(0));
         chunk.SetTile(14, 16, STile.From(0));
         chunk.SetTile(16, 14, STile.From(0));
+        chunk.SetTile(15, 14, STile.From(0));
         chunk.SetTile(17, 16, STile.From((int)Tiles.Workbench));
-        return chunk;
+        chunk.SetTile(14, 17, STile.From((int)Tiles.Stone));
+        chunk.SetTile(15, 17, STile.From((int)Tiles.Stone));
+        chunk.SetTile(16, 17, STile.From((int)Tiles.Stone));
+        chunk.SetTile(17, 17, STile.From((int)Tiles.Stone));
+        Context.Get().GameState.World.AddChunk(chunk);
     }
 }

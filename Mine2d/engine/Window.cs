@@ -14,6 +14,10 @@ public class Window
             h,
             SDL_WindowFlags.SDL_WINDOW_OPENGL | SDL_WindowFlags.SDL_WINDOW_RESIZABLE
         );
+        var (ptr, size) = new ResourceLoader().LoadToIntPtr("assets.icon.png");
+        var sdlBuffer = SDL_RWFromMem(ptr, size);
+        var surface = IMG_Load_RW(sdlBuffer, 1);
+        SDL_SetWindowIcon(this.window, surface);
     }
 
     public Window(string title, int x, int y, int w, int h, SDL_WindowFlags flags)
