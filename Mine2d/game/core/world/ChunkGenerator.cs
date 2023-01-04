@@ -33,8 +33,8 @@ public class ChunkGenerator
         {
             for (var j = 0; j < Constants.ChunkSize; j++)
             {
-                var n = (Noise.coherentNoise(i + (x * 32), j + (y * 32), 0, 1, 25, 0.5f, 0.9f));
-                var n2 = (Noise2.coherentNoise(i + (x * 32), j + (y * 32), 0, 1, 25, 0.5f, 0.9f));
+                var n = Noise.coherentNoise((int)((i + (x * 32)) * 0.6), (int)((j + (y * 32)) * 1), 0, 1, 25, 0.5f, 0.9f);
+                var n2 = Noise2.coherentNoise((int)((i + (x * 32)) * 0.6), (int)((j + (y * 32)) * 1), 0, 1, 25, 0.5f, 0.9f);
                 // Console.WriteLine(i * (x * 32) + "  "+ j * (y * 32));
                 if (n > 0.08 || n2 > 0.08) continue;
                 chunk.SetTile(i, j, fill);
@@ -68,6 +68,26 @@ public class ChunkGenerator
                     if (new Random().NextInt64(0, 100) < 1)
                     {
                         fill.Id = (int)Tiles.CoalOre;
+                    }
+                    if (fill.Id != 1)
+                    {
+                        var pX = i;
+                        var pY = j;
+                        var maxCount = new Random().NextInt64(fill.Id == (int)Tiles.CoalOre ? 3 : 1, fill.Id == (int)Tiles.CoalOre ? 10 : 6);
+                        for (var count = 0; count < maxCount; count++)
+                        {
+                            var delta = new Random().NextInt64(-1, 2);
+                            var dir = new Random().NextInt64(0, 2);
+                            pX += (int)(dir == 0 ? delta : 0);
+                            pY += (int)(dir == 1 ? delta : 0);
+                            Console.WriteLine("Try Adding ader");
+                            Console.WriteLine(pX + " " + pY);
+                            if (chunk.HasTile(pX, pY))
+                            {
+                                chunk.SetTile(pX, pY, STile.From(fill.Id));
+                                Console.WriteLine("Adding ader");
+                            }
+                        }
                     }
                     chunk.SetTile(i, j, fill);
                 }

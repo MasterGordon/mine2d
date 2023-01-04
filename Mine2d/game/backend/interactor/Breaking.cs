@@ -83,7 +83,7 @@ public class Breaking
     }
 
     [Interaction(InteractorKind.Server, PacketType.BlockBroken)]
-    public static void BreakServer(BlockBrokenPacket packet)
+    public static void BlockBrokenServer(BlockBrokenPacket packet)
     {
         var ctx = Context.Get();
         var tile = ctx.TileRegistry.GetTile(packet.Tile.Id);

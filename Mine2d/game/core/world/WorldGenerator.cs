@@ -101,7 +101,7 @@ public class WorldGenerator
             }
         }
 
-        var rng = random.Next(0, 700);
+        var rng = random.Next(0, 1050);
         if (rng < ores.Count)
         {
             return ores[rng];
